@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR-код генератор для PlantCare</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .size-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .size-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .size-btn:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .size-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .qr-container {
+            text-align: center;
+            margin: 30px 0;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        #qr-code {
+            display: inline-block;
+        }
+        
+        .placeholder {
+            color: #999;
+            font-style: italic;
+        }
+        
+        .download-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .download-btn:active {
+            transform: translateY(0);
+        }
+        
+        .info {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .info-title {
+            font-weight: 600;
+            color: #1976D2;
+            margin-bottom: 8px;
+        }
+        
+        .info-text {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌿 QR-код для PlantCare</h1>
+        <p class="subtitle">Создайте QR-код для вашего сайта</p>
+        
+        <div class="input-group">
+            <label for="url-input">🔗 URL вашего сайта</label>
+            <input 
+                type="text" 
+                id="url-input" 
+                placeholder="https://ваш-сайт.netlify.app"
+                value="">
+        </div>
+        
+        <label>📏 Размер QR-кода</label>
+        <div class="size-selector">
+            <button class="size-btn" data-size="200">200px</button>
+            <button class="size-btn active" data-size="300">300px</button>
+            <button class="size-btn" data-size="400">400px</button>
+            <button class="size-btn" data-size="500">500px</button>
+        </div>
+        
+        <div class="qr-container">
+            <div id="qr-code">
+                <p class="placeholder">Введите URL и QR-код появится здесь</p>
+            </div>
+        </div>
+        
+        <button class="download-btn" id="download-btn" style="display: none;">
+            📥 Скачать QR-код
+        </button>
+        
+        <div class="info">
+            <div class="info-title">ℹ️ Как использовать:</div>
+            <div class="info-text">
+                1. После деплоя на Netlify скопируйте URL вашего сайта<br>
+                2. Вставьте URL в поле выше<br>
+                3. Выберите нужный размер QR-кода<br>
+                4. Нажмите правой кнопкой на QR-код → "Сохранить изображение как..." или используйте кнопку "Скачать"
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentSize = 300;
+        const urlInput = document.getElementById('url-input');
+        const qrCodeDiv = document.getElementById('qr-code');
+        const downloadBtn = document.getElementById('download-btn');
+        const sizeButtons = document.querySelectorAll('.size-btn');
+        
+        // Размер переключателей
+        sizeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                sizeButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentSize = btn.dataset.size;
+                generateQR();
+            });
+        });
+        
+        // Генерация QR
+        urlInput.addEventListener('input', generateQR);
+        
+        function generateQR() {
+            const url = urlInput.value.trim();
+            
+            if (!url) {
+                qrCodeDiv.innerHTML = '<p class="placeholder">Введите URL и QR-код появится здесь</p>';
+                downloadBtn.style.display = 'none';
+                return;
+            }
+            
+            const encodedUrl = encodeURIComponent(url);
+            const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chs=${currentSize}x${currentSize}&chl=${encodedUrl}`;
+            
+            qrCodeDiv.innerHTML = `<img src="${qrUrl}" alt="QR Code" style="max-width: 100%; height: auto; border-radius: 8px;">`;
+            downloadBtn.style.display = 'block';
+        }
+        
+        // Скачивание
+        downloadBtn.addEventListener('click', async () => {
+            const url = urlInput.value.trim();
+            if (!url) return;
+            
+            const encodedUrl = encodeURIComponent(url);
+            const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chs=${currentSize}x${currentSize}&chl=${encodedUrl}`;
+            
+            try {
+                const response = await fetch(qrUrl);
+                const blob = await response.blob();
+                const downloadUrl = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = downloadUrl;
+                a.download = `PlantCare-QR-${currentSize}px.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(downloadUrl);
+            } catch (error) {
+                alert('Ошибка при скачивании. Попробуйте сохранить изображение правой кнопкой мыши.');
+            }
+        });
+        
+        // Генерация при загрузке если есть URL
+        if (urlInput.value) {
+            generateQR();
+        }
+    </script>
+</body>
+</html>
