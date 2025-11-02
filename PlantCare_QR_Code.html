@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR-код PlantCare Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 60px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        
+        .url {
+            color: #667eea;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            word-break: break-all;
+        }
+        
+        .qr-container {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            display: inline-block;
+        }
+        
+        .qr-code {
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .sizes {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .size-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            min-width: 150px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 3px solid transparent;
+        }
+        
+        .size-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+        
+        .size-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .size-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+        
+        .download-btn:active {
+            transform: translateY(0);
+        }
+        
+        .info {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border-left: 5px solid #2196F3;
+            text-align: left;
+        }
+        
+        .info-title {
+            font-weight: 700;
+            color: #1976D2;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .info-text {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .success-badge {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .share-text {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            border-radius: 10px;
+            border-left: 5px solid #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-badge">✅ Сайт успешно задеплоен!</div>
+        
+        <div class="logo">🌿</div>
+        <h1>QR-код PlantCare</h1>
+        <div class="url">https://plantcaresite.netlify.app/</div>
+        
+        <div class="qr-container">
+            <div id="qr-code-canvas"></div>
+        </div>
+        
+        <div>
+            <button onclick="downloadQR()" class="download-btn" id="download-btn">
+                📥 Скачать QR-код (400x400)
+            </button>
+        </div>
+        
+        <div class="sizes">
+            <div class="size-card" onclick="changeSize(200)">
+                <div class="size-label">Маленький</div>
+                <div class="size-value">200px</div>
+            </div>
+            <div class="size-card" onclick="changeSize(300)">
+                <div class="size-label">Средний</div>
+                <div class="size-value">300px</div>
+            </div>
+            <div class="size-card" onclick="changeSize(400)">
+                <div class="size-label">Большой</div>
+                <div class="size-value">400px</div>
+            </div>
+            <div class="size-card" onclick="changeSize(500)">
+                <div class="size-label">Очень большой</div>
+                <div class="size-value">500px</div>
+            </div>
+        </div>
+        
+        <div class="share-text">
+            <strong>💡 Совет:</strong> Отсканируйте этот QR-код смартфоном для быстрого доступа к сайту!
+        </div>
+        
+        <div class="info">
+            <div class="info-title">ℹ️ Как использовать QR-код:</div>
+            <div class="info-text">
+                <strong>1.</strong> Скачайте изображение, нажав на кнопку выше<br>
+                <strong>2.</strong> Используйте QR-код на визитках, презентациях, плакатах<br>
+                <strong>3.</strong> Поделитесь в социальных сетях<br>
+                <strong>4.</strong> Распечатайте для оффлайн мероприятий<br>
+                <strong>5.</strong> При сканировании пользователи попадут прямо на сайт PlantCare!
+            </div>
+        </div>
+        
+        <div class="info" style="background: #f0f8ff; border-left-color: #667eea; margin-top: 20px;">
+            <div class="info-title">✨ Дополнительные возможности:</div>
+            <div class="info-text">
+                <strong>• Нажмите на размер</strong> (200px, 300px, 400px, 500px) чтобы изменить QR-код<br>
+                <strong>• Скачайте</strong> нажав на кнопку "Скачать QR-код"<br>
+                <strong>• Или щелкните правой кнопкой</strong> по QR-коду и выберите "Сохранить изображение"<br>
+                <strong>• Отсканируйте</strong> смартфоном для проверки!
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>PlantCare</strong> — Ваш помощник в царстве растений 🌿</p>
+            <p style="margin-top: 10px;">Создано с ❤️ Денисом Аниськовым</p>
+        </div>
+    </div>
+    
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    
+    <script>
+        let currentSize = 400;
+        let qrcode = null;
+        const url = 'https://plantcaresite.netlify.app/';
+        
+        // Generate initial QR code
+        window.onload = function() {
+            generateQR(currentSize);
+        }
+        
+        function generateQR(size) {
+            currentSize = size;
+            
+            // Clear previous QR code
+            const container = document.getElementById('qr-code-canvas');
+            container.innerHTML = '';
+            
+            // Generate new QR code
+            qrcode = new QRCode(container, {
+                text: url,
+                width: size,
+                height: size,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+            
+            // Update download button text
+            document.getElementById('download-btn').innerHTML = `📥 Скачать QR-код (${size}x${size})`;
+        }
+        
+        function changeSize(size) {
+            generateQR(size);
+        }
+        
+        function downloadQR() {
+            const canvas = document.querySelector('#qr-code-canvas canvas');
+            if (canvas) {
+                const link = document.createElement('a');
+                link.download = `PlantCare-QR-${currentSize}px.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            } else {
+                // Fallback to image if canvas not found
+                const img = document.querySelector('#qr-code-canvas img');
+                if (img) {
+                    const link = document.createElement('a');
+                    link.download = `PlantCare-QR-${currentSize}px.png`;
+                    link.href = img.src;
+                    link.click();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
