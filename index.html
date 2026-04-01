@@ -1,0 +1,629 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PlantCare - ваш помощник в царстве растений. ИИ-определение растений, диагностика болезней, персональные рекомендации по уходу.">
+    <meta name="keywords" content="PlantCare, растения, ИИ, уход за растениями, приложение, определение растений">
+    <meta name="author" content="Денис Аниськов">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="PlantCare - Ваш Помощник в Царстве Растений">
+    <meta property="og:description" content="Определяйте растения, диагностируйте болезни и получайте рекомендации с помощью искусственного интеллекта">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://denisaniskov.github.io/PlantCare-Site/og-image.png">
+    
+    <title>PlantCare - Ваш Помощник в Царстве Растений</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌿%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+    <!-- Header / Navigation -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav-logo">
+                <span class="logo-icon">🌿</span>
+                <span class="logo-text">PlantCare</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Главная</a></li>
+                <li><a href="#features" class="nav-link">Возможности</a></li>
+                <li><a href="#download" class="nav-link">Скачать</a></li>
+                <li><a href="#about" class="nav-link">О проекте</a></li>
+            </ul>
+            <div class="nav-actions">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+                <span class="theme-icon">🌙</span>
+            </button>
+            <button class="nav-burger" id="nav-burger" aria-label="Меню" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            </div>
+        </nav>
+        <div class="nav-mobile" id="nav-mobile">
+            <a href="#home" class="nav-mobile-link">Главная</a>
+            <a href="#features" class="nav-mobile-link">Возможности</a>
+            <a href="#download" class="nav-mobile-link">Скачать</a>
+            <a href="#about" class="nav-mobile-link">О проекте</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="hero-badge">
+                        <span class="badge-dot"></span>
+                        Версия 1.1 — AI-ассистент с Groq API
+                    </span>
+                    <h1 class="hero-title">
+                        <span class="gradient-text">PlantCare</span><br>
+                        Ваш помощник в царстве растений
+                    </h1>
+                    <p class="hero-description">
+                        Определяйте растения по фото, диагностируйте болезни, получайте персональные 
+                        рекомендации по уходу — все это с помощью искусственного интеллекта, 
+                        работающего прямо на вашем устройстве.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#download" class="btn btn-primary">
+                            <span>📥</span>
+                            <span>Скачать бесплатно</span>
+                        </a>
+                        <a href="https://github.com/DenisAniskov/PlantCare" target="_blank" class="btn btn-secondary">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                            <span>GitHub</span>
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-value">100+</div>
+                        <div class="stat-label">Растений в справочнике</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Бесплатно</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">3 AI</div>
+                        <div class="stat-label">Модели (Groq, Gemini, RAG)</div>
+                    </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="phone-mockup">
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="app-preview">
+                                    <div class="preview-header">
+                                        <span class="preview-logo">🌿</span>
+                                        <span class="preview-title">PlantCare</span>
+                                    </div>
+                                    <div class="preview-image">
+                                        <div class="scan-animation"></div>
+                                        <div class="plant-icon">🌱</div>
+                                    </div>
+                                    <div class="preview-info">
+                                        <div class="info-item">
+                                            <span class="info-icon">✓</span>
+                                            <span>Определение растений</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-icon">✓</span>
+                                            <span>Диагностика болезней</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-icon">✓</span>
+                                            <span>Рекомендации по уходу</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Floating cards -->
+                        <div class="float-card card-1">
+                            <span class="card-icon">🌿</span>
+                            <span>ИИ Распознавание</span>
+                        </div>
+                        <div class="float-card card-2">
+                            <span class="card-icon">📱</span>
+                            <span>Оффлайн режим</span>
+                        </div>
+                        <div class="float-card card-3">
+                            <span class="card-icon">⚡</span>
+                            <span>Быстро и точно</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg"></div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">
+                    <span>✨</span>
+                    Возможности
+                </span>
+                <h2 class="section-title">Все, что нужно для ухода за растениями</h2>
+                <p class="section-description">
+                    PlantCare объединяет передовые технологии ИИ с удобным интерфейсом 
+                    для максимально эффективного ухода за вашими растениями
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="feature-title">AI-ассистент (Groq API)</h3>
+                    <p class="feature-description">
+                        Мощный ИИ-помощник на базе Groq API (Llama 3.1/3.2) с автоматическим fallback на 
+                        Gemini и локальную базу. Отвечает на вопросы по уходу за растениями, 
+                        анализирует фото и даёт персональные рекомендации.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📸</div>
+                    <h3 class="feature-title">ИИ-анализатор растений</h3>
+                    <p class="feature-description">
+                        Сделайте фото растения и получите подробный анализ: определение вида, 
+                        оценка здоровья, выявление проблем и рекомендации по уходу. 
+                        Использует Groq Vision и Gemini для максимальной точности.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏥</div>
+                    <h3 class="feature-title">Диагностика болезней</h3>
+                    <p class="feature-description">
+                        Обнаруживайте проблемы со здоровьем растений на ранних стадиях. 
+                        Локальная база заболеваний + AI-диагностика по симптомам 
+                        с пошаговыми рекомендациями по лечению.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="feature-title">Расширенный справочник</h3>
+                    <p class="feature-description">
+                        Справочник растений с описаниями, требованиями к уходу и изображениями. 
+                        Локальная база + Perenual API (300K+ растений) + Pixabay для фото. 
+                        Данные доступны оффлайн.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3 class="feature-title">Персональные рекомендации</h3>
+                    <p class="feature-description">
+                        Получайте индивидуальные советы по поливу, освещению, удобрениям 
+                        и пересадке с учетом конкретного вида растения и условий содержания.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3 class="feature-title">Оффлайн режим</h3>
+                    <p class="feature-description">
+                        Все основные функции работают без интернета. AI-ассистент автоматически 
+                        переключается на локальную базу при отсутствии подключения. 
+                        Ваши данные остаются конфиденциальными.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">
+                    <span>📥</span>
+                    Скачать
+                </span>
+                <h2 class="section-title">Выберите версию для вашего устройства</h2>
+                <p class="section-description">
+                    PlantCare доступен для Android и Windows совершенно бесплатно
+                </p>
+            </div>
+
+            <div class="download-grid">
+                <!-- Android -->
+                <div class="download-card download-card-featured">
+                    <div class="download-header">
+                        <div class="download-icon">🤖</div>
+                        <div>
+                            <div class="download-title">Android</div>
+                            <div class="download-subtitle">Смартфоны и планшеты</div>
+                        </div>
+                    </div>
+                    <div class="download-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Версия:</span>
+                            <span class="detail-value">1.1</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Размер:</span>
+                            <span class="detail-value">~150 МБ</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Требования:</span>
+                            <span class="detail-value">Android 7.0+</span>
+                        </div>
+                    </div>
+                    <a href="Releases/PlantCare-v1.1.apk" class="btn-download" download>
+                        <span>📥</span> Скачать APK v1.1
+                    </a>
+                    <p class="download-note">AI-ассистент (Groq/Gemini), справочник с Perenual, диагностика, погода</p>
+                </div>
+
+                <!-- Windows EXE -->
+                <div class="download-card">
+                    <div class="download-header">
+                        <div class="download-icon">🪟</div>
+                        <div>
+                            <div class="download-title">Windows (Установщик)</div>
+                            <div class="download-subtitle">Для компьютеров на Windows</div>
+                        </div>
+                    </div>
+                    <div class="download-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Версия:</span>
+                            <span class="detail-value">1.1</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Размер:</span>
+                            <span class="detail-value">~200 МБ</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Требования:</span>
+                            <span class="detail-value">Windows 10+</span>
+                        </div>
+                    </div>
+                    <a href="Releases/PlantCare-latest.exe" class="btn-download" download>
+                        <span>📥</span> Скачать EXE
+                    </a>
+                    <p class="download-note">Автоматический установщик для Windows</p>
+                </div>
+
+                <!-- Windows MSI -->
+                <div class="download-card">
+                    <div class="download-header">
+                        <div class="download-icon">🪟</div>
+                        <div>
+                            <div class="download-title">Windows (MSI)</div>
+                            <div class="download-subtitle">Альтернативный установщик</div>
+                        </div>
+                    </div>
+                    <div class="download-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Версия:</span>
+                            <span class="detail-value">1.1</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Размер:</span>
+                            <span class="detail-value">~200 МБ</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Требования:</span>
+                            <span class="detail-value">Windows 10+</span>
+                        </div>
+                    </div>
+                    <a href="Releases/PlantCare-latest.msi" class="btn-download" download>
+                        <span>📥</span> Скачать MSI
+                    </a>
+                    <p class="download-note">MSI установщик для Windows</p>
+                </div>
+
+                <!-- Documentation -->
+                <div class="download-card">
+                    <div class="download-header">
+                        <div class="download-icon">📚</div>
+                        <div>
+                            <div class="download-title">Документация</div>
+                            <div class="download-subtitle">Руководство пользователя</div>
+                        </div>
+                    </div>
+                    <div class="download-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Формат:</span>
+                            <span class="detail-value">PDF</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Размер:</span>
+                            <span class="detail-value">9 страниц</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Язык:</span>
+                            <span class="detail-value">Русский</span>
+                        </div>
+                    </div>
+                    <a href="Releases/PlantCare-Documentation.pdf" class="btn-download" download>
+                        <span>📥</span> Скачать PDF
+                    </a>
+                    <p class="download-note">Руководство по использованию приложения</p>
+                </div>
+            </div>
+
+            <!-- Video Presentation -->
+            <div class="video-section">
+                <h3>🎬 Видео-презентация</h3>
+                <div class="video-wrapper">
+                    <video controls preload="metadata" poster="Releases/PlantCare-booklet-p1.png">
+                        <source src="Releases/PlantCare.mp4" type="video/mp4">
+                        Ваш браузер не поддерживает видео.
+                    </video>
+                </div>
+                <p class="video-caption">Обзор возможностей PlantCare — AI-ассистент, диагностика, справочник</p>
+            </div>
+
+            <!-- Booklet Preview -->
+            <div class="booklet-section">
+                <h3>📄 Буклет</h3>
+                <p class="booklet-description">Краткое описание продукта в формате буклета. Нажмите на изображение для увеличения.</p>
+                <div class="booklet-pages">
+                    <div class="booklet-page" onclick="openLightbox('Releases/PlantCare-booklet-p1.png', 'Буклет PlantCare — Страница 1')">
+                        <img src="Releases/PlantCare-booklet-p1.png" alt="Буклет PlantCare — Страница 1" loading="lazy">
+                        <p class="page-label">Страница 1</p>
+                    </div>
+                    <div class="booklet-page" onclick="openLightbox('Releases/PlantCare-booklet-p2.png', 'Буклет PlantCare — Страница 2')">
+                        <img src="Releases/PlantCare-booklet-p2.png" alt="Буклет PlantCare — Страница 2" loading="lazy">
+                        <p class="page-label">Страница 2</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lightbox Modal -->
+            <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+                <span class="lightbox-close">&times;</span>
+                <img id="lightbox-img" src="" alt="">
+                <p id="lightbox-caption"></p>
+            </div>
+
+            <!-- Installation Instructions -->
+            <div class="install-instructions">
+                <h3>📝 Как установить</h3>
+                <div class="instructions-grid">
+                    <div class="instruction-card">
+                        <div class="instruction-number">1</div>
+                        <h4>Скачайте файл</h4>
+                        <p>Выберите версию для вашей платформы и нажмите кнопку "Скачать"</p>
+                    </div>
+                    <div class="instruction-card">
+                        <div class="instruction-number">2</div>
+                        <h4>Разрешите установку</h4>
+                        <p>Android: включите "Неизвестные источники" в настройках. Windows: запустите установщик</p>
+                    </div>
+                    <div class="instruction-card">
+                        <div class="instruction-number">3</div>
+                        <h4>Установите и используйте</h4>
+                        <p>Следуйте инструкциям установщика и наслаждайтесь PlantCare!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+            <!-- Installation Instructions -->
+            <div class="install-instructions">
+                <h3>📝 Как установить</h3>
+                <div class="instructions-grid">
+                    <div class="instruction-card">
+                        <div class="instruction-number">1</div>
+                        <h4>Скачайте файл</h4>
+                        <p>Выберите версию для вашей платформы и нажмите кнопку "Скачать"</p>
+                    </div>
+                    <div class="instruction-card">
+                        <div class="instruction-number">2</div>
+                        <h4>Разрешите установку</h4>
+                        <p>Android: включите "Неизвестные источники" в настройках. Windows: запустите установщик</p>
+                    </div>
+                    <div class="instruction-card">
+                        <div class="instruction-number">3</div>
+                        <h4>Установите и используйте</h4>
+                        <p>Следуйте инструкциям установщика и наслаждайтесь PlantCare!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">
+                    <span>🌱</span>
+                    О проекте
+                </span>
+                <h2 class="section-title">PlantCare - современные технологии на службе природы</h2>
+            </div>
+
+            <div class="about-content">
+                <div class="about-left">
+                    <!-- Creator Card - Moved Higher -->
+                    <div class="creator-card">
+                        <div class="creator-avatar">👨‍💻</div>
+                        <div class="creator-info">
+                            <h3>Денис Аниськов</h3>
+                            <p class="creator-role">Разработчик PlantCare</p>
+                            <p class="creator-bio">
+                                Увлеченный разработчик, соединяющий технологии ИИ с заботой о природе. 
+                                PlantCare — это мой индивидуальный проект, созданный для того, чтобы 
+                                сделать уход за растениями доступным и понятным каждому.
+                            </p>
+                            <div class="creator-links">
+                                <a href="https://github.com/DenisAniskov/PlantCare" target="_blank" class="creator-link">
+                                    <span>🌿</span>
+                                    <span>PlantCare</span>
+                                </a>
+                                <a href="https://github.com/DenisAniskov/PlantCare-Site" target="_blank" class="creator-link">
+                                    <span>🌐</span>
+                                    <span>PlantCare-Site</span>
+                                </a>
+                                <a href="https://github.com/DenisAniskov/PlantCare-Ai-Plants-Scanner" target="_blank" class="creator-link">
+                                    <span>📸</span>
+                                    <span>ИИ Сканер растений</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="about-description">
+                        PlantCare — это результат сочетания страсти к технологиям и желания помочь людям 
+                        лучше понимать растительный мир. Приложение использует передовые технологии 
+                        машинного обучения для точного определения растений и диагностики их состояния.
+                    </p>
+
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="about-icon">🎯</div>
+                            <div>
+                                <h4>Миссия</h4>
+                                <p>Сделать уход за растениями простым и доступным для каждого</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-icon">🔬</div>
+                            <div>
+                                <h4>Технологии</h4>
+                                <p>Kotlin, Jetpack Compose, Groq API, Gemini AI — ИИ для распознавания растений</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-icon">🌍</div>
+                            <div>
+                                <h4>Открытость</h4>
+                                <p>Проект полностью бесплатный и доступен на GitHub</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-right">
+                    <div class="stats-card">
+                        <h3>📊 Статистика проекта</h3>
+                        <div class="stat-grid">
+                            <div class="stat-box">
+                                <div class="stat-number">100+</div>
+                                <div class="stat-text">Растений в справочнике</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number">15+</div>
+                                <div class="stat-text">Болезней и вредителей</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number">3</div>
+                                <div class="stat-text">AI-модели</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number">100%</div>
+                                <div class="stat-text">Бесплатно</div>
+                            </div>
+                        </div>
+
+                        <div class="tech-stack">
+                            <h4>🛠 Технологический стек</h4>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Kotlin</span>
+                                <span class="tech-tag">Jetpack Compose</span>
+                                <span class="tech-tag">Groq API</span>
+                                <span class="tech-tag">Gemini AI</span>
+                                <span class="tech-tag">Room Database</span>
+                                <span class="tech-tag">Material Design 3</span>
+                                <span class="tech-tag">OkHttp</span>
+                                <span class="tech-tag">Perenual API</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🌿</span>
+                        <span>PlantCare</span>
+                    </div>
+                    <p class="footer-tagline">
+                        Ваш помощник в царстве растений. Определяйте, диагностируйте, 
+                        ухаживайте с помощью искусственного интеллекта.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://github.com/DenisAniskov/PlantCare" target="_blank" class="social-link" aria-label="PlantCare">
+                            🌿
+                        </a>
+                        <a href="https://github.com/DenisAniskov/PlantCare-Site" target="_blank" class="social-link" aria-label="PlantCare Site">
+                            🌐
+                        </a>
+                        <a href="https://github.com/DenisAniskov/PlantCare-Ai-Plants-Scanner" target="_blank" class="social-link" aria-label="AI Scanner">
+                            📸
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Проект</h4>
+                        <ul>
+                            <li><a href="#home">Главная</a></li>
+                            <li><a href="#features">Возможности</a></li>
+                            <li><a href="#download">Скачать</a></li>
+                            <li><a href="#about">О проекте</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Репозитории</h4>
+                        <ul>
+                            <li><a href="https://github.com/DenisAniskov/PlantCare" target="_blank">PlantCare</a></li>
+                            <li><a href="https://github.com/DenisAniskov/PlantCare-Site" target="_blank">Сайт</a></li>
+                            <li><a href="https://github.com/DenisAniskov/PlantCare-Ai-Plants-Scanner" target="_blank">ИИ Сканер</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Поддержка</h4>
+                        <ul>
+                            <li><a href="https://github.com/DenisAniskov/PlantCare/issues" target="_blank">Сообщить о проблеме</a></li>
+                            <li><a href="https://github.com/DenisAniskov/PlantCare/blob/master/README.md" target="_blank">Документация</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 PlantCare. Создано с ❤️ Денисом Аниськовым</p>
+                <p class="footer-note">
+                    Проект находится в активной разработке. Все материалы предоставлены для образовательных целей.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scroll-top" aria-label="Прокрутить наверх">
+        <span>↑</span>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
