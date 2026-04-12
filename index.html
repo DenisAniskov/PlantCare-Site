@@ -1,629 +1,2040 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PlantCare - ваш помощник в царстве растений. ИИ-определение растений, диагностика болезней, персональные рекомендации по уходу.">
-    <meta name="keywords" content="PlantCare, растения, ИИ, уход за растениями, приложение, определение растений">
+    <meta name="description" content="PlantCare — умный помощник для ваших растений. ИИ определяет болезни, напоминает о поливе и даёт советы по уходу.">
     <meta name="author" content="Денис Аниськов">
-    
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="PlantCare - Ваш Помощник в Царстве Растений">
-    <meta property="og:description" content="Определяйте растения, диагностируйте болезни и получайте рекомендации с помощью искусственного интеллекта">
+    <meta name="theme-color" content="#10b981">
+    <meta property="og:title" content="PlantCare — Умный уход за растениями">
+    <meta property="og:description" content="ИИ-помощник для растений: определение болезней, напоминания об уходе, советы и справочник — всё бесплатно">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://denisaniskov.github.io/PlantCare-Site/og-image.png">
-    
-    <title>PlantCare - Ваш Помощник в Царстве Растений</title>
-    
-    <!-- Fonts -->
+    <title>PlantCare — Умный уход за растениями</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- Favicon -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌿%3C/text%3E%3C/svg%3E">
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-light: #34d399;
+            --primary-dark: #059669;
+            --primary-glow: rgba(16,185,129,0.35);
+            --primary-subtle: rgba(16,185,129,0.1);
+            --secondary: #8b5cf6;
+            --secondary-light: #a78bfa;
+            --secondary-glow: rgba(139,92,246,0.3);
+            --accent: #f59e0b;
+            --accent-glow: rgba(245,158,11,0.3);
+            --info: #3b82f6;
+            --info-glow: rgba(59,130,246,0.3);
+            --cyan: #06b6d4;
+            --cyan-glow: rgba(6,182,212,0.3);
+            --success: #22c55e;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-glass: rgba(255,255,255,0.7);
+            --bg-glass-strong: rgba(255,255,255,0.96);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-tertiary: #94a3b8;
+            --border-light: rgba(0,0,0,0.06);
+            --border-medium: rgba(0,0,0,0.1);
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.12);
+            --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+            --shadow-card: 0 4px 24px rgba(0,0,0,0.08);
+            --shadow-card-hover: 0 20px 40px rgba(0,0,0,0.13);
+            --gradient-primary: linear-gradient(135deg,#10b981 0%,#34d399 50%,#6ee7b7 100%);
+            --gradient-secondary: linear-gradient(135deg,#8b5cf6 0%,#a78bfa 100%);
+            --gradient-accent: linear-gradient(135deg,#f59e0b 0%,#fbbf24 100%);
+            --gradient-info: linear-gradient(135deg,#3b82f6 0%,#60a5fa 100%);
+            --gradient-cyan: linear-gradient(135deg,#06b6d4 0%,#22d3ee 100%);
+            --gradient-hero: linear-gradient(135deg,#ecfdf5 0%,#d1fae5 50%,#a7f3d0 100%);
+            --gradient-card: linear-gradient(145deg,var(--bg-card) 0%,var(--bg-secondary) 100%);
+            --gradient-shine: linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);
+            --gradient-mesh: radial-gradient(at 40% 20%,hsla(160,84%,78%,0.3) 0px,transparent 50%),
+                             radial-gradient(at 80% 0%,hsla(189,100%,56%,0.2) 0px,transparent 50%),
+                             radial-gradient(at 0% 50%,hsla(160,100%,76%,0.2) 0px,transparent 50%),
+                             radial-gradient(at 80% 50%,hsla(271,91%,65%,0.15) 0px,transparent 50%);
+            --space-xs:.25rem; --space-sm:.5rem; --space-md:1rem;
+            --space-lg:1.5rem; --space-xl:2rem; --space-2xl:3rem;
+            --space-3xl:4rem; --space-4xl:6rem; --space-5xl:8rem;
+            --radius-sm:.375rem; --radius-md:.75rem; --radius-lg:1rem;
+            --radius-xl:1.5rem; --radius-2xl:2rem; --radius-full:9999px;
+            --transition-fast:150ms cubic-bezier(0.4,0,0.2,1);
+            --transition-base:300ms cubic-bezier(0.4,0,0.2,1);
+            --transition-bounce:600ms cubic-bezier(0.34,1.56,0.64,1);
+            --font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+            --font-mono:'JetBrains Mono',monospace;
+            --z-sticky:200; --z-fixed:300; --z-modal:500; --z-max:9999;
+        }
+        [data-theme="dark"] {
+            --bg-primary:#0a0f1a;
+            --bg-secondary:#111827;
+            --bg-tertiary:#1f2937;
+            --bg-card:#1a2332;
+            --bg-glass:rgba(26,35,50,0.8);
+            --bg-glass-strong:rgba(26,35,50,0.97);
+            --text-primary:#f1f5f9;
+            --text-secondary:#cbd5e1;
+            --text-tertiary:#64748b;
+            --border-light:rgba(255,255,255,0.06);
+            --border-medium:rgba(255,255,255,0.1);
+            --shadow-card:0 4px 24px rgba(0,0,0,0.4);
+            --shadow-card-hover:0 20px 40px rgba(0,0,0,0.5);
+            --gradient-hero:linear-gradient(135deg,#0a0f1a 0%,#111827 50%,#0a0f1a 100%);
+            --gradient-card:linear-gradient(145deg,var(--bg-card) 0%,#151d2b 100%);
+            --gradient-mesh:radial-gradient(at 40% 20%,hsla(160,84%,40%,0.12) 0px,transparent 50%),
+                            radial-gradient(at 80% 0%,hsla(189,100%,40%,0.08) 0px,transparent 50%),
+                            radial-gradient(at 0% 50%,hsla(160,100%,40%,0.08) 0px,transparent 50%),
+                            radial-gradient(at 80% 50%,hsla(271,91%,50%,0.08) 0px,transparent 50%);
+        }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth;scroll-padding-top:100px}
+        body{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--text-primary);background:var(--bg-primary);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+        ::-webkit-scrollbar{width:10px}
+        ::-webkit-scrollbar-track{background:var(--bg-secondary)}
+        ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--primary),var(--primary-dark));border-radius:var(--radius-full);border:2px solid var(--bg-secondary)}
+        ::selection{background:var(--primary);color:white}
+        :focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+        a{color:inherit;text-decoration:none;transition:var(--transition-fast)}
+        img{max-width:100%;height:auto;display:block}
+        button{font-family:inherit;font-size:inherit;border:none;background:none;cursor:pointer}
+        ul,ol{list-style:none}
+        .container{width:100%;max-width:1340px;margin:0 auto;padding:0 var(--space-lg)}
+
+        /* LOADING */
+        .loading-screen{position:fixed;inset:0;background:var(--bg-primary);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:var(--z-max);transition:opacity .6s ease,visibility .6s ease}
+        .loading-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+        .loading-logo{font-size:5rem;animation:loadingPulse 1.5s ease-in-out infinite;filter:drop-shadow(0 0 30px var(--primary-glow))}
+        .loading-text{margin-top:var(--space-md);font-size:1.5rem;font-weight:800;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .loading-sub{margin-top:var(--space-sm);font-size:.875rem;color:var(--text-tertiary)}
+        .loading-bar{width:220px;height:4px;background:var(--bg-tertiary);border-radius:var(--radius-full);margin-top:var(--space-xl);overflow:hidden}
+        .loading-progress{height:100%;background:var(--gradient-primary);border-radius:var(--radius-full);animation:loadingSlide 1.5s ease-in-out infinite}
+        .loading-dots{display:flex;gap:var(--space-sm);margin-top:var(--space-lg)}
+        .loading-dot{width:10px;height:10px;background:var(--primary);border-radius:50%;animation:loadingDot 1.4s ease-in-out infinite}
+        .loading-dot:nth-child(2){animation-delay:.2s}
+        .loading-dot:nth-child(3){animation-delay:.4s}
+        @keyframes loadingPulse{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.1) rotate(5deg)}}
+        @keyframes loadingSlide{0%{width:0;margin-left:0}50%{width:70%;margin-left:15%}100%{width:0;margin-left:100%}}
+        @keyframes loadingDot{0%,80%,100%{transform:scale(.6);opacity:.5}40%{transform:scale(1);opacity:1}}
+
+        .scroll-progress{position:fixed;top:0;left:0;width:0;height:3px;background:var(--gradient-primary);z-index:var(--z-max);box-shadow:0 0 10px var(--primary-glow);transition:width .1s linear}
+
+        @media(hover:hover) and (pointer:fine){
+            .cursor{display:block;position:fixed;width:24px;height:24px;border:2px solid var(--primary);border-radius:50%;pointer-events:none;z-index:var(--z-max);transition:transform .15s ease,background .15s ease;mix-blend-mode:difference}
+            .cursor-dot{display:block;position:fixed;width:6px;height:6px;background:var(--primary);border-radius:50%;pointer-events:none;z-index:var(--z-max)}
+            .cursor.active{transform:scale(2);background:rgba(16,185,129,.15)}
+            .cursor.clicking{transform:scale(.8)}
+        }
+        .cursor,.cursor-dot{display:none}
+
+        /* HEADER */
+        .header{position:fixed;top:0;left:0;right:0;z-index:var(--z-sticky);padding:var(--space-md) 0;transition:var(--transition-base)}
+        .header.scrolled{padding:var(--space-sm) 0;background:var(--bg-glass-strong);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);box-shadow:var(--shadow-lg);border-bottom:1px solid var(--border-light)}
+        .nav{display:flex;align-items:center;justify-content:space-between;gap:var(--space-xl)}
+        .nav-logo{display:flex;align-items:center;gap:var(--space-sm);font-weight:800;font-size:1.5rem;transition:var(--transition-fast)}
+        .nav-logo:hover{transform:scale(1.05)}
+        .logo-icon{font-size:2rem;filter:drop-shadow(0 2px 8px var(--primary-glow));animation:logoFloat 3s ease-in-out infinite}
+        @keyframes logoFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-3px) rotate(5deg)}}
+        .logo-text{background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .nav-menu{display:flex;align-items:center;gap:2px;background:var(--bg-glass);backdrop-filter:blur(10px);padding:4px;border-radius:var(--radius-full);border:1px solid var(--border-light)}
+        .nav-link{position:relative;padding:var(--space-sm) var(--space-md);font-weight:500;font-size:.875rem;color:var(--text-secondary);border-radius:var(--radius-full);transition:var(--transition-fast);overflow:hidden}
+        .nav-link::before{content:'';position:absolute;inset:0;background:var(--gradient-primary);opacity:0;transition:var(--transition-fast);border-radius:var(--radius-full)}
+        .nav-link span{position:relative;z-index:1}
+        .nav-link:hover{color:var(--text-primary)}
+        .nav-link:hover::before{opacity:.1}
+        .nav-link.active{color:white}
+        .nav-link.active::before{opacity:1}
+        .nav-actions{display:flex;align-items:center;gap:var(--space-sm)}
+        .theme-toggle{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--bg-glass);backdrop-filter:blur(10px);border:1px solid var(--border-light);border-radius:var(--radius-lg);font-size:1.2rem;transition:var(--transition-fast);position:relative;overflow:hidden}
+        .theme-toggle::before{content:'';position:absolute;inset:0;background:var(--gradient-primary);opacity:0;transition:var(--transition-fast)}
+        .theme-toggle:hover{transform:rotate(180deg);border-color:var(--primary)}
+        .theme-toggle:hover::before{opacity:1}
+        .theme-icon{position:relative;z-index:1}
+        .nav-cta{padding:var(--space-sm) var(--space-lg);background:var(--gradient-primary);color:white;font-weight:600;font-size:.875rem;border-radius:var(--radius-full);box-shadow:var(--shadow-md),0 0 20px var(--primary-glow);transition:var(--transition-fast)}
+        .nav-cta:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg),0 0 30px var(--primary-glow)}
+        .nav-burger{display:none;width:44px;height:44px;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:var(--bg-glass);border:1px solid var(--border-light);border-radius:var(--radius-lg);transition:var(--transition-fast)}
+        .nav-burger span{width:20px;height:2px;background:var(--text-primary);border-radius:var(--radius-full);transition:var(--transition-fast)}
+        .nav-burger.active{background:var(--primary)}
+        .nav-burger.active span{background:white}
+        .nav-burger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .nav-burger.active span:nth-child(2){opacity:0}
+        .nav-burger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+        .nav-mobile{position:fixed;inset:0;background:var(--bg-glass-strong);backdrop-filter:blur(20px);padding:calc(80px + var(--space-xl)) var(--space-lg) var(--space-xl);display:flex;flex-direction:column;gap:var(--space-sm);transform:translateX(100%);opacity:0;visibility:hidden;transition:var(--transition-base);z-index:calc(var(--z-sticky) - 1)}
+        .nav-mobile.active{transform:translateX(0);opacity:1;visibility:visible}
+        .nav-mobile-link{padding:var(--space-lg);font-weight:600;font-size:1.2rem;color:var(--text-primary);background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius-xl);text-align:center;transition:var(--transition-fast);display:block}
+        .nav-mobile-link:hover{background:var(--gradient-primary);color:white;transform:scale(1.02)}
+        @media(max-width:1100px){.nav-menu,.nav-cta{display:none}.nav-burger{display:flex}}
+
+        /* HERO */
+        .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:calc(100px + var(--space-3xl)) 0 var(--space-4xl);overflow:hidden}
+        .hero-bg{position:absolute;inset:0;background:var(--gradient-hero);z-index:-2}
+        .hero-bg::before{content:'';position:absolute;inset:0;background:var(--gradient-mesh);z-index:-1}
+        .hero-shapes{position:absolute;inset:0;overflow:hidden;z-index:-1;pointer-events:none}
+        .hero-shape{position:absolute;border-radius:50%;filter:blur(70px);opacity:.45;animation:shapeFloat 20s ease-in-out infinite}
+        .hero-shape-1{width:500px;height:500px;background:var(--primary-glow);top:5%;left:-100px}
+        .hero-shape-2{width:350px;height:350px;background:var(--secondary-glow);top:50%;right:-50px;animation-delay:-7s}
+        .hero-shape-3{width:280px;height:280px;background:var(--accent-glow);bottom:10%;left:35%;animation-delay:-14s}
+        @keyframes shapeFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-30px) scale(1.1)}66%{transform:translate(-20px,20px) scale(.9)}}
+        .particles{position:absolute;inset:0;overflow:hidden;z-index:-1}
+        .particle{position:absolute;opacity:.35;animation:particleFloat 15s ease-in-out infinite;pointer-events:none}
+        @keyframes particleFloat{0%,100%{transform:translateY(0) rotate(0) scale(1)}33%{transform:translateY(-40px) rotate(15deg) scale(1.1)}66%{transform:translateY(-20px) rotate(-10deg) scale(.9)}}
+        .hero-content{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--space-4xl);align-items:center}
+        .hero-text{animation:fadeInUp .9s ease-out}
+        .hero-visual{animation:fadeInRight .9s ease-out .3s both}
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes fadeInRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+        .hero-badge{display:inline-flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-lg);background:var(--bg-glass);backdrop-filter:blur(10px);border:1px solid var(--border-light);border-radius:var(--radius-full);font-size:.875rem;font-weight:500;color:var(--text-secondary);margin-bottom:var(--space-lg)}
+        .badge-dot{width:8px;height:8px;background:var(--success);border-radius:50%;animation:blink 2s ease-in-out infinite;box-shadow:0 0 10px var(--success)}
+        .badge-version{background:var(--gradient-primary);color:white;padding:2px 8px;border-radius:var(--radius-full);font-size:.75rem;font-weight:700;margin-left:4px}
+        @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+        .hero-title{font-size:clamp(2.75rem,6vw,4.5rem);font-weight:900;line-height:1.05;margin-bottom:var(--space-lg);letter-spacing:-.03em}
+        .gradient-text{background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;background-size:200% auto;animation:gradientShift 5s ease-in-out infinite}
+        @keyframes gradientShift{0%,100%{background-position:0% center}50%{background-position:100% center}}
+        #typing-text{border-right:3px solid var(--primary);padding-right:4px;animation:cursorBlink 1s step-end infinite}
+        @keyframes cursorBlink{50%{border-color:transparent}}
+        .hero-description{font-size:1.15rem;color:var(--text-secondary);margin-bottom:var(--space-xl);max-width:560px;line-height:1.8}
+        .hero-buttons{display:flex;gap:var(--space-md);flex-wrap:wrap;margin-bottom:var(--space-2xl)}
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-sm);padding:var(--space-md) var(--space-xl);font-weight:600;font-size:1rem;border-radius:var(--radius-xl);transition:var(--transition-fast);position:relative;overflow:hidden;cursor:pointer}
+        .btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--gradient-shine);transition:left .5s ease}
+        .btn:hover::before{left:100%}
+        .btn-primary{background:var(--gradient-primary);color:white;box-shadow:var(--shadow-lg),0 0 30px var(--primary-glow)}
+        .btn-primary:hover{transform:translateY(-4px);box-shadow:var(--shadow-xl),0 0 50px var(--primary-glow)}
+        .btn-secondary{background:var(--bg-glass);backdrop-filter:blur(10px);border:2px solid var(--border-medium);color:var(--text-primary)}
+        .btn-secondary:hover{background:var(--bg-tertiary);border-color:var(--primary);transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+        .btn-lg{padding:var(--space-lg) var(--space-2xl);font-size:1.1rem}
+        .hero-stats{display:flex;gap:var(--space-2xl);padding-top:var(--space-xl);border-top:1px solid var(--border-light)}
+        .stat-value{font-size:2.25rem;font-weight:900;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+        .stat-label{font-size:.875rem;color:var(--text-tertiary);margin-top:var(--space-xs);font-weight:500}
+
+        /* PHONE */
+        .phone-mockup{position:relative;perspective:1500px;display:flex;justify-content:center}
+        .phone-frame{position:relative;width:295px;height:615px;background:linear-gradient(145deg,#1a1a2e,#0f0f1a);border-radius:50px;padding:14px;box-shadow:var(--shadow-2xl),inset 0 0 0 1px rgba(255,255,255,.1),0 0 80px var(--primary-glow);transform:rotateY(-8deg) rotateX(5deg);animation:phoneFloat 6s ease-in-out infinite;transition:var(--transition-base)}
+        @keyframes phoneFloat{0%,100%{transform:rotateY(-8deg) rotateX(5deg) translateY(0)}50%{transform:rotateY(-8deg) rotateX(5deg) translateY(-20px)}}
+        .phone-mockup:hover .phone-frame{transform:rotateY(0) rotateX(0) scale(1.02);box-shadow:var(--shadow-2xl),0 0 100px var(--primary-glow)}
+        .phone-frame::before{content:'';position:absolute;top:14px;left:50%;transform:translateX(-50%);width:120px;height:28px;background:#0f0f1a;border-radius:0 0 20px 20px;z-index:20}
+        .phone-screen{width:100%;height:100%;background:linear-gradient(180deg,#1a3a28,#0d1f15);border-radius:40px;overflow:hidden;position:relative}
+        .app-preview{padding:var(--space-3xl) var(--space-md) var(--space-md);height:100%;display:flex;flex-direction:column}
+        .preview-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-md)}
+        .preview-header-left{display:flex;align-items:center;gap:var(--space-sm)}
+        .preview-logo{font-size:1.5rem}
+        .preview-title{color:white;font-weight:700;font-size:1.1rem}
+        .proxy-indicator{display:flex;align-items:center;gap:4px;padding:3px 8px;border-radius:var(--radius-full);background:rgba(255,255,255,.1);font-size:.65rem;color:rgba(255,255,255,.85);font-weight:600}
+        .proxy-dot{width:7px;height:7px;border-radius:50%;animation:blink 2s ease-in-out infinite}
+        .proxy-dot.green{background:#22c55e;box-shadow:0 0 6px #22c55e}
+        .preview-image{flex:1;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.05);border-radius:var(--radius-xl);position:relative;overflow:hidden;margin-bottom:var(--space-md);border:1px solid rgba(255,255,255,.1)}
+        .scan-animation{position:absolute;width:100%;height:4px;background:linear-gradient(90deg,transparent,var(--primary),var(--primary-light),var(--primary),transparent);animation:scan 2.5s ease-in-out infinite;box-shadow:0 0 20px var(--primary-glow)}
+        @keyframes scan{0%{top:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:100%;opacity:0}}
+        .plant-icon{font-size:4.5rem;animation:plantGrow 3s ease-in-out infinite}
+        @keyframes plantGrow{0%,100%{transform:scale(1) rotate(0)}33%{transform:scale(1.1) rotate(-3deg)}66%{transform:scale(1.05) rotate(3deg)}}
+        .preview-info{display:flex;flex-direction:column;gap:6px}
+        .info-item{display:flex;align-items:center;gap:var(--space-sm);padding:7px 10px;background:rgba(255,255,255,.08);border-radius:var(--radius-md);color:white;font-size:.78rem;font-weight:500;border:1px solid rgba(255,255,255,.05);transition:var(--transition-fast)}
+        .info-item:hover{background:rgba(255,255,255,.13);transform:translateX(4px)}
+        .info-icon{color:var(--primary-light)}
+        .float-card{position:absolute;display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-md);background:var(--bg-glass-strong);backdrop-filter:blur(15px);border-radius:var(--radius-lg);box-shadow:var(--shadow-xl);font-size:.85rem;font-weight:600;white-space:nowrap;border:1px solid var(--border-light)}
+        .float-card .card-icon{font-size:1.4rem}
+        .card-1{top:8%;left:-42%;animation:floatCard1 5s ease-in-out infinite}
+        .card-2{top:42%;right:-37%;animation:floatCard2 5s ease-in-out infinite;animation-delay:-2s}
+        .card-3{bottom:12%;left:-34%;animation:floatCard3 5s ease-in-out infinite;animation-delay:-4s}
+        @keyframes floatCard1{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-15px) rotate(2deg)}}
+        @keyframes floatCard2{0%,100%{transform:translateY(0) rotate(2deg)}50%{transform:translateY(-20px) rotate(-2deg)}}
+        @keyframes floatCard3{0%,100%{transform:translateY(0) rotate(1deg)}50%{transform:translateY(-12px) rotate(-1deg)}}
+        @media(max-width:1200px){.hero-content{grid-template-columns:1fr;text-align:center;gap:var(--space-3xl)}.hero-description{margin:0 auto var(--space-xl)}.hero-buttons{justify-content:center}.hero-stats{justify-content:center}.float-card{display:none}}
+        @media(max-width:640px){.hero-stats{flex-direction:column;gap:var(--space-md);align-items:center}.hero-buttons{flex-direction:column;width:100%}.btn{width:100%}.phone-frame{width:250px;height:520px}}
+
+        /* SECTION COMMON */
+        .section-header{text-align:center;max-width:720px;margin:0 auto var(--space-3xl);position:relative;z-index:1}
+        .section-badge{display:inline-flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-lg);background:var(--primary-subtle);border:1px solid rgba(16,185,129,.2);border-radius:var(--radius-full);font-size:.9rem;font-weight:600;color:var(--primary);margin-bottom:var(--space-lg)}
+        .section-title{font-size:clamp(1.875rem,4vw,2.75rem);font-weight:800;margin-bottom:var(--space-md);letter-spacing:-.02em;line-height:1.2;color:var(--text-primary)}
+        .section-description{font-size:1.1rem;color:var(--text-secondary);line-height:1.75}
+
+        /* AI CASCADE */
+        .ai-cascade{padding:var(--space-5xl) 0;background:var(--bg-primary);position:relative;overflow:hidden}
+        .ai-cascade::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--primary),transparent)}
+        .cascade-visual{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-md);margin-top:var(--space-2xl);position:relative}
+        .cascade-visual::before{content:'';position:absolute;top:42%;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent),var(--info),#6b7280);transform:translateY(-50%);z-index:0;opacity:.25}
+        .cascade-step{position:relative;z-index:1;background:var(--gradient-card);border-radius:var(--radius-2xl);padding:var(--space-xl);border:1px solid var(--border-light);text-align:center;transition:var(--transition-base)}
+        .cascade-step:hover{transform:translateY(-8px);box-shadow:var(--shadow-card-hover)}
+        .cascade-step.step-1{border-color:var(--primary)}
+        .cascade-step.step-2{border-color:var(--secondary)}
+        .cascade-step.step-3{border-color:var(--accent)}
+        .cascade-step.step-4{border-color:var(--info)}
+        .cascade-step.step-5{border-color:#6b7280}
+        .cascade-number{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:white;font-weight:800;font-size:.875rem;margin:0 auto var(--space-md)}
+        .step-1 .cascade-number{background:var(--gradient-primary)}
+        .step-2 .cascade-number{background:var(--gradient-secondary)}
+        .step-3 .cascade-number{background:var(--gradient-accent)}
+        .step-4 .cascade-number{background:var(--gradient-info)}
+        .step-5 .cascade-number{background:linear-gradient(135deg,#6b7280,#9ca3af)}
+        .cascade-icon{font-size:2.25rem;margin-bottom:var(--space-sm)}
+        .cascade-label{font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:var(--radius-full);margin-bottom:var(--space-sm);display:inline-block;letter-spacing:.02em}
+        .step-1 .cascade-label{background:rgba(16,185,129,.15);color:var(--primary)}
+        .step-2 .cascade-label{background:rgba(139,92,246,.15);color:var(--secondary)}
+        .step-3 .cascade-label{background:rgba(245,158,11,.15);color:var(--accent)}
+        .step-4 .cascade-label{background:rgba(59,130,246,.15);color:var(--info)}
+        .step-5 .cascade-label{background:rgba(107,114,128,.15);color:#6b7280}
+        .cascade-name{font-size:1rem;font-weight:700;margin-bottom:var(--space-xs);color:var(--text-primary)}
+        .cascade-desc{font-size:.8rem;color:var(--text-secondary);line-height:1.5}
+        .cascade-arrow{position:absolute;top:42%;right:-13px;transform:translateY(-50%);width:26px;height:26px;background:var(--bg-secondary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;border:1px solid var(--border-light);z-index:2;color:var(--text-tertiary)}
+        .cascade-step:last-child .cascade-arrow{display:none}
+        .cascade-note{grid-column:1/-1;text-align:center;font-size:.875rem;color:var(--text-tertiary);margin-top:var(--space-md);padding:var(--space-md);background:var(--bg-secondary);border-radius:var(--radius-xl);border:1px solid var(--border-light)}
+        @media(max-width:1200px){.cascade-visual{grid-template-columns:repeat(3,1fr)}.cascade-visual::before{display:none}.cascade-arrow{display:none}}
+        @media(max-width:768px){.cascade-visual{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:480px){.cascade-visual{grid-template-columns:1fr}}
+
+        /* FEATURES */
+        .features{padding:var(--space-5xl) 0;background:var(--bg-secondary);position:relative;overflow:hidden}
+        .features::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--primary),transparent)}
+        .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-xl);position:relative;z-index:1}
+        .feature-card{position:relative;padding:var(--space-xl);background:var(--gradient-card);border-radius:var(--radius-2xl);border:1px solid var(--border-light);transition:var(--transition-base);overflow:hidden;cursor:default}
+        .feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--gradient-primary);transform:scaleX(0);transform-origin:left;transition:var(--transition-base)}
+        .feature-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-card-hover);border-color:var(--primary)}
+        .feature-card:hover::before{transform:scaleX(1)}
+        .feature-new{position:absolute;top:var(--space-md);right:var(--space-md);background:var(--gradient-primary);color:white;font-size:.65rem;font-weight:700;padding:3px 8px;border-radius:var(--radius-full);letter-spacing:.05em}
+        .feature-card-content{position:relative;z-index:1}
+        .feature-icon{width:68px;height:68px;display:flex;align-items:center;justify-content:center;background:var(--primary-subtle);border-radius:var(--radius-xl);font-size:2rem;margin-bottom:var(--space-lg);transition:var(--transition-base)}
+        .feature-card:hover .feature-icon{transform:scale(1.1) rotate(5deg);background:var(--gradient-primary)}
+        .feature-title{font-size:1.2rem;font-weight:700;margin-bottom:var(--space-sm);color:var(--text-primary)}
+        .feature-description{color:var(--text-secondary);font-size:.9375rem;line-height:1.7}
+        .feature-tags{display:flex;flex-wrap:wrap;gap:var(--space-xs);margin-top:var(--space-md)}
+        .feature-tag{padding:3px 10px;border-radius:var(--radius-full);font-size:.75rem;font-weight:600;background:var(--primary-subtle);color:var(--primary)}
+        .feature-tag.purple{background:rgba(139,92,246,.1);color:var(--secondary)}
+        .feature-tag.amber{background:rgba(245,158,11,.1);color:var(--accent)}
+        .feature-tag.blue{background:rgba(59,130,246,.1);color:var(--info)}
+        .feature-tag.gray{background:rgba(107,114,128,.1);color:#6b7280}
+        @media(max-width:1024px){.features-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:640px){.features-grid{grid-template-columns:1fr}}
+
+        /* PROXY SECTION */
+        .proxy-section{padding:var(--space-4xl) 0;background:var(--bg-primary)}
+        .proxy-card{max-width:960px;margin:var(--space-2xl) auto 0;background:var(--gradient-card);border-radius:var(--radius-2xl);border:1px solid var(--border-light);padding:var(--space-2xl);display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2xl);align-items:center}
+        .proxy-states{display:flex;flex-direction:column;gap:var(--space-md)}
+        .proxy-state{display:flex;align-items:flex-start;gap:var(--space-md);padding:var(--space-md) var(--space-lg);border-radius:var(--radius-xl);border:1px solid var(--border-light);background:var(--bg-secondary);transition:var(--transition-fast)}
+        .proxy-state:hover{transform:translateX(6px)}
+        .proxy-state-dot{width:18px;height:18px;border-radius:50%;flex-shrink:0;margin-top:3px}
+        .proxy-state-dot.blue-dot{background:#06b6d4;box-shadow:0 0 12px #06b6d4;animation:blink 2s ease-in-out infinite}
+        .proxy-state-dot.green-dot{background:#22c55e;box-shadow:0 0 12px #22c55e}
+        .proxy-state-dot.yellow-dot{background:#f59e0b;box-shadow:0 0 12px #f59e0b;animation:blink 2s ease-in-out infinite .3s}
+        .proxy-state-dot.red-dot{background:#ef4444;box-shadow:0 0 12px #ef4444;animation:blink 2s ease-in-out infinite .6s}
+        .proxy-state-info h4{font-size:.9375rem;font-weight:700;color:var(--text-primary);margin-bottom:3px}
+        .proxy-state-info p{font-size:.8125rem;color:var(--text-secondary);line-height:1.5}
+        .proxy-visual{text-align:center}
+        .proxy-visual-icon{font-size:5rem;margin-bottom:var(--space-md)}
+        .proxy-visual h3{font-size:1.5rem;font-weight:700;margin-bottom:var(--space-sm);color:var(--text-primary)}
+        .proxy-visual p{color:var(--text-secondary);line-height:1.7}
+        @media(max-width:768px){.proxy-card{grid-template-columns:1fr}}
+
+        /* SMART CARE */
+        .smart-care{padding:var(--space-5xl) 0;background:var(--bg-secondary);position:relative}
+        .smart-care::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--secondary),transparent)}
+        .smart-care-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3xl);align-items:start;margin-top:var(--space-2xl)}
+        .smart-care-features{display:flex;flex-direction:column;gap:var(--space-md)}
+        .smart-care-item{display:flex;gap:var(--space-md);padding:var(--space-lg);background:var(--bg-card);border-radius:var(--radius-xl);border:1px solid var(--border-light);transition:var(--transition-fast)}
+        .smart-care-item:hover{border-color:var(--secondary);transform:translateX(6px);box-shadow:var(--shadow-md)}
+        .smart-care-icon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-lg);font-size:1.5rem;flex-shrink:0}
+        .sci-green{background:var(--primary-subtle)}
+        .sci-amber{background:rgba(245,158,11,.1)}
+        .sci-purple{background:rgba(139,92,246,.1)}
+        .sci-blue{background:rgba(59,130,246,.1)}
+        .sci-teal{background:rgba(6,182,212,.1)}
+        .smart-care-item:hover .sci-green{background:var(--gradient-primary)}
+        .smart-care-item:hover .sci-amber{background:var(--gradient-accent)}
+        .smart-care-item:hover .sci-purple{background:var(--gradient-secondary)}
+        .smart-care-item:hover .sci-blue{background:var(--gradient-info)}
+        .smart-care-item:hover .sci-teal{background:var(--gradient-cyan)}
+        .smart-care-text h4{font-size:1rem;font-weight:700;margin-bottom:5px;color:var(--text-primary)}
+        .smart-care-text p{font-size:.875rem;color:var(--text-secondary);line-height:1.65}
+        .anti-error-card{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(245,158,11,.03));border:1px solid rgba(245,158,11,.25);border-radius:var(--radius-2xl);padding:var(--space-xl)}
+        .anti-error-title{display:flex;align-items:center;gap:var(--space-sm);font-weight:700;font-size:1rem;margin-bottom:var(--space-sm);color:var(--text-primary)}
+        .anti-error-subtitle{font-size:.8125rem;color:var(--text-tertiary);margin-bottom:var(--space-lg);line-height:1.5}
+        .anti-error-cases{display:flex;flex-direction:column;gap:var(--space-md)}
+        .anti-error-case{display:flex;gap:var(--space-md);padding:var(--space-md);border-radius:var(--radius-lg)}
+        .anti-error-case.too-often{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2)}
+        .anti-error-case.too-rare{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2)}
+        .anti-error-case.perfect{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2)}
+        .case-icon{font-size:1.5rem;flex-shrink:0;line-height:1}
+        .case-text strong{display:block;font-size:.9rem;font-weight:700;color:var(--text-primary);margin-bottom:3px}
+        .case-text span{font-size:.8125rem;color:var(--text-secondary);line-height:1.5}
+        .care-types{display:flex;flex-wrap:wrap;gap:var(--space-sm);margin-top:var(--space-lg);padding-top:var(--space-lg);border-top:1px solid var(--border-light)}
+        .care-type-badge{display:inline-flex;align-items:center;gap:6px;padding:var(--space-sm) var(--space-md);background:var(--bg-secondary);border:1px solid var(--border-light);border-radius:var(--radius-lg);font-size:.8125rem;font-weight:600;color:var(--text-primary)}
+        @media(max-width:1024px){.smart-care-grid{grid-template-columns:1fr}}
+
+        /* WIKIPEDIA */
+        .wiki-section{padding:var(--space-5xl) 0;background:var(--bg-primary)}
+        .wiki-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3xl);align-items:start;margin-top:var(--space-2xl)}
+        .wiki-card{background:var(--gradient-card);border-radius:var(--radius-2xl);border:1px solid var(--border-light);padding:var(--space-xl)}
+        .wiki-card-header{display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-lg);padding-bottom:var(--space-lg);border-bottom:1px solid var(--border-light)}
+        .wiki-card-icon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;background:rgba(59,130,246,.1);border-radius:var(--radius-lg);font-size:1.75rem;flex-shrink:0}
+        .wiki-card-title{font-size:1.125rem;font-weight:700;color:var(--text-primary)}
+        .wiki-card-sub{font-size:.8125rem;color:var(--text-tertiary);margin-top:2px}
+        .wiki-flow{display:flex;flex-direction:column;gap:var(--space-sm)}
+        .wiki-flow-item{display:flex;align-items:flex-start;gap:var(--space-md);padding:var(--space-md);background:var(--bg-secondary);border-radius:var(--radius-lg);transition:var(--transition-fast)}
+        .wiki-flow-item:hover{background:rgba(59,130,246,.07);transform:translateX(4px)}
+        .wiki-flow-num{width:30px;height:30px;background:var(--gradient-info);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;flex-shrink:0;margin-top:1px}
+        .wiki-flow-text{font-size:.875rem;color:var(--text-secondary);line-height:1.6;padding-top:4px}
+        .wiki-flow-text strong{color:var(--text-primary);display:block;margin-bottom:2px;font-size:.9rem}
+        .wiki-benefits{display:flex;flex-direction:column;gap:var(--space-lg)}
+        .wiki-benefit{display:flex;align-items:flex-start;gap:var(--space-md);padding:var(--space-lg);background:var(--bg-card);border-radius:var(--radius-xl);border:1px solid var(--border-light);transition:var(--transition-fast)}
+        .wiki-benefit:hover{border-color:var(--info);transform:translateY(-3px);box-shadow:var(--shadow-md)}
+        .wiki-benefit-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(59,130,246,.1);border-radius:var(--radius-lg);font-size:1.5rem;flex-shrink:0}
+        .wiki-benefit-text h4{font-size:1rem;font-weight:700;margin-bottom:4px;color:var(--text-primary)}
+        .wiki-benefit-text p{font-size:.875rem;color:var(--text-secondary);line-height:1.65}
+        @media(max-width:1024px){.wiki-grid{grid-template-columns:1fr}}
+
+        /* CHAT */
+        .chat-section{padding:var(--space-5xl) 0;background:var(--bg-secondary);position:relative}
+        .chat-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--secondary),transparent)}
+        .chat-demo{max-width:740px;margin:var(--space-2xl) auto 0}
+        .chat-window{background:var(--bg-card);border-radius:var(--radius-2xl);border:1px solid var(--border-light);overflow:hidden;box-shadow:var(--shadow-xl)}
+        .chat-topbar{display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-md) var(--space-lg);background:var(--bg-secondary);border-bottom:1px solid var(--border-light)}
+        .chat-tabs{display:flex;gap:var(--space-sm);overflow-x:auto;flex:1;scrollbar-width:none}
+        .chat-tabs::-webkit-scrollbar{display:none}
+        .chat-tab{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:var(--radius-lg);font-size:.8125rem;font-weight:500;white-space:nowrap;background:var(--bg-tertiary);color:var(--text-secondary);border:1px solid var(--border-light);transition:var(--transition-fast);cursor:pointer;user-select:none}
+        .chat-tab.active{background:var(--gradient-primary);color:white;border-color:transparent}
+        .chat-tab-close{opacity:.5;font-size:.75rem;transition:var(--transition-fast);line-height:1}
+        .chat-tab:hover .chat-tab-close{opacity:1}
+        .chat-new-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--primary-subtle);border-radius:var(--radius-md);color:var(--primary);font-size:1.25rem;flex-shrink:0;cursor:pointer;transition:var(--transition-fast)}
+        .chat-new-btn:hover{background:var(--gradient-primary);color:white}
+        .chat-messages{padding:var(--space-lg);display:flex;flex-direction:column;gap:var(--space-md);min-height:240px;max-height:320px;overflow-y:auto;scroll-behavior:smooth}
+        .chat-messages::-webkit-scrollbar{width:4px}
+        .chat-messages::-webkit-scrollbar-track{background:transparent}
+        .chat-messages::-webkit-scrollbar-thumb{background:var(--border-medium);border-radius:4px}
+        .chat-msg{display:flex;gap:var(--space-md);animation:msgIn .4s ease}
+        @keyframes msgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        .chat-msg.user{flex-direction:row-reverse}
+        .chat-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;align-self:flex-end}
+        .chat-avatar.ai{background:var(--gradient-primary)}
+        .chat-avatar.user-av{background:var(--gradient-secondary)}
+        .chat-bubble{max-width:78%;padding:var(--space-md) var(--space-lg);border-radius:var(--radius-xl);font-size:.9rem;line-height:1.65;color:var(--text-primary)}
+        .chat-msg.ai .chat-bubble{background:var(--bg-secondary);border:1px solid var(--border-light);border-top-left-radius:var(--radius-sm)}
+        .chat-msg.user .chat-bubble{background:var(--gradient-primary);color:white;border-top-right-radius:var(--radius-sm)}
+        .chat-wiki-ref{display:inline-flex;align-items:center;gap:6px;margin-top:var(--space-sm);font-size:.75rem;color:var(--info);background:rgba(59,130,246,.1);padding:4px 10px;border-radius:var(--radius-full)}
+        .chat-typing{display:flex;align-items:center;gap:4px;padding:var(--space-md) var(--space-lg);background:var(--bg-secondary);border:1px solid var(--border-light);border-radius:var(--radius-xl);border-top-left-radius:var(--radius-sm);max-width:80px}
+        .chat-typing-dot{width:8px;height:8px;background:var(--text-tertiary);border-radius:50%;animation:typingDot 1.4s ease-in-out infinite}
+        .chat-typing-dot:nth-child(2){animation-delay:.2s}
+        .chat-typing-dot:nth-child(3){animation-delay:.4s}
+        @keyframes typingDot{0%,80%,100%{transform:scale(.6);opacity:.5}40%{transform:scale(1);opacity:1}}
+        .chat-input-area{padding:var(--space-md) var(--space-lg);border-top:1px solid var(--border-light);display:flex;gap:var(--space-sm);align-items:flex-end}
+        .chat-input{flex:1;padding:var(--space-md);background:var(--bg-secondary);border:1px solid var(--border-light);border-radius:var(--radius-xl);color:var(--text-primary);font-family:var(--font-sans);font-size:.9rem;transition:var(--transition-fast);resize:none;max-height:120px;line-height:1.5}
+        .chat-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-subtle)}
+        .chat-input::placeholder{color:var(--text-tertiary)}
+        .chat-send{width:44px;height:44px;background:var(--gradient-primary);color:white;border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-size:1.25rem;transition:var(--transition-fast);cursor:pointer;flex-shrink:0}
+        .chat-send:hover{transform:scale(1.1);box-shadow:0 0 20px var(--primary-glow)}
+        .chat-send:disabled{opacity:.5;cursor:not-allowed;transform:none}
+        .chat-hint{padding:var(--space-sm) var(--space-lg);border-top:1px solid var(--border-light);display:flex;align-items:center;gap:var(--space-sm);font-size:.75rem;color:var(--text-tertiary)}
+
+        /* SCREENSHOTS */
+        .screenshots{padding:var(--space-5xl) 0;background:var(--bg-primary);overflow:hidden}
+        .carousel-container{position:relative;margin-top:var(--space-2xl);padding:var(--space-lg) 0}
+        .carousel-track{display:flex;gap:var(--space-lg);animation:carouselScroll 40s linear infinite}
+        .carousel-track:hover{animation-play-state:paused}
+        @keyframes carouselScroll{0%{transform:translateX(0)}100%{transform:translateX(calc(-300px * 6 - var(--space-lg) * 6))}}
+        .screenshot-card{flex-shrink:0;width:300px;height:540px;background:var(--bg-secondary);border-radius:var(--radius-2xl);overflow:hidden;box-shadow:var(--shadow-xl);border:1px solid var(--border-light);transition:var(--transition-base);cursor:pointer}
+        .screenshot-card:hover{transform:scale(1.05) translateY(-10px);box-shadow:var(--shadow-2xl)}
+        .screenshot-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#1a3a28,#0d1f15);color:white;gap:var(--space-md);padding:var(--space-xl);text-align:center}
+        .screenshot-placeholder-icon{font-size:3.5rem;animation:iconBounce 2s ease-in-out infinite}
+        @keyframes iconBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+        .screenshot-placeholder-text{font-weight:700;font-size:1.1rem}
+        .screenshot-placeholder-sub{font-size:.8rem;opacity:.65;line-height:1.4}
+
+        /* DOWNLOAD */
+        .download{padding:var(--space-5xl) 0;background:var(--bg-secondary);position:relative}
+        .download::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--primary),transparent)}
+        .download-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg);margin-top:var(--space-2xl)}
+        .download-card{background:var(--gradient-card);border-radius:var(--radius-2xl);padding:var(--space-xl);border:1px solid var(--border-light);transition:var(--transition-base);display:flex;flex-direction:column;position:relative;overflow:hidden}
+        .download-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-card-hover);border-color:var(--primary)}
+        .download-card-featured{border:2px solid var(--primary);background:linear-gradient(145deg,rgba(16,185,129,.05),var(--bg-card))}
+        .download-card-featured::after{content:'⭐ Рекомендуем';position:absolute;top:22px;right:-42px;background:var(--gradient-primary);color:white;padding:var(--space-xs) var(--space-2xl);font-size:.7rem;font-weight:700;transform:rotate(45deg);z-index:10}
+        .download-header{display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-lg)}
+        .download-icon{width:58px;height:58px;display:flex;align-items:center;justify-content:center;background:var(--primary-subtle);border-radius:var(--radius-xl);font-size:1.875rem;flex-shrink:0}
+        .download-info{flex:1;min-width:0}
+        .download-title{font-size:1.05rem;font-weight:700;margin-bottom:3px;color:var(--text-primary)}
+        .download-subtitle{font-size:.8rem;color:var(--text-tertiary)}
+        .download-details{flex:1;display:flex;flex-direction:column;gap:var(--space-sm);margin-bottom:var(--space-lg)}
+        .detail-item{display:flex;justify-content:space-between;align-items:center;padding:var(--space-sm) 0;border-bottom:1px solid var(--border-light)}
+        .detail-item:last-child{border-bottom:none}
+        .detail-label{color:var(--text-tertiary);font-size:.8125rem}
+        .detail-value{font-weight:600;font-size:.8125rem;color:var(--text-primary)}
+        .btn-download{display:flex;align-items:center;justify-content:center;gap:var(--space-sm);padding:var(--space-md);background:var(--gradient-primary);color:white;font-weight:600;font-size:.9375rem;border-radius:var(--radius-xl);transition:var(--transition-fast);position:relative;overflow:hidden}
+        .btn-download::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--gradient-shine);transition:left .5s ease}
+        .btn-download:hover::before{left:100%}
+        .btn-download:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg),0 0 30px var(--primary-glow)}
+        .download-note{margin-top:var(--space-md);font-size:.8rem;color:var(--text-tertiary);text-align:center;line-height:1.5}
+        @media(max-width:1200px){.download-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:640px){.download-grid{grid-template-columns:1fr}}
+
+        /* VIDEO & BOOKLET */
+        .video-section{margin-top:var(--space-4xl);text-align:center}
+        .video-section h3{font-size:1.75rem;font-weight:700;margin-bottom:var(--space-lg);color:var(--text-primary)}
+        .video-wrapper{max-width:900px;margin:0 auto;border-radius:var(--radius-2xl);overflow:hidden;box-shadow:var(--shadow-2xl);background:var(--bg-tertiary);border:1px solid var(--border-light)}
+        .video-wrapper video{width:100%;display:block}
+        .video-caption{margin-top:var(--space-md);color:var(--text-tertiary);font-size:.9375rem}
+        .booklet-section{margin-top:var(--space-4xl);text-align:center}
+        .booklet-section h3{font-size:1.75rem;font-weight:700;margin-bottom:var(--space-sm);color:var(--text-primary)}
+        .booklet-description{color:var(--text-secondary);margin-bottom:var(--space-xl)}
+        .booklet-pages{display:flex;justify-content:center;gap:var(--space-2xl);flex-wrap:wrap}
+        .booklet-page{width:320px;cursor:pointer;transition:var(--transition-base);position:relative}
+        .booklet-page::before{content:'🔍 Открыть крупнее';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--bg-glass-strong);backdrop-filter:blur(10px);padding:var(--space-sm) var(--space-md);border-radius:var(--radius-lg);font-size:.875rem;font-weight:600;opacity:0;transition:var(--transition-fast);white-space:nowrap;z-index:10;color:var(--text-primary)}
+        .booklet-page:hover::before{opacity:1}
+        .booklet-page:hover{transform:scale(1.05) translateY(-10px)}
+        .booklet-page img{width:100%;border-radius:var(--radius-xl);box-shadow:var(--shadow-xl);border:1px solid var(--border-light)}
+        .page-label{margin-top:var(--space-md);font-weight:600;color:var(--text-secondary)}
+        .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:var(--z-modal);opacity:0;visibility:hidden;transition:var(--transition-base);cursor:pointer;backdrop-filter:blur(10px)}
+        .lightbox.active{opacity:1;visibility:visible}
+        .lightbox-close{position:absolute;top:var(--space-xl);right:var(--space-xl);width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.1);border-radius:50%;font-size:1.5rem;color:white;cursor:pointer;transition:var(--transition-fast)}
+        .lightbox-close:hover{transform:rotate(90deg);background:#ef4444}
+        .lightbox img{max-width:90%;max-height:80vh;border-radius:var(--radius-xl);box-shadow:var(--shadow-2xl);animation:lightboxZoom .3s ease}
+        @keyframes lightboxZoom{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+        .lightbox p{color:white;margin-top:var(--space-lg);font-size:1.1rem;font-weight:500}
+        .install-instructions{margin-top:var(--space-4xl)}
+        .install-instructions h3{text-align:center;font-size:1.75rem;font-weight:700;margin-bottom:var(--space-xl);color:var(--text-primary)}
+        .instructions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg)}
+        .instruction-card{text-align:center;padding:var(--space-xl);background:var(--bg-card);border-radius:var(--radius-2xl);border:1px solid var(--border-light);transition:var(--transition-base)}
+        .instruction-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-card-hover);border-color:var(--primary)}
+        .instruction-number{width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:var(--gradient-primary);color:white;font-size:1.5rem;font-weight:800;border-radius:50%;margin:0 auto var(--space-lg);box-shadow:0 0 30px var(--primary-glow)}
+        .instruction-card h4{font-size:1.1rem;font-weight:700;margin-bottom:var(--space-sm);color:var(--text-primary)}
+        .instruction-card p{color:var(--text-secondary);font-size:.9375rem;line-height:1.6}
+        @media(max-width:768px){.instructions-grid{grid-template-columns:1fr}}
+
+        /* FAQ */
+        .faq{padding:var(--space-5xl) 0;background:var(--bg-primary)}
+        .faq-list{max-width:820px;margin:var(--space-2xl) auto 0}
+        .faq-item{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius-xl);margin-bottom:var(--space-md);overflow:hidden;transition:var(--transition-base)}
+        .faq-item:hover{border-color:var(--primary);box-shadow:var(--shadow-md)}
+        .faq-item.active{border-color:var(--primary);box-shadow:var(--shadow-lg),0 0 20px var(--primary-glow)}
+        .faq-question{width:100%;display:flex;align-items:center;justify-content:space-between;padding:var(--space-lg) var(--space-xl);font-weight:600;font-size:1rem;text-align:left;color:var(--text-primary);cursor:pointer;transition:var(--transition-fast);background:transparent}
+        .faq-question:hover{color:var(--primary)}
+        .faq-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--primary-subtle);border-radius:var(--radius-md);font-size:1.2rem;color:var(--primary);transition:var(--transition-fast);flex-shrink:0}
+        .faq-item.active .faq-icon{background:var(--gradient-primary);color:white;transform:rotate(45deg)}
+        .faq-answer{max-height:0;overflow:hidden;transition:max-height .4s ease}
+        .faq-item.active .faq-answer{max-height:600px}
+        .faq-answer-content{padding:0 var(--space-xl) var(--space-xl);color:var(--text-secondary);line-height:1.8;font-size:1rem}
+
+        /* ABOUT */
+        .about{padding:var(--space-5xl) 0;background:var(--bg-secondary);position:relative}
+        .about::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--primary),transparent)}
+        .about-content{display:grid;grid-template-columns:1.2fr .8fr;gap:var(--space-3xl);margin-top:var(--space-2xl)}
+        .creator-card{display:flex;gap:var(--space-xl);padding:var(--space-xl);background:var(--gradient-card);border-radius:var(--radius-2xl);border:1px solid var(--border-light);margin-bottom:var(--space-xl);transition:var(--transition-base)}
+        .creator-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-card-hover);border-color:var(--primary)}
+        .creator-avatar{width:100px;height:100px;display:flex;align-items:center;justify-content:center;background:var(--gradient-primary);border-radius:var(--radius-2xl);font-size:3rem;flex-shrink:0;box-shadow:0 0 30px var(--primary-glow)}
+        .creator-info h3{font-size:1.5rem;font-weight:700;margin-bottom:4px;color:var(--text-primary)}
+        .creator-role{color:var(--primary);font-weight:600;font-size:.9375rem;margin-bottom:var(--space-sm)}
+        .creator-bio{color:var(--text-secondary);font-size:.9375rem;margin-bottom:var(--space-lg);line-height:1.7}
+        .creator-links{display:flex;flex-wrap:wrap;gap:var(--space-sm)}
+        .creator-link{display:inline-flex;align-items:center;gap:var(--space-xs);padding:var(--space-sm) var(--space-md);background:var(--bg-tertiary);border-radius:var(--radius-lg);font-size:.875rem;font-weight:500;transition:var(--transition-fast);color:var(--text-primary)}
+        .creator-link:hover{background:var(--gradient-primary);color:white;transform:translateY(-2px)}
+        .about-description{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-xl);font-size:1.0625rem}
+        .about-features{display:flex;flex-direction:column;gap:var(--space-md)}
+        .about-feature{display:flex;gap:var(--space-md);padding:var(--space-lg);background:var(--bg-card);border-radius:var(--radius-xl);border:1px solid var(--border-light);transition:var(--transition-fast)}
+        .about-feature:hover{transform:translateX(10px);border-color:var(--primary);box-shadow:var(--shadow-md)}
+        .about-icon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;background:var(--primary-subtle);border-radius:var(--radius-lg);font-size:1.75rem;flex-shrink:0}
+        .about-feature:hover .about-icon{background:var(--gradient-primary)}
+        .about-feature h4{font-size:1rem;font-weight:700;margin-bottom:4px;color:var(--text-primary)}
+        .about-feature p{color:var(--text-secondary);font-size:.9rem;line-height:1.6}
+        .stats-card{padding:var(--space-xl);background:var(--gradient-card);border-radius:var(--radius-2xl);border:1px solid var(--border-light);position:sticky;top:120px}
+        .stats-card h3{font-size:1.25rem;font-weight:700;margin-bottom:var(--space-lg);color:var(--text-primary)}
+        .stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-md);margin-bottom:var(--space-xl)}
+        .stat-box{padding:var(--space-lg);background:var(--bg-secondary);border-radius:var(--radius-xl);text-align:center;transition:var(--transition-fast);border:1px solid transparent}
+        .stat-box:hover{transform:scale(1.05);background:var(--primary-subtle);border-color:var(--primary)}
+        .stat-number{font-size:2rem;font-weight:900;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+        .stat-text{font-size:.8125rem;color:var(--text-tertiary);margin-top:var(--space-sm);font-weight:500}
+        .tech-stack{padding-top:var(--space-lg);border-top:1px solid var(--border-light)}
+        .tech-stack h4{font-size:1rem;font-weight:600;margin-bottom:var(--space-md);color:var(--text-primary)}
+        .tech-tags{display:flex;flex-wrap:wrap;gap:var(--space-sm)}
+        .tech-tag{padding:4px var(--space-md);background:var(--bg-tertiary);border-radius:var(--radius-lg);font-size:.8125rem;font-weight:500;transition:var(--transition-fast);color:var(--text-primary)}
+        .tech-tag:hover{background:var(--gradient-primary);color:white;transform:scale(1.05)}
+        @media(max-width:1024px){.about-content{grid-template-columns:1fr}.stats-card{position:static}}
+        @media(max-width:640px){.creator-card{flex-direction:column;text-align:center}.creator-avatar{margin:0 auto}.creator-links{justify-content:center}}
+
+        /* CTA */
+        .cta{padding:var(--space-5xl) 0;background:var(--gradient-primary);position:relative;overflow:hidden}
+        .cta::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(255,255,255,.12) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,255,255,.1) 0%,transparent 50%)}
+        .cta-content{position:relative;z-index:1;text-align:center;max-width:720px;margin:0 auto}
+        .cta-icon{font-size:4rem;margin-bottom:var(--space-lg);animation:ctaBounce 2s ease-in-out infinite}
+        @keyframes ctaBounce{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-10px) rotate(8deg)}}
+        .cta-title{font-size:clamp(2rem,4vw,3rem);font-weight:800;color:white;margin-bottom:var(--space-md)}
+        .cta-desc{font-size:1.2rem;color:rgba(255,255,255,.9);margin-bottom:var(--space-xl);line-height:1.75}
+        .cta-badges{display:flex;justify-content:center;flex-wrap:wrap;gap:var(--space-md);margin-bottom:var(--space-xl)}
+        .cta-badge{display:inline-flex;align-items:center;gap:6px;padding:var(--space-sm) var(--space-lg);background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);border-radius:var(--radius-full);color:white;font-size:.875rem;font-weight:600;backdrop-filter:blur(10px)}
+        .cta-buttons{display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap}
+        .btn-cta-white{background:white;color:var(--primary-dark);padding:var(--space-lg) var(--space-2xl);font-size:1.1rem;border-radius:var(--radius-xl);font-weight:700}
+        .btn-cta-white:hover{transform:translateY(-4px);box-shadow:var(--shadow-2xl)}
+        .btn-cta-outline{background:rgba(255,255,255,.15);backdrop-filter:blur(10px);border:2px solid rgba(255,255,255,.35);color:white;padding:var(--space-lg) var(--space-2xl);font-size:1.1rem;border-radius:var(--radius-xl);font-weight:600}
+        .btn-cta-outline:hover{background:rgba(255,255,255,.25);transform:translateY(-4px)}
+
+        /* FOOTER */
+        .footer{padding:var(--space-4xl) 0 var(--space-xl);background:var(--bg-secondary);border-top:1px solid var(--border-light)}
+        .footer-content{display:grid;grid-template-columns:1.5fr 2fr;gap:var(--space-4xl);margin-bottom:var(--space-3xl)}
+        .footer-brand{max-width:350px}
+        .footer-logo{display:inline-flex;align-items:center;gap:var(--space-sm);font-size:1.75rem;font-weight:800;margin-bottom:var(--space-md)}
+        .footer-tagline{color:var(--text-secondary);line-height:1.7;margin-bottom:var(--space-xl)}
+        .footer-social{display:flex;gap:var(--space-sm)}
+        .social-link{width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:var(--bg-tertiary);border-radius:var(--radius-xl);font-size:1.5rem;transition:var(--transition-fast);border:1px solid var(--border-light)}
+        .social-link:hover{background:var(--gradient-primary);transform:translateY(-5px) rotate(5deg);box-shadow:var(--shadow-lg),0 0 20px var(--primary-glow)}
+        .footer-links{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-xl)}
+        .footer-section h4{font-size:1rem;font-weight:700;margin-bottom:var(--space-lg);color:var(--text-primary)}
+        .footer-section ul{display:flex;flex-direction:column;gap:var(--space-sm)}
+        .footer-section a{color:var(--text-secondary);font-size:.9375rem;transition:var(--transition-fast);display:inline-block}
+        .footer-section a:hover{color:var(--primary);transform:translateX(5px)}
+        .footer-bottom{padding-top:var(--space-xl);border-top:1px solid var(--border-light);text-align:center}
+        .footer-bottom p{color:var(--text-tertiary);font-size:.9375rem}
+        .footer-note{margin-top:var(--space-sm);font-size:.8125rem!important}
+        @media(max-width:1024px){.footer-content{grid-template-columns:1fr}.footer-brand{max-width:none;text-align:center}.footer-social{justify-content:center}}
+        @media(max-width:768px){.footer-links{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:480px){.footer-links{grid-template-columns:1fr;text-align:center}}
+
+        .scroll-top{position:fixed;bottom:var(--space-xl);right:var(--space-xl);width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:var(--gradient-primary);color:white;border-radius:50%;font-size:1.5rem;box-shadow:var(--shadow-xl),0 0 30px var(--primary-glow);opacity:0;visibility:hidden;transform:translateY(30px) scale(.8);transition:var(--transition-bounce);z-index:var(--z-fixed)}
+        .scroll-top.visible{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+        .scroll-top:hover{transform:translateY(-5px) scale(1.1)}
+        .cookie-consent{position:fixed;bottom:0;left:0;right:0;padding:var(--space-lg) var(--space-xl);background:var(--bg-glass-strong);backdrop-filter:blur(20px);border-top:1px solid var(--border-light);display:flex;align-items:center;justify-content:center;gap:var(--space-xl);z-index:var(--z-fixed);transform:translateY(100%);transition:var(--transition-base);box-shadow:var(--shadow-xl)}
+        .cookie-consent.visible{transform:translateY(0)}
+        .cookie-content{display:flex;align-items:center;gap:var(--space-md)}
+        .cookie-text{color:var(--text-secondary);font-size:.9375rem}
+        .cookie-buttons{display:flex;gap:var(--space-sm)}
+        .cookie-btn{padding:var(--space-sm) var(--space-lg);border-radius:var(--radius-lg);font-weight:600;font-size:.875rem;transition:var(--transition-fast)}
+        .cookie-btn-accept{background:var(--gradient-primary);color:white}
+        .cookie-btn-accept:hover{transform:translateY(-2px)}
+        .cookie-btn-decline{background:var(--bg-tertiary);color:var(--text-primary)}
+        @media(max-width:640px){.cookie-consent{flex-direction:column;text-align:center;padding:var(--space-lg)}.cookie-content{flex-direction:column}}
+
+        .animate-on-scroll{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+        .animate-on-scroll.animated{opacity:1;transform:translateY(0)}
+        .animate-slide-left{opacity:0;transform:translateX(-50px);transition:opacity .8s ease,transform .8s ease}
+        .animate-slide-left.animated{opacity:1;transform:translateX(0)}
+        .animate-slide-right{opacity:0;transform:translateX(50px);transition:opacity .8s ease,transform .8s ease}
+        .animate-slide-right.animated{opacity:1;transform:translateX(0)}
+        .animate-delay-1{transition-delay:.1s}.animate-delay-2{transition-delay:.2s}
+        .animate-delay-3{transition-delay:.3s}.animate-delay-4{transition-delay:.4s}
+        .animate-delay-5{transition-delay:.5s}
+        @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}html{scroll-behavior:auto}.animate-on-scroll,.animate-slide-left,.animate-slide-right{opacity:1;transform:none}}
+    </style>
 </head>
 <body>
-    <!-- Header / Navigation -->
-    <header class="header">
-        <nav class="nav container">
-            <div class="nav-logo">
-                <span class="logo-icon">🌿</span>
-                <span class="logo-text">PlantCare</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Главная</a></li>
-                <li><a href="#features" class="nav-link">Возможности</a></li>
-                <li><a href="#download" class="nav-link">Скачать</a></li>
-                <li><a href="#about" class="nav-link">О проекте</a></li>
-            </ul>
-            <div class="nav-actions">
-            <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+
+<!-- LOADING SCREEN -->
+<div class="loading-screen" id="loading">
+    <div class="loading-logo">🌿</div>
+    <div class="loading-text">PlantCare</div>
+    <div class="loading-sub">Загружаем сайт...</div> <!-- ✅ ИСПРАВЛЕНО -->
+    <div class="loading-bar"><div class="loading-progress"></div></div>
+    <div class="loading-dots">
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+    </div>
+</div>
+<div class="scroll-progress" id="scroll-progress"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursor-dot"></div>
+
+<!-- HEADER -->
+<header class="header" id="header">
+    <nav class="nav container">
+        <a href="#home" class="nav-logo">
+            <span class="logo-icon">🌿</span>
+            <span class="logo-text">PlantCare</span>
+        </a>
+        <ul class="nav-menu">
+            <li><a href="#home" class="nav-link active"><span>Главная</span></a></li>
+            <li><a href="#ai-cascade" class="nav-link"><span>Как работает ИИ</span></a></li>
+            <li><a href="#features" class="nav-link"><span>Возможности</span></a></li>
+            <li><a href="#screenshots" class="nav-link"><span>Разделы</span></a></li>
+            <li><a href="#download" class="nav-link"><span>Скачать</span></a></li>
+            <li><a href="#faq" class="nav-link"><span>FAQ</span></a></li>
+            <li><a href="#about" class="nav-link"><span>О проекте</span></a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Сменить тему">
                 <span class="theme-icon">🌙</span>
             </button>
+            <a href="#download" class="nav-cta">Скачать</a>
             <button class="nav-burger" id="nav-burger" aria-label="Меню" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
-            </div>
-        </nav>
-        <div class="nav-mobile" id="nav-mobile">
-            <a href="#home" class="nav-mobile-link">Главная</a>
-            <a href="#features" class="nav-mobile-link">Возможности</a>
-            <a href="#download" class="nav-mobile-link">Скачать</a>
-            <a href="#about" class="nav-mobile-link">О проекте</a>
         </div>
-    </header>
+    </nav>
+    <div class="nav-mobile" id="nav-mobile">
+        <a href="#home" class="nav-mobile-link">🏠 Главная</a>
+        <a href="#ai-cascade" class="nav-mobile-link">🤖 Как работает ИИ</a>
+        <a href="#features" class="nav-mobile-link">✨ Возможности</a>
+        <a href="#screenshots" class="nav-mobile-link">📱 Разделы</a>
+        <a href="#download" class="nav-mobile-link">📥 Скачать</a>
+        <a href="#faq" class="nav-mobile-link">❓ FAQ</a>
+        <a href="#about" class="nav-mobile-link">🌱 О проекте</a>
+    </div>
+</header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <span class="hero-badge">
-                        <span class="badge-dot"></span>
-                        Версия 1.1 — AI-ассистент с Groq API
-                    </span>
-                    <h1 class="hero-title">
-                        <span class="gradient-text">PlantCare</span><br>
-                        Ваш помощник в царстве растений
-                    </h1>
-                    <p class="hero-description">
-                        Определяйте растения по фото, диагностируйте болезни, получайте персональные 
-                        рекомендации по уходу — все это с помощью искусственного интеллекта, 
-                        работающего прямо на вашем устройстве.
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="#download" class="btn btn-primary">
-                            <span>📥</span>
-                            <span>Скачать бесплатно</span>
-                        </a>
-                        <a href="https://github.com/DenisAniskov/PlantCare" target="_blank" class="btn btn-secondary">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-                            <span>GitHub</span>
-                        </a>
-                    </div>
-                    <div class="hero-stats">
+<!-- HERO -->
+<section id="home" class="hero">
+    <div class="hero-shapes">
+        <div class="hero-shape hero-shape-1"></div>
+        <div class="hero-shape hero-shape-2"></div>
+        <div class="hero-shape hero-shape-3"></div>
+    </div>
+    <div class="particles" id="particles"></div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-badge">
+                    <span class="badge-dot"></span>
+                    Версия 1.2
+                    <span class="badge-version">OpenRouter AI</span>
+                </span>
+                <h1 class="hero-title">
+                    <span class="gradient-text">PlantCare</span><br>
+                    <span id="typing-text"></span>
+                </h1>
+                <p class="hero-description">
+                    Умный помощник для ваших растений. Определяет болезни по фото, следит за расписанием ухода, даёт советы — и всё это с помощью продвинутого искусственного интеллекта. Бесплатно.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#download" class="btn btn-primary btn-lg">
+                        <span>📥</span><span>Скачать бесплатно</span>
+                    </a>
+                    <a href="https://github.com/DenisAniskov/PlantCare" target="_blank" class="btn btn-secondary btn-lg">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+                <div class="hero-stats">
                     <div class="stat">
-                        <div class="stat-value">100+</div>
-                        <div class="stat-label">Растений в справочнике</div>
+                        <div class="stat-value" data-count="100">0+</div>
+                        <div class="stat-label">Растений в базе</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-value">100%</div>
-                        <div class="stat-label">Бесплатно</div>
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">Уровней ИИ</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-value">3 AI</div>
-                        <div class="stat-label">Модели (Groq, Gemini, RAG)</div>
-                    </div>
+                        <div class="stat-value">0 ₽</div>
+                        <div class="stat-label">Стоимость</div>
                     </div>
                 </div>
-                <div class="hero-visual">
-                    <div class="phone-mockup">
-                        <div class="phone-frame">
-                            <div class="phone-screen">
-                                <div class="app-preview">
-                                    <div class="preview-header">
+            </div>
+            <div class="hero-visual">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="app-preview">
+                                <div class="preview-header">
+                                    <div class="preview-header-left">
                                         <span class="preview-logo">🌿</span>
                                         <span class="preview-title">PlantCare</span>
                                     </div>
-                                    <div class="preview-image">
-                                        <div class="scan-animation"></div>
-                                        <div class="plant-icon">🌱</div>
+                                    <div class="proxy-indicator">
+                                        <div class="proxy-dot green"></div>
+                                        <span>Прокси активен</span>
                                     </div>
-                                    <div class="preview-info">
-                                        <div class="info-item">
-                                            <span class="info-icon">✓</span>
-                                            <span>Определение растений</span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="info-icon">✓</span>
-                                            <span>Диагностика болезней</span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="info-icon">✓</span>
-                                            <span>Рекомендации по уходу</span>
-                                        </div>
+                                </div>
+                                <div class="preview-image">
+                                    <div class="scan-animation"></div>
+                                    <div class="plant-icon">🌱</div>
+                                </div>
+                                <div class="preview-info">
+                                    <div class="info-item">
+                                        <span class="info-icon">🟢</span>
+                                        <span>Соединение установлено</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-icon">📖</span>
+                                        <span>Wikipedia подключена</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-icon">🛡️</span>
+                                        <span>Smart Care включён</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-icon">💬</span>
+                                        <span>3 активных чата</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Floating cards -->
-                        <div class="float-card card-1">
-                            <span class="card-icon">🌿</span>
-                            <span>ИИ Распознавание</span>
-                        </div>
-                        <div class="float-card card-2">
-                            <span class="card-icon">📱</span>
-                            <span>Оффлайн режим</span>
-                        </div>
-                        <div class="float-card card-3">
-                            <span class="card-icon">⚡</span>
-                            <span>Быстро и точно</span>
-                        </div>
                     </div>
+                    <div class="float-card card-1"><span class="card-icon">🔗</span><span>OpenRouter AI</span></div>
+                    <div class="float-card card-2"><span class="card-icon">📖</span><span>Wikipedia</span></div>
+                    <div class="float-card card-3"><span class="card-icon">🛡️</span><span>Smart Care</span></div>
                 </div>
             </div>
         </div>
-        <div class="hero-bg"></div>
-    </section>
+    </div>
+    <div class="hero-bg"></div>
+</section>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">
-                    <span>✨</span>
-                    Возможности
-                </span>
-                <h2 class="section-title">Все, что нужно для ухода за растениями</h2>
-                <p class="section-description">
-                    PlantCare объединяет передовые технологии ИИ с удобным интерфейсом 
-                    для максимально эффективного ухода за вашими растениями
-                </p>
+<!-- AI CASCADE -->
+<section id="ai-cascade" class="ai-cascade">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-badge"><span>🤖</span><span>Как работает ИИ</span></span>
+            <h2 class="section-title">5 уровней ИИ — один надёжнее другого</h2>
+            <p class="section-description">
+                Приложение использует сразу несколько ИИ-моделей по очереди. Если одна по какой-то причине недоступна — следующая подхватывает без задержек. Вы этого даже не заметите.
+            </p>
+        </div>
+        <div class="cascade-visual">
+            <div class="cascade-step step-1 animate-on-scroll animate-delay-1">
+                <div class="cascade-number">1</div>
+                <div class="cascade-icon">🚀</div>
+                <div class="cascade-label">Главная</div>
+                <div class="cascade-name">Nemotron</div>
+                <div class="cascade-desc">Мощная и точная. Отлично понимает вопросы о растениях и даёт развёрнутые ответы.</div>
+                <div class="cascade-arrow">→</div>
             </div>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3 class="feature-title">AI-ассистент (Groq API)</h3>
-                    <p class="feature-description">
-                        Мощный ИИ-помощник на базе Groq API (Llama 3.1/3.2) с автоматическим fallback на 
-                        Gemini и локальную базу. Отвечает на вопросы по уходу за растениями, 
-                        анализирует фото и даёт персональные рекомендации.
-                    </p>
-                </div>
+            <div class="cascade-step step-2 animate-on-scroll animate-delay-2">
+                <div class="cascade-number">2</div>
+                <div class="cascade-icon">🌊</div>
+                <div class="cascade-label">1-й резерв</div>
+                <div class="cascade-name">MiniMax</div>
+                <div class="cascade-desc">Включается, если главная не отвечает. Быстрая и надёжная.</div>
+                <div class="cascade-arrow">→</div>
+            </div>
+            <div class="cascade-step step-3 animate-on-scroll animate-delay-3">
+                <div class="cascade-number">3</div>
+                <div class="cascade-icon">⚡</div>
+                <div class="cascade-label">2-й резерв</div>
+                <div class="cascade-name">GLM</div>
+                <div class="cascade-desc">Лёгкая модель для быстрых ответов. Работает даже при нестабильном интернете.</div>
+                <div class="cascade-arrow">→</div>
+            </div>
+            <div class="cascade-step step-4 animate-on-scroll animate-delay-4">
+                <div class="cascade-number">4</div>
+                <div class="cascade-icon">🔄</div>
+                <div class="cascade-label">3-й резерв</div>
+                <div class="cascade-name">OpenRouter Free</div>
+                <div class="cascade-desc">Бесплатные модели OpenRouter. Последний онлайн-вариант перед уходом в офлайн.</div>
+                <div class="cascade-arrow">→</div>
+            </div>
+            <div class="cascade-step step-5 animate-on-scroll animate-delay-5">
+                <div class="cascade-number">5</div>
+                <div class="cascade-icon">📴</div>
+                <div class="cascade-label">Офлайн</div>
+                <div class="cascade-name">Без интернета</div>
+                <div class="cascade-desc">Локальная база знаний или TF-Lite модель прямо на телефоне — работает без сети.</div>
+            </div>
+            <div class="cascade-note">
+                💡 Переключение между уровнями происходит автоматически — вы ничего не настраиваете
+            </div>
+        </div>
+    </div>
+</section>
 
-                <div class="feature-card">
+<!-- FEATURES -->
+<section id="features" class="features">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-badge"><span>✨</span><span>Возможности</span></span>
+            <h2 class="section-title">Всё для ваших растений в одном приложении</h2>
+            <p class="section-description">Удобный интерфейс, умный ИИ и полезные инструменты — всё бесплатно</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card animate-on-scroll animate-delay-1">
+                <span class="feature-new">НОВОЕ</span>
+                <div class="feature-card-content">
+                    <div class="feature-icon">🔗</div>
+                    <h3 class="feature-title">Умный ИИ на OpenRouter</h3>
+                    <p class="feature-description">Пять уровней ИИ в одной цепочке: Nemotron, MiniMax, GLM и другие. Если один не работает — следующий подхватывает запрос. Вы всегда получаете ответ.</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">OpenRouter</span>
+                        <span class="feature-tag purple">5 уровней</span>
+                        <span class="feature-tag amber">Автопереключение</span>
+                    </div>
+                </div>
+            </div>
+            <div class="feature-card animate-on-scroll animate-delay-2">
+                <span class="feature-new">НОВОЕ</span>
+                <div class="feature-card-content">
+                    <div class="feature-icon">📖</div>
+                    <h3 class="feature-title">Ответы из Wikipedia</h3>
+                    <p class="feature-description">ИИ сам находит нужную статью в Wikipedia и добавляет фото болезней из Wikimedia. Получаете ответ сразу с иллюстрациями и проверенными данными.</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag blue">Wikipedia</span>
+                        <span class="feature-tag blue">Wikimedia фото</span>
+                        <span class="feature-tag">Автопоиск</span>
+                    </div>
+                </div>
+            </div>
+            <div class="feature-card animate-on-scroll animate-delay-3">
+                <span class="feature-new">НОВОЕ</span>
+                <div class="feature-card-content">
+                    <div class="feature-icon">🛡️</div>
+                    <h3 class="feature-title">Умный уход — без ошибок</h3>
+                    <p class="feature-description">Приложение следит за расписанием полива, удобрения, опрыскивания и пересадки. Предупреждает в обе стороны: сделали уход слишком рано или, наоборот, давно забыли.</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">💧 Полив</span>
+                        <span class="feature-tag amber">🌿 Удобрение</span>
+                        <span class="feature-tag blue">💦 Опрыскивание</span>
+                    </div>
+                </div>
+            </div>
+            <div class="feature-card animate-on-scroll animate-delay-4">
+                <span class="feature-new">НОВОЕ</span>
+                <div class="feature-card-content">
+                    <div class="feature-icon">🟢</div>
+                    <h3 class="feature-title">Индикатор прокси</h3>
+                    <p class="feature-description">На главном экране — цветной кружок, который показывает состояние соединения с прокси. Всегда понятно, всё ли в порядке с подключением.</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag blue">🔵 Проверка</span>
+                        <span class="feature-tag">🟢 Подключено</span>
+                        <span class="feature-tag amber">🟡 Проблема</span>
+                    </div>
+                </div>
+            </div>
+            <div class="feature-card animate-on-scroll animate-delay-5">
+                <span class="feature-new">НОВОЕ</span>
+                <div class="feature-card-content">
+                    <div class="feature-icon">💬</div>
+                    <h3 class="feature-title">Несколько чатов с памятью</h3>
+                    <p class="feature-description">Создайте отдельный чат для каждого растения. Назовите его как хотите. История сохраняется — ИИ помнит, о чём вы разговаривали в прошлый раз.</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">Много чатов</span>
+                        <span class="feature-tag purple">История</span>
+                        <span class="feature-tag">Переименование</span>
+                    </div>
+                </div>
+            </div>
+            <div class="feature-card animate-on-scroll animate-delay-1">
+                <span class="feature-new">НОВОЕ</span>
+                <div class="feature-card-content">
+                    <div class="feature-icon">🌿</div>
+                    <h3 class="feature-title">Советы по удобрениям</h3>
+                    <p class="feature-description">ИИ подбирает конкретные удобрения под ваше растение — Агрикола, Здравень, Fertika и другие. С точными дозировками и сроками подкормки.</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">Агрикола</span>
+                        <span class="feature-tag">Здравень</span>
+                        <span class="feature-tag amber">Персонально</span>
+                    </div>
+                </div>
+            </div>
+            <div class="feature-card animate-on-scroll animate-delay-2">
+                <div class="feature-card-content">
                     <div class="feature-icon">📸</div>
-                    <h3 class="feature-title">ИИ-анализатор растений</h3>
-                    <p class="feature-description">
-                        Сделайте фото растения и получите подробный анализ: определение вида, 
-                        оценка здоровья, выявление проблем и рекомендации по уходу. 
-                        Использует Groq Vision и Gemini для максимальной точности.
-                    </p>
+                    <h3 class="feature-title">Распознавание по фото</h3>
+                    <p class="feature-description">Сфотографируйте растение — ИИ определит вид, оценит состояние и подскажет, что не так. Результат дополняется данными из Wikipedia.</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">Фото-анализ</span>
+                        <span class="feature-tag blue">+ Wikipedia</span>
+                    </div>
                 </div>
-
-                <div class="feature-card">
+            </div>
+            <div class="feature-card animate-on-scroll animate-delay-3">
+                <div class="feature-card-content">
                     <div class="feature-icon">🏥</div>
                     <h3 class="feature-title">Диагностика болезней</h3>
-                    <p class="feature-description">
-                        Обнаруживайте проблемы со здоровьем растений на ранних стадиях. 
-                        Локальная база заболеваний + AI-диагностика по симптомам 
-                        с пошаговыми рекомендациями по лечению.
-                    </p>
+                    <p class="feature-description">Опишите симптомы или покажите фото — приложение найдёт болезнь в базе и покажет фотографии для сравнения из Wikimedia. Плюс пошаговое лечение.</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">15+ болезней</span>
+                        <span class="feature-tag blue">Фото для сравнения</span>
+                    </div>
                 </div>
-
-                <div class="feature-card">
+            </div>
+            <div class="feature-card animate-on-scroll animate-delay-4">
+                <div class="feature-card-content">
                     <div class="feature-icon">🔍</div>
-                    <h3 class="feature-title">Расширенный справочник</h3>
-                    <p class="feature-description">
-                        Справочник растений с описаниями, требованиями к уходу и изображениями. 
-                        Локальная база + Perenual API (300K+ растений) + Pixabay для фото. 
-                        Данные доступны оффлайн.
-                    </p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">💡</div>
-                    <h3 class="feature-title">Персональные рекомендации</h3>
-                    <p class="feature-description">
-                        Получайте индивидуальные советы по поливу, освещению, удобрениям 
-                        и пересадке с учетом конкретного вида растения и условий содержания.
-                    </p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <h3 class="feature-title">Оффлайн режим</h3>
-                    <p class="feature-description">
-                        Все основные функции работают без интернета. AI-ассистент автоматически 
-                        переключается на локальную базу при отсутствии подключения. 
-                        Ваши данные остаются конфиденциальными.
-                    </p>
+                    <h3 class="feature-title">Справочник растений</h3>
+                    <p class="feature-description">Более 100 растений с описанием и правилами ухода хранятся прямо в приложении. При наличии интернета — доступ к базе из 300 тысяч растений через Perenual.</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">100+ офлайн</span>
+                        <span class="feature-tag purple">300K онлайн</span>
+                        <span class="feature-tag gray">Perenual API</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Download Section -->
-    <section id="download" class="download">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">
-                    <span>📥</span>
-                    Скачать
-                </span>
-                <h2 class="section-title">Выберите версию для вашего устройства</h2>
-                <p class="section-description">
-                    PlantCare доступен для Android и Windows совершенно бесплатно
+<!-- PROXY INDICATOR -->
+<section class="proxy-section">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-badge"><span>🟢</span><span>Индикатор прокси</span></span>
+            <h2 class="section-title">Всегда знайте, как работает соединение</h2>
+            <p class="section-description">Маленький кружок на главном экране показывает состояние прокси в реальном времени — никаких сюрпризов</p>
+        </div>
+        <div class="proxy-card animate-on-scroll">
+            <div class="proxy-states">
+                <div class="proxy-state">
+                    <div class="proxy-state-dot blue-dot"></div>
+                    <div class="proxy-state-info">
+                        <h4>🔵 Голубой — идёт проверка</h4>
+                        <p>Приложение в данный момент проверяет доступность прокси-соединения. Обычно это занимает пару секунд.</p>
+                    </div>
+                </div>
+                <div class="proxy-state">
+                    <div class="proxy-state-dot green-dot"></div>
+                    <div class="proxy-state-info">
+                        <h4>🟢 Зелёный — соединение есть</h4>
+                        <p>Прокси работает, соединение установлено успешно. Всё в порядке.</p>
+                    </div>
+                </div>
+                <div class="proxy-state">
+                    <div class="proxy-state-dot yellow-dot"></div>
+                    <div class="proxy-state-info">
+                        <h4>🟡 Жёлтый — соединение не прошло (1–3 попытки)</h4>
+                        <p>Прокси не ответил с первого раза. Приложение повторяет попытки — скорее всего, ещё подключится.</p>
+                    </div>
+                </div>
+                <div class="proxy-state">
+                    <div class="proxy-state-dot red-dot"></div>
+                    <div class="proxy-state-info">
+                        <h4>🔴 Красный — соединение недоступно (3+ попыток)</h4>
+                        <p>После нескольких попыток прокси так и не ответил. Приложение переходит на офлайн-режим с локальной базой.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="proxy-visual">
+                <div class="proxy-visual-icon">🛡️</div>
+                <h3>Полная прозрачность</h3>
+                <p>Вы всегда видите реальное состояние соединения — приложение ничего не скрывает. Это помогает понять, почему ИИ отвечает чуть медленнее или переключился в офлайн.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SMART CARE -->
+<section id="smart-care" class="smart-care">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-badge"><span>🛡️</span><span>Smart Care</span></span>
+            <h2 class="section-title">Умный уход — без перебора и без пропусков</h2>
+            <p class="section-description">Приложение следит за всеми видами ухода и вовремя предупреждает, если что-то идёт не так — в любую сторону</p>
+        </div>
+        <div class="smart-care-grid">
+            <div class="smart-care-features">
+                <div class="smart-care-item animate-on-scroll animate-delay-1">
+                    <div class="smart-care-icon sci-green">💧</div>
+                    <div class="smart-care-text">
+                        <h4>Полив</h4>
+                        <p>Записывает каждый полив с точным временем. Знает нормальный интервал для конкретного вида и предупреждает об отклонениях.</p>
+                    </div>
+                </div>
+                <div class="smart-care-item animate-on-scroll animate-delay-2">
+                    <div class="smart-care-icon sci-blue">🌿</div>
+                    <div class="smart-care-text">
+                        <h4>Удобрение</h4>
+                        <p>Следит за графиком подкормки. Не даст перекормить или забыть про удобрения. ИИ рекомендует конкретные марки с дозировкой.</p>
+                    </div>
+                </div>
+                <div class="smart-care-item animate-on-scroll animate-delay-3">
+                    <div class="smart-care-icon sci-teal">💦</div>
+                    <div class="smart-care-text">
+                        <h4>Опрыскивание</h4>
+                        <p>Контролирует влажность воздуха для растений, которым это нужно. Напоминает об опрыскивании и предупреждает об избытке.</p>
+                    </div>
+                </div>
+                <div class="smart-care-item animate-on-scroll animate-delay-4">
+                    <div class="smart-care-icon sci-purple">🪴</div>
+                    <div class="smart-care-text">
+                        <h4>Пересадка</h4>
+                        <p>Отслеживает время последней пересадки. Напоминает, когда пора переселить растение в горшок побольше.</p>
+                    </div>
+                </div>
+                <div class="smart-care-item animate-on-scroll animate-delay-5">
+                    <div class="smart-care-icon sci-amber">⚠️</div>
+                    <div class="smart-care-text">
+                        <h4>Анти-ошибка в обе стороны</h4>
+                        <p>Сделали уход слишком рано — предупредит. Давно не делали — напомнит. Работает для всех видов ухода одновременно.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="animate-slide-right">
+                <div class="anti-error-card">
+                    <div class="anti-error-title">
+                        <span>⚙️</span>
+                        <span>Как это выглядит в приложении</span>
+                    </div>
+                    <div class="anti-error-subtitle">
+                        Приложение автоматически проверяет время последнего ухода и показывает нужное предупреждение
+                    </div>
+                    <div class="anti-error-cases">
+                        <div class="anti-error-case too-often">
+                            <div class="case-icon">❌</div>
+                            <div class="case-text">
+                                <strong>Рано! Не торопитесь</strong>
+                                <span>Вы поливали 4 часа назад. Этому растению нужно минимум 3 дня между поливами.</span>
+                            </div>
+                        </div>
+                        <div class="anti-error-case too-rare">
+                            <div class="case-icon">⚠️</div>
+                            <div class="case-text">
+                                <strong>Пора! Не забывайте</strong>
+                                <span>Орхидея ждёт уже 12 дней. Проверьте, насколько просохла земля в горшке.</span>
+                            </div>
+                        </div>
+                        <div class="anti-error-case perfect">
+                            <div class="case-icon">✅</div>
+                            <div class="case-text">
+                                <strong>Всё хорошо!</strong>
+                                <span>Фикус полит вовремя. Следующий раз — примерно через 5 дней.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="care-types">
+                        <span class="care-type-badge">💧 Полив</span>
+                        <span class="care-type-badge">🌿 Удобрение</span>
+                        <span class="care-type-badge">💦 Опрыскивание</span>
+                        <span class="care-type-badge">🪴 Пересадка</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WIKIPEDIA -->
+<section class="wiki-section">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-badge"><span>📖</span><span>Wikipedia + RAG</span></span>
+            <h2 class="section-title">ИИ ищет информацию в Wikipedia — за вас</h2>
+            <p class="section-description">Не нужно ничего гуглить самостоятельно. Приложение само находит нужные статьи и добавляет их к ответу</p>
+        </div>
+        <div class="wiki-grid">
+            <div class="wiki-card animate-slide-left">
+                <div class="wiki-card-header">
+                    <div class="wiki-card-icon">⚙️</div>
+                    <div>
+                        <div class="wiki-card-title">Что происходит за секунды</div>
+                        <div class="wiki-card-sub">Всё автоматически — вы просто задаёте вопрос</div>
+                    </div>
+                </div>
+                <div class="wiki-flow">
+                    <div class="wiki-flow-item">
+                        <div class="wiki-flow-num">1</div>
+                        <div class="wiki-flow-text">
+                            <strong>Понимает, о чём вы спросили</strong>
+                            Выделяет ключевые слова: название болезни, вредителя или растения
+                        </div>
+                    </div>
+                    <div class="wiki-flow-item">
+                        <div class="wiki-flow-num">2</div>
+                        <div class="wiki-flow-text">
+                            <strong>Находит статью в Wikipedia</strong>
+                            Делает запрос к Wikipedia API и получает актуальный текст
+                        </div>
+                    </div>
+                    <div class="wiki-flow-item">
+                        <div class="wiki-flow-num">3</div>
+                        <div class="wiki-flow-text">
+                            <strong>Добавляет реальные фотографии</strong>
+                            Загружает снимки болезней и вредителей из Wikimedia Commons
+                        </div>
+                    </div>
+                    <div class="wiki-flow-item">
+                        <div class="wiki-flow-num">4</div>
+                        <div class="wiki-flow-text">
+                            <strong>Формирует готовый ответ</strong>
+                            Соединяет данные Wikipedia с ответом ИИ — вы получаете всё сразу
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wiki-benefits animate-slide-right">
+                <div class="wiki-benefit">
+                    <div class="wiki-benefit-icon">🔬</div>
+                    <div class="wiki-benefit-text">
+                        <h4>Проверенные факты, не догадки</h4>
+                        <p>Wikipedia проверяется сообществом. Ответы приложения основаны на реальных источниках, а не только на том, что ИИ «запомнил» при обучении.</p>
+                    </div>
+                </div>
+                <div class="wiki-benefit">
+                    <div class="wiki-benefit-icon">🖼️</div>
+                    <div class="wiki-benefit-text">
+                        <h4>Фото болезней для сравнения</h4>
+                        <p>Видите пятна на листьях? Сравните с реальными фото из Wikimedia — сразу понятно, то это или нет.</p>
+                    </div>
+                </div>
+                <div class="wiki-benefit">
+                    <div class="wiki-benefit-icon">🔄</div>
+                    <div class="wiki-benefit-text">
+                        <h4>Всегда свежая информация</h4>
+                        <p>Wikipedia постоянно обновляется. Приложение получает актуальные данные, а не те, что были актуальны год назад при обучении модели.</p>
+                    </div>
+                </div>
+                <div class="wiki-benefit">
+                    <div class="wiki-benefit-icon">🌍</div>
+                    <div class="wiki-benefit-text">
+                        <h4>Простыми словами о RAG</h4>
+                        <p>Это как если бы ИИ перед ответом быстро погуглил тему и прочитал несколько статей. Намного умнее, чем просто «вспомнить из памяти».</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CHAT -->
+<section class="chat-section">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-badge"><span>💬</span><span>Чаты с памятью</span></span>
+            <h2 class="section-title">Отдельный чат для каждого растения</h2>
+            <p class="section-description">Создайте столько чатов, сколько у вас растений. Назовите каждый по имени — история разговоров сохранится</p>
+        </div>
+        <div class="chat-demo animate-on-scroll">
+            <div class="chat-window">
+                <div class="chat-topbar">
+                    <div class="chat-tabs" id="chat-tabs">
+                        <div class="chat-tab active" data-id="1">🌿 Мой фикус <span class="chat-tab-close">✕</span></div>
+                        <div class="chat-tab" data-id="2">🌸 Орхидея <span class="chat-tab-close">✕</span></div>
+                        <div class="chat-tab" data-id="3">🌵 Кактус <span class="chat-tab-close">✕</span></div>
+                    </div>
+                    <div class="chat-new-btn" id="chat-new" title="Новый чат">+</div>
+                </div>
+                <div class="chat-messages" id="chat-messages">
+                    <div class="chat-msg ai">
+                        <div class="chat-avatar ai">🤖</div>
+                        <div>
+                            <div class="chat-bubble">Привет! Я PlantCare, работаю через OpenRouter. Что случилось с вашим фикусом? Расскажите — я помогу 🌿</div>
+                            <div class="chat-wiki-ref">📖 Wikipedia готова к поиску</div>
+                        </div>
+                    </div>
+                    <div class="chat-msg user">
+                        <div class="chat-avatar user-av">👤</div>
+                        <div class="chat-bubble">Снизу желтеют и падают листья</div>
+                    </div>
+                    <div class="chat-msg ai">
+                        <div class="chat-avatar ai">🤖</div>
+                        <div>
+                            <div class="chat-bubble">Это частая ситуация — скорее всего стресс или проблемы с поливом. Нашёл в Wikipedia статью про фикус. Проверьте: 💧 не заливаете ли (чаще раза в неделю — много), ☀️ нет ли тени, 🌡️ стоит ли не на сквозняке. Для восстановления подойдёт Агрикола для фикусов — 1 раз в 2 недели.</div>
+                            <div class="chat-wiki-ref">📖 Wikipedia — Ficus benjamina · 🖼️ Wikimedia фото хлороза</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <textarea class="chat-input" id="chat-input" rows="1" placeholder="Спросите что-нибудь о фикусе..."></textarea>
+                    <button class="chat-send" id="chat-send">↑</button>
+                </div>
+                <div class="chat-hint">
+                    <span>💡</span>
+                    <span>Нажмите Enter для отправки · Shift+Enter для новой строки</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SCREENSHOTS -->
+<section id="screenshots" class="screenshots">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-badge"><span>📱</span><span>Разделы</span></span>
+            <h2 class="section-title">Разделы приложения</h2>
+            <p class="section-description">Чистый и понятный дизайн в стиле Material Design 3</p>
+        </div>
+    </div>
+    <div class="carousel-container">
+        <div class="carousel-track">
+            <div class="screenshot-card"><div class="screenshot-placeholder"><div class="screenshot-placeholder-icon">🏠</div><div class="screenshot-placeholder-text">Главный экран</div><div class="screenshot-placeholder-sub">Индикатор прокси и статус</div></div></div>
+            <div class="screenshot-card"><div class="screenshot-placeholder"><div class="screenshot-placeholder-icon">🤖</div><div class="screenshot-placeholder-text">ИИ-чат</div><div class="screenshot-placeholder-sub">Несколько чатов с памятью</div></div></div>
+            <div class="screenshot-card"><div class="screenshot-placeholder"><div class="screenshot-placeholder-icon">📖</div><div class="screenshot-placeholder-text">Wikipedia в ответах</div><div class="screenshot-placeholder-sub">Данные и фото из Wikipedia</div></div></div>
+            <div class="screenshot-card"><div class="screenshot-placeholder"><div class="screenshot-placeholder-icon">🛡️</div><div class="screenshot-placeholder-text">Smart Care</div><div class="screenshot-placeholder-sub">Полив, удобрение, пересадка</div></div></div>
+            <div class="screenshot-card"><div class="screenshot-placeholder"><div class="screenshot-placeholder-icon">🏥</div><div class="screenshot-placeholder-text">Диагностика</div><div class="screenshot-placeholder-sub">Фото болезней для сравнения</div></div></div>
+            <div class="screenshot-card"><div class="screenshot-placeholder"><div class="screenshot-placeholder-icon">📚</div><div class="screenshot-placeholder-text">Справочник</div><div class="screenshot-placeholder-sub">100+ растений офлайн</div></div></div>
+            <div class="screenshot-card"><div class="screenshot-placeholder"><div class="screenshot-placeholder-icon">🏠</div><div class="screenshot-placeholder-text">Главный экран</div><div class="screenshot-placeholder-sub">Индикатор прокси и статус</div></div></div>
+            <div class="screenshot-card"><div class="screenshot-placeholder"><div class="screenshot-placeholder-icon">🤖</div><div class="screenshot-placeholder-text">ИИ-чат</div><div class="screenshot-placeholder-sub">Несколько чатов с памятью</div></div></div>
+            <div class="screenshot-card"><div class="screenshot-placeholder"><div class="screenshot-placeholder-icon">📖</div><div class="screenshot-placeholder-text">Wikipedia в ответах</div><div class="screenshot-placeholder-sub">Данные и фото из Wikipedia</div></div></div>
+            <div class="screenshot-card"><div class="screenshot-placeholder"><div class="screenshot-placeholder-icon">🛡️</div><div class="screenshot-placeholder-text">Smart Care</div><div class="screenshot-placeholder-sub">Полив, удобрение, пересадка</div></div></div>
+            <div class="screenshot-card"><div class="screenshot-placeholder"><div class="screenshot-placeholder-icon">🏥</div><div class="screenshot-placeholder-text">Диагностика</div><div class="screenshot-placeholder-sub">Фото болезней для сравнения</div></div></div>
+            <div class="screenshot-card"><div class="screenshot-placeholder"><div class="screenshot-placeholder-icon">📚</div><div class="screenshot-placeholder-text">Справочник</div><div class="screenshot-placeholder-sub">100+ растений офлайн</div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section id="download" class="download">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-badge"><span>📥</span><span>Скачать</span></span>
+            <h2 class="section-title">Выберите версию для вашего устройства</h2>
+            <p class="section-description">PlantCare бесплатен для Android и Windows — без рекламы и подписок</p>
+        </div>
+        <div class="download-grid">
+            <div class="download-card download-card-featured animate-on-scroll animate-delay-1">
+                <div class="download-header">
+                    <div class="download-icon">🤖</div>
+                    <div class="download-info">
+                        <div class="download-title">Android</div>
+                        <div class="download-subtitle">Смартфоны и планшеты</div>
+                    </div>
+                </div>
+                <div class="download-details">
+                    <div class="detail-item"><span class="detail-label">Версия:</span><span class="detail-value">1.2</span></div>
+                    <div class="detail-item"><span class="detail-label">Размер:</span><span class="detail-value">~150 МБ</span></div>
+                    <div class="detail-item"><span class="detail-label">Требования:</span><span class="detail-value">Android 7.0+</span></div>
+                </div>
+                <a href="Releases/PlantCare-v1.2.apk" class="btn-download" download>
+                    <span>📥</span><span>Скачать APK v1.2</span>
+                </a>
+                <p class="download-note">OpenRouter AI · Wikipedia · Smart Care · 5 уровней ИИ</p>
+            </div>
+            <div class="download-card animate-on-scroll animate-delay-2">
+                <div class="download-header">
+                    <div class="download-icon">🪟</div>
+                    <div class="download-info">
+                        <div class="download-title">Windows (EXE)</div>
+                        <div class="download-subtitle">Установщик</div>
+                    </div>
+                </div>
+                <div class="download-details">
+                    <div class="detail-item"><span class="detail-label">Версия:</span><span class="detail-value">1.2</span></div>
+                    <div class="detail-item"><span class="detail-label">Размер:</span><span class="detail-value">~200 МБ</span></div>
+                    <div class="detail-item"><span class="detail-label">Требования:</span><span class="detail-value">Windows 10+</span></div>
+                </div>
+                <a href="Releases/PlantCare-latest.exe" class="btn-download" download>
+                    <span>📥</span><span>Скачать EXE</span>
+                </a>
+                <p class="download-note">Автоматический установщик — просто запустите и нажмите «Далее»</p>
+            </div>
+            <div class="download-card animate-on-scroll animate-delay-3">
+                <div class="download-header">
+                    <div class="download-icon">🪟</div>
+                    <div class="download-info">
+                        <div class="download-title">Windows (MSI)</div>
+                        <div class="download-subtitle">Альтернативный</div>
+                    </div>
+                </div>
+                <div class="download-details">
+                    <div class="detail-item"><span class="detail-label">Версия:</span><span class="detail-value">1.2</span></div>
+                    <div class="detail-item"><span class="detail-label">Размер:</span><span class="detail-value">~200 МБ</span></div>
+                    <div class="detail-item"><span class="detail-label">Требования:</span><span class="detail-value">Windows 10+</span></div>
+                </div>
+                <a href="Releases/PlantCare-latest.msi" class="btn-download" download>
+                    <span>📥</span><span>Скачать MSI</span>
+                </a>
+                <p class="download-note">MSI-формат — если EXE не подходит</p>
+            </div>
+            <div class="download-card animate-on-scroll animate-delay-4">
+                <div class="download-header">
+                    <div class="download-icon">📚</div>
+                    <div class="download-info">
+                        <div class="download-title">Руководство</div>
+                        <div class="download-subtitle">Инструкция пользователя</div>
+                    </div>
+                </div>
+                <div class="download-details">
+                    <div class="detail-item"><span class="detail-label">Формат:</span><span class="detail-value">PDF</span></div>
+                    <div class="detail-item"><span class="detail-label">Страниц:</span><span class="detail-value">9</span></div>
+                    <div class="detail-item"><span class="detail-label">Язык:</span><span class="detail-value">Русский</span></div>
+                </div>
+                <a href="Releases/PlantCare-Documentation.pdf" class="btn-download" download>
+                    <span>📥</span><span>Скачать PDF</span>
+                </a>
+                <p class="download-note">Как пользоваться всеми функциями — с картинками</p>
+            </div>
+        </div>
+
+        <div class="video-section animate-on-scroll">
+            <h3>🎬 Видео-обзор приложения</h3>
+            <div class="video-wrapper">
+                <video controls preload="metadata" poster="Releases/PlantCare-booklet-p1.png">
+                    <source src="Releases/PlantCare.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео.
+                </video>
+            </div>
+            <p class="video-caption">Смотрите, как работают ИИ-чат, Wikipedia, Smart Care и индикатор прокси</p>
+        </div>
+
+        <div class="booklet-section animate-on-scroll">
+            <h3>📄 Буклет о приложении</h3>
+            <p class="booklet-description">Краткое описание на двух страницах. Нажмите, чтобы рассмотреть крупнее.</p>
+            <div class="booklet-pages">
+                <div class="booklet-page" onclick="openLightbox('Releases/PlantCare-booklet-p1.png','Буклет PlantCare — Страница 1')">
+                    <img src="Releases/PlantCare-booklet-p1.png" alt="Буклет — Страница 1" loading="lazy">
+                    <p class="page-label">Страница 1</p>
+                </div>
+                <div class="booklet-page" onclick="openLightbox('Releases/PlantCare-booklet-p2.png','Буклет PlantCare — Страница 2')">
+                    <img src="Releases/PlantCare-booklet-p2.png" alt="Буклет — Страница 2" loading="lazy">
+                    <p class="page-label">Страница 2</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+            <span class="lightbox-close">&times;</span>
+            <img id="lightbox-img" src="" alt="">
+            <p id="lightbox-caption"></p>
+        </div>
+
+        <div class="install-instructions animate-on-scroll">
+            <h3>📝 Как установить — три шага</h3>
+            <div class="instructions-grid">
+                <div class="instruction-card">
+                    <div class="instruction-number">1</div>
+                    <h4>Нажмите «Скачать»</h4>
+                    <p>Выберите нужную версию — Android APK или Windows установщик — и скачайте файл.</p>
+                </div>
+                <div class="instruction-card">
+                    <div class="instruction-number">2</div>
+                    <h4>Разрешите установку</h4>
+                    <p>На Android: разрешите установку из неизвестных источников. На Windows: просто запустите файл и нажмите «Далее».</p>
+                </div>
+                <div class="instruction-card">
+                    <div class="instruction-number">3</div>
+                    <h4>Откройте и пользуйтесь!</h4>
+                    <p>Запустите PlantCare. Зелёный кружок в углу — значит прокси подключился и ИИ готов помогать.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="faq">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-badge"><span>❓</span><span>Вопросы и ответы</span></span>
+            <h2 class="section-title">Часто задаваемые вопросы</h2>
+            <p class="section-description">Отвечаем на самые популярные вопросы о PlantCare</p>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item animate-on-scroll animate-delay-1">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>Какие ИИ-модели используются в приложении?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        В приложении выстроена цепочка из пяти уровней. Сначала пробуется Nemotron — мощная основная модель. Если она не отвечает — подключается MiniMax, потом GLM, затем бесплатные модели через OpenRouter. Последний уровень — полный офлайн: локальная база данных или TF-Lite модель прямо на устройстве. Всё происходит автоматически, вы ничего не настраиваете.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item animate-on-scroll animate-delay-2">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>Что означают цвета кружка на главном экране?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Это индикатор состояния прокси-соединения. Голубой — приложение прямо сейчас проверяет, работает ли прокси. Зелёный — соединение установлено, всё в порядке. Жёлтый — соединение не прошло после 1–3 попыток, приложение ещё пытается подключиться. Красный — после более чем 3 попыток прокси не ответил, и приложение переходит в офлайн-режим с локальной базой.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item animate-on-scroll animate-delay-3">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>Зачем ИИ лезет в Wikipedia? Он сам не знает ответы?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        ИИ обучен на данных прошлых лет и иногда может ошибаться или знать устаревшую информацию. Когда приложение дополнительно запрашивает Wikipedia — ответ становится точнее и актуальнее. Представьте, что ИИ перед ответом быстро проверяет факты в энциклопедии — получается намного надёжнее. Плюс в ответе сразу появляются фотографии болезней из Wikimedia для сравнения.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item animate-on-scroll animate-delay-4">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>Smart Care следит только за поливом?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Нет, Smart Care следит за четырьмя видами ухода: поливом, удобрением, опрыскиванием и пересадкой. Для каждого из них приложение запоминает время последнего события и сравнивает с нормальным интервалом для данного растения. Если вы сделали что-то слишком рано — предупредит. Если давно не делали — напомнит.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item animate-on-scroll animate-delay-5">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>Как работают чаты и зачем их несколько?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Если у вас несколько растений — удобно завести отдельный чат для каждого. Назовите чат «Мой фикус» или «Орхидея на кухне». ИИ будет помнить историю разговора именно об этом растении. Можно в любой момент переименовать чат или удалить его. Все разговоры сохраняются даже после закрытия приложения.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item animate-on-scroll">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>Работает ли приложение без интернета?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Да. Справочник с более чем 100 растениями, Smart Care и основная диагностика работают полностью офлайн. При отсутствии интернета ИИ-чат переходит на локальную базу знаний или лёгкую TF-Lite модель, установленную прямо на устройстве. Кружок на главном экране станет красным — так вы сразу поймёте, что прокси недоступен и работает офлайн-режим.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item animate-on-scroll">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>Это точно бесплатно? Не будет скрытых платежей потом?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Абсолютно бесплатно. Нет рекламы, нет подписки, нет покупок внутри приложения, нет платных функций. PlantCare — это открытый проект, весь исходный код доступен на GitHub для проверки. Планов делать приложение платным нет.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-badge"><span>🌱</span><span>О проекте</span></span>
+            <h2 class="section-title">Кто сделал PlantCare и зачем</h2>
+        </div>
+        <div class="about-content">
+            <div class="about-left">
+                <div class="creator-card animate-slide-left">
+                    <div class="creator-avatar">👨‍💻</div>
+                    <div class="creator-info">
+                        <h3>Денис Аниськов</h3>
+                        <p class="creator-role">Разработчик PlantCare</p>
+                        <p class="creator-bio">Люблю программирование и растения. PlantCare — мой личный проект: захотел сделать удобное приложение, которое реально помогает ухаживать за растениями, а не просто выглядит красиво.</p>
+                        <div class="creator-links">
+                            <a href="https://github.com/DenisAniskov/PlantCare" target="_blank" class="creator-link"><span>🌿</span><span>PlantCare</span></a>
+                            <a href="https://github.com/DenisAniskov/PlantCare-Site" target="_blank" class="creator-link"><span>🌐</span><span>Сайт</span></a>
+                        </div>
+                    </div>
+                </div>
+                <p class="about-description animate-on-scroll">
+                    Приложение выросло из простого справочника в полноценный ИИ-помощник. Сначала была только база данных растений. Потом добавился ИИ-чат, распознавание по фото, Wikipedia, Smart Care и индикатор прокси. Проект продолжает развиваться, и всё это — полностью открыто и бесплатно.
                 </p>
-            </div>
-
-            <div class="download-grid">
-                <!-- Android -->
-                <div class="download-card download-card-featured">
-                    <div class="download-header">
-                        <div class="download-icon">🤖</div>
+                <div class="about-features">
+                    <div class="about-feature animate-on-scroll animate-delay-1">
+                        <div class="about-icon">🎯</div>
                         <div>
-                            <div class="download-title">Android</div>
-                            <div class="download-subtitle">Смартфоны и планшеты</div>
+                            <h4>Зачем это всё</h4>
+                            <p>Хочу, чтобы любой человек мог ухаживать за растениями — даже если раньше никогда этим не занимался</p>
                         </div>
                     </div>
-                    <div class="download-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Версия:</span>
-                            <span class="detail-value">1.1</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Размер:</span>
-                            <span class="detail-value">~150 МБ</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Требования:</span>
-                            <span class="detail-value">Android 7.0+</span>
-                        </div>
-                    </div>
-                    <a href="Releases/PlantCare-v1.1.apk" class="btn-download" download>
-                        <span>📥</span> Скачать APK v1.1
-                    </a>
-                    <p class="download-note">AI-ассистент (Groq/Gemini), справочник с Perenual, диагностика, погода</p>
-                </div>
-
-                <!-- Windows EXE -->
-                <div class="download-card">
-                    <div class="download-header">
-                        <div class="download-icon">🪟</div>
+                    <div class="about-feature animate-on-scroll animate-delay-2">
+                        <div class="about-icon">🔬</div>
                         <div>
-                            <div class="download-title">Windows (Установщик)</div>
-                            <div class="download-subtitle">Для компьютеров на Windows</div>
+                            <h4>Что внутри</h4>
+                            <p>Kotlin, Jetpack Compose, OpenRouter, Wikipedia API, офлайн-база, TF-Lite — и всё это в одном APK</p>
                         </div>
                     </div>
-                    <div class="download-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Версия:</span>
-                            <span class="detail-value">1.1</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Размер:</span>
-                            <span class="detail-value">~200 МБ</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Требования:</span>
-                            <span class="detail-value">Windows 10+</span>
-                        </div>
-                    </div>
-                    <a href="Releases/PlantCare-latest.exe" class="btn-download" download>
-                        <span>📥</span> Скачать EXE
-                    </a>
-                    <p class="download-note">Автоматический установщик для Windows</p>
-                </div>
-
-                <!-- Windows MSI -->
-                <div class="download-card">
-                    <div class="download-header">
-                        <div class="download-icon">🪟</div>
+                    <div class="about-feature animate-on-scroll animate-delay-3">
+                        <div class="about-icon">🌍</div>
                         <div>
-                            <div class="download-title">Windows (MSI)</div>
-                            <div class="download-subtitle">Альтернативный установщик</div>
+                            <h4>Открытый код</h4>
+                            <p>Всё на GitHub. Можно посмотреть, как устроено, предложить улучшение или сообщить о баге</p>
                         </div>
                     </div>
-                    <div class="download-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Версия:</span>
-                            <span class="detail-value">1.1</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Размер:</span>
-                            <span class="detail-value">~200 МБ</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Требования:</span>
-                            <span class="detail-value">Windows 10+</span>
-                        </div>
-                    </div>
-                    <a href="Releases/PlantCare-latest.msi" class="btn-download" download>
-                        <span>📥</span> Скачать MSI
-                    </a>
-                    <p class="download-note">MSI установщик для Windows</p>
-                </div>
-
-                <!-- Documentation -->
-                <div class="download-card">
-                    <div class="download-header">
-                        <div class="download-icon">📚</div>
+                    <div class="about-feature animate-on-scroll animate-delay-4">
+                        <div class="about-icon">🚀</div>
                         <div>
-                            <div class="download-title">Документация</div>
-                            <div class="download-subtitle">Руководство пользователя</div>
-                        </div>
-                    </div>
-                    <div class="download-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Формат:</span>
-                            <span class="detail-value">PDF</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Размер:</span>
-                            <span class="detail-value">9 страниц</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Язык:</span>
-                            <span class="detail-value">Русский</span>
-                        </div>
-                    </div>
-                    <a href="Releases/PlantCare-Documentation.pdf" class="btn-download" download>
-                        <span>📥</span> Скачать PDF
-                    </a>
-                    <p class="download-note">Руководство по использованию приложения</p>
-                </div>
-            </div>
-
-            <!-- Video Presentation -->
-            <div class="video-section">
-                <h3>🎬 Видео-презентация</h3>
-                <div class="video-wrapper">
-                    <video controls preload="metadata" poster="Releases/PlantCare-booklet-p1.png">
-                        <source src="Releases/PlantCare.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
-                </div>
-                <p class="video-caption">Обзор возможностей PlantCare — AI-ассистент, диагностика, справочник</p>
-            </div>
-
-            <!-- Booklet Preview -->
-            <div class="booklet-section">
-                <h3>📄 Буклет</h3>
-                <p class="booklet-description">Краткое описание продукта в формате буклета. Нажмите на изображение для увеличения.</p>
-                <div class="booklet-pages">
-                    <div class="booklet-page" onclick="openLightbox('Releases/PlantCare-booklet-p1.png', 'Буклет PlantCare — Страница 1')">
-                        <img src="Releases/PlantCare-booklet-p1.png" alt="Буклет PlantCare — Страница 1" loading="lazy">
-                        <p class="page-label">Страница 1</p>
-                    </div>
-                    <div class="booklet-page" onclick="openLightbox('Releases/PlantCare-booklet-p2.png', 'Буклет PlantCare — Страница 2')">
-                        <img src="Releases/PlantCare-booklet-p2.png" alt="Буклет PlantCare — Страница 2" loading="lazy">
-                        <p class="page-label">Страница 2</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Lightbox Modal -->
-            <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-                <span class="lightbox-close">&times;</span>
-                <img id="lightbox-img" src="" alt="">
-                <p id="lightbox-caption"></p>
-            </div>
-
-            <!-- Installation Instructions -->
-            <div class="install-instructions">
-                <h3>📝 Как установить</h3>
-                <div class="instructions-grid">
-                    <div class="instruction-card">
-                        <div class="instruction-number">1</div>
-                        <h4>Скачайте файл</h4>
-                        <p>Выберите версию для вашей платформы и нажмите кнопку "Скачать"</p>
-                    </div>
-                    <div class="instruction-card">
-                        <div class="instruction-number">2</div>
-                        <h4>Разрешите установку</h4>
-                        <p>Android: включите "Неизвестные источники" в настройках. Windows: запустите установщик</p>
-                    </div>
-                    <div class="instruction-card">
-                        <div class="instruction-number">3</div>
-                        <h4>Установите и используйте</h4>
-                        <p>Следуйте инструкциям установщика и наслаждайтесь PlantCare!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-            <!-- Installation Instructions -->
-            <div class="install-instructions">
-                <h3>📝 Как установить</h3>
-                <div class="instructions-grid">
-                    <div class="instruction-card">
-                        <div class="instruction-number">1</div>
-                        <h4>Скачайте файл</h4>
-                        <p>Выберите версию для вашей платформы и нажмите кнопку "Скачать"</p>
-                    </div>
-                    <div class="instruction-card">
-                        <div class="instruction-number">2</div>
-                        <h4>Разрешите установку</h4>
-                        <p>Android: включите "Неизвестные источники" в настройках. Windows: запустите установщик</p>
-                    </div>
-                    <div class="instruction-card">
-                        <div class="instruction-number">3</div>
-                        <h4>Установите и используйте</h4>
-                        <p>Следуйте инструкциям установщика и наслаждайтесь PlantCare!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">
-                    <span>🌱</span>
-                    О проекте
-                </span>
-                <h2 class="section-title">PlantCare - современные технологии на службе природы</h2>
-            </div>
-
-            <div class="about-content">
-                <div class="about-left">
-                    <!-- Creator Card - Moved Higher -->
-                    <div class="creator-card">
-                        <div class="creator-avatar">👨‍💻</div>
-                        <div class="creator-info">
-                            <h3>Денис Аниськов</h3>
-                            <p class="creator-role">Разработчик PlantCare</p>
-                            <p class="creator-bio">
-                                Увлеченный разработчик, соединяющий технологии ИИ с заботой о природе. 
-                                PlantCare — это мой индивидуальный проект, созданный для того, чтобы 
-                                сделать уход за растениями доступным и понятным каждому.
-                            </p>
-                            <div class="creator-links">
-                                <a href="https://github.com/DenisAniskov/PlantCare" target="_blank" class="creator-link">
-                                    <span>🌿</span>
-                                    <span>PlantCare</span>
-                                </a>
-                                <a href="https://github.com/DenisAniskov/PlantCare-Site" target="_blank" class="creator-link">
-                                    <span>🌐</span>
-                                    <span>PlantCare-Site</span>
-                                </a>
-                                <a href="https://github.com/DenisAniskov/PlantCare-Ai-Plants-Scanner" target="_blank" class="creator-link">
-                                    <span>📸</span>
-                                    <span>ИИ Сканер растений</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <p class="about-description">
-                        PlantCare — это результат сочетания страсти к технологиям и желания помочь людям 
-                        лучше понимать растительный мир. Приложение использует передовые технологии 
-                        машинного обучения для точного определения растений и диагностики их состояния.
-                    </p>
-
-                    <div class="about-features">
-                        <div class="about-feature">
-                            <div class="about-icon">🎯</div>
-                            <div>
-                                <h4>Миссия</h4>
-                                <p>Сделать уход за растениями простым и доступным для каждого</p>
-                            </div>
-                        </div>
-                        <div class="about-feature">
-                            <div class="about-icon">🔬</div>
-                            <div>
-                                <h4>Технологии</h4>
-                                <p>Kotlin, Jetpack Compose, Groq API, Gemini AI — ИИ для распознавания растений</p>
-                            </div>
-                        </div>
-                        <div class="about-feature">
-                            <div class="about-icon">🌍</div>
-                            <div>
-                                <h4>Открытость</h4>
-                                <p>Проект полностью бесплатный и доступен на GitHub</p>
-                            </div>
+                            <h4>Постоянно развивается</h4>
+                            <p>Регулярно выходят обновления: новые функции, улучшенные модели ИИ, исправление ошибок</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="about-right">
-                    <div class="stats-card">
-                        <h3>📊 Статистика проекта</h3>
-                        <div class="stat-grid">
-                            <div class="stat-box">
-                                <div class="stat-number">100+</div>
-                                <div class="stat-text">Растений в справочнике</div>
-                            </div>
-                            <div class="stat-box">
-                                <div class="stat-number">15+</div>
-                                <div class="stat-text">Болезней и вредителей</div>
-                            </div>
-                            <div class="stat-box">
-                                <div class="stat-number">3</div>
-                                <div class="stat-text">AI-модели</div>
-                            </div>
-                            <div class="stat-box">
-                                <div class="stat-number">100%</div>
-                                <div class="stat-text">Бесплатно</div>
-                            </div>
-                        </div>
-
-                        <div class="tech-stack">
-                            <h4>🛠 Технологический стек</h4>
-                            <div class="tech-tags">
-                                <span class="tech-tag">Kotlin</span>
-                                <span class="tech-tag">Jetpack Compose</span>
-                                <span class="tech-tag">Groq API</span>
-                                <span class="tech-tag">Gemini AI</span>
-                                <span class="tech-tag">Room Database</span>
-                                <span class="tech-tag">Material Design 3</span>
-                                <span class="tech-tag">OkHttp</span>
-                                <span class="tech-tag">Perenual API</span>
-                            </div>
+            </div>
+            <div class="about-right">
+                <div class="stats-card animate-slide-right">
+                    <h3>📊 Цифры проекта</h3>
+                    <div class="stat-grid">
+                        <div class="stat-box"><div class="stat-number">100+</div><div class="stat-text">Растений в базе</div></div>
+                        <div class="stat-box"><div class="stat-number">15+</div><div class="stat-text">Болезней</div></div>
+                        <div class="stat-box"><div class="stat-number">5</div><div class="stat-text">Уровней ИИ</div></div>
+                        <div class="stat-box"><div class="stat-number">0 ₽</div><div class="stat-text">Стоимость</div></div>
+                    </div>
+                    <div class="tech-stack">
+                        <h4>🛠 Технологии</h4>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Kotlin</span>
+                            <span class="tech-tag">Jetpack Compose</span>
+                            <span class="tech-tag">OpenRouter</span>
+                            <span class="tech-tag">TF-Lite</span>
+                            <span class="tech-tag">Wikipedia API</span>
+                            <span class="tech-tag">Wikimedia</span>
+                            <span class="tech-tag">Room Database</span>
+                            <span class="tech-tag">Material Design 3</span>
+                            <span class="tech-tag">OkHttp</span>
+                            <span class="tech-tag">Perenual API</span>
+                            <span class="tech-tag">Coil</span>
+                            <span class="tech-tag">Coroutines</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <span class="logo-icon">🌿</span>
-                        <span>PlantCare</span>
-                    </div>
-                    <p class="footer-tagline">
-                        Ваш помощник в царстве растений. Определяйте, диагностируйте, 
-                        ухаживайте с помощью искусственного интеллекта.
-                    </p>
-                    <div class="footer-social">
-                        <a href="https://github.com/DenisAniskov/PlantCare" target="_blank" class="social-link" aria-label="PlantCare">
-                            🌿
-                        </a>
-                        <a href="https://github.com/DenisAniskov/PlantCare-Site" target="_blank" class="social-link" aria-label="PlantCare Site">
-                            🌐
-                        </a>
-                        <a href="https://github.com/DenisAniskov/PlantCare-Ai-Plants-Scanner" target="_blank" class="social-link" aria-label="AI Scanner">
-                            📸
-                        </a>
-                    </div>
-                </div>
-
-                <div class="footer-links">
-                    <div class="footer-section">
-                        <h4>Проект</h4>
-                        <ul>
-                            <li><a href="#home">Главная</a></li>
-                            <li><a href="#features">Возможности</a></li>
-                            <li><a href="#download">Скачать</a></li>
-                            <li><a href="#about">О проекте</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-section">
-                        <h4>Репозитории</h4>
-                        <ul>
-                            <li><a href="https://github.com/DenisAniskov/PlantCare" target="_blank">PlantCare</a></li>
-                            <li><a href="https://github.com/DenisAniskov/PlantCare-Site" target="_blank">Сайт</a></li>
-                            <li><a href="https://github.com/DenisAniskov/PlantCare-Ai-Plants-Scanner" target="_blank">ИИ Сканер</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-section">
-                        <h4>Поддержка</h4>
-                        <ul>
-                            <li><a href="https://github.com/DenisAniskov/PlantCare/issues" target="_blank">Сообщить о проблеме</a></li>
-                            <li><a href="https://github.com/DenisAniskov/PlantCare/blob/master/README.md" target="_blank">Документация</a></li>
-                        </ul>
-                    </div>
-                </div>
+<!-- CTA -->
+<section class="cta">
+    <div class="container">
+        <div class="cta-content">
+            <div class="cta-icon">🌿</div>
+            <h2 class="cta-title">Попробуйте — это бесплатно</h2>
+            <p class="cta-desc">Скачайте PlantCare и получите умного помощника для всех ваших растений. Никакой регистрации, никаких платежей — просто скачайте и пользуйтесь.</p>
+            <div class="cta-badges">
+                <span class="cta-badge">✅ Полностью бесплатно</span>
+                <span class="cta-badge">📴 Работает без интернета</span>
+                <span class="cta-badge">💰 Никаких скрытых платежей</span>
+                <span class="cta-badge">⭐ Открытый код</span>
             </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2026 PlantCare. Создано с ❤️ Денисом Аниськовым</p>
-                <p class="footer-note">
-                    Проект находится в активной разработке. Все материалы предоставлены для образовательных целей.
-                </p>
+            <div class="cta-buttons">
+                <a href="#download" class="btn btn-cta-white"><span>📥</span><span>Скачать бесплатно</span></a>
+                <a href="https://github.com/DenisAniskov/PlantCare" target="_blank" class="btn btn-cta-outline"><span>⭐</span><span>Поставить звезду на GitHub</span></a>
             </div>
         </div>
-    </footer>
+    </div>
+</section>
 
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scroll-top" aria-label="Прокрутить наверх">
-        <span>↑</span>
-    </button>
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo"><span class="logo-icon">🌿</span><span class="logo-text">PlantCare</span></div>
+                <p class="footer-tagline">Умный помощник для ваших растений. ИИ-чат, диагностика болезней, напоминания об уходе — всё бесплатно.</p>
+                <div class="footer-social">
+                    <a href="https://github.com/DenisAniskov/PlantCare" target="_blank" class="social-link" aria-label="PlantCare на GitHub">🌿</a>
+                    <a href="https://github.com/DenisAniskov/PlantCare-Site" target="_blank" class="social-link" aria-label="Сайт на GitHub">🌐</a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#ai-cascade">Как работает ИИ</a></li>
+                        <li><a href="#features">Возможности</a></li>
+                        <li><a href="#screenshots">Разделы</a></li>
+                        <li><a href="#download">Скачать</a></li>
+                        <li><a href="#faq">Вопросы и ответы</a></li>
+                        <li><a href="#about">О проекте</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Репозитории</h4>
+                    <ul>
+                        <li><a href="https://github.com/DenisAniskov/PlantCare" target="_blank">PlantCare App</a></li>
+                        <li><a href="https://github.com/DenisAniskov/PlantCare-Site" target="_blank">Сайт проекта</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Поддержка</h4>
+                    <ul>
+                        <li><a href="https://github.com/DenisAniskov/PlantCare/issues" target="_blank">Нашли баг? Напишите</a></li>
+                        <li><a href="https://github.com/DenisAniskov/PlantCare/blob/master/README.md" target="_blank">Документация</a></li>
+                        <li><a href="https://github.com/DenisAniskov/PlantCare/releases" target="_blank">Все версии</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024–2026 PlantCare. Сделано с ❤️ Денисом Аниськовым</p>
+            <p class="footer-note">Открытый проект на GitHub. Все материалы — для образовательных целей.</p>
+        </div>
+    </div>
+</footer>
 
-    <script src="script.js"></script>
+<button class="scroll-top" id="scroll-top" aria-label="Наверх">↑</button>
+
+<div class="cookie-consent" id="cookie-consent">
+    <div class="cookie-content">
+        <span style="font-size:1.5rem">🍪</span>
+        <p class="cookie-text">Используем cookies, чтобы сайт работал лучше</p>
+    </div>
+    <div class="cookie-buttons">
+        <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()">Хорошо</button>
+        <button class="cookie-btn cookie-btn-decline" onclick="declineCookies()">Нет</button>
+    </div>
+</div>
+
+<script>
+    const CFG = {
+        loadingMs: 1800,
+        typingSpeed: 65,
+        typingText: 'умный помощник для ваших растений',
+        emojiList: ['🌿','🌱','🍀','🌸','🌺','🌻','🌼','🍃','🌾','☘️','🪴','🌳'],
+        particleCount: 18
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            const l = document.getElementById('loading');
+            l.classList.add('hidden');
+            setTimeout(() => l.remove(), 600);
+        }, CFG.loadingMs);
+
+        initParticles();
+        initTyping();
+        initScrollProgress();
+        initHeader();
+        initMobileNav();
+        initTheme();
+        initScrollAnim();
+        initCounter();
+        initCursor();
+        initCookies();
+        initScrollTop();
+        initActiveNav();
+        initSmoothScroll();
+        initKeyboard();
+        initChat();
+    });
+
+    function initParticles() {
+        const c = document.getElementById('particles');
+        if (!c) return;
+        for (let i = 0; i < CFG.particleCount; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.textContent = CFG.emojiList[Math.floor(Math.random() * CFG.emojiList.length)];
+            p.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${1.5+Math.random()*1.5}rem;animation-delay:${Math.random()*5}s;animation-duration:${12+Math.random()*8}s;opacity:${.2+Math.random()*.3}`;
+            c.appendChild(p);
+        }
+    }
+
+    function initTyping() {
+        const el = document.getElementById('typing-text');
+        if (!el) return;
+        const t = CFG.typingText;
+        let i = 0;
+        function type() {
+            if (i < t.length) {
+                el.textContent = t.slice(0, ++i);
+                setTimeout(type, CFG.typingSpeed);
+            } else {
+                setTimeout(() => el.style.borderRight = 'none', 1200);
+            }
+        }
+        setTimeout(type, CFG.loadingMs + 400);
+    }
+
+    function initScrollProgress() {
+        const bar = document.getElementById('scroll-progress');
+        if (!bar) return;
+        let tick = false;
+        window.addEventListener('scroll', () => {
+            if (!tick) {
+                requestAnimationFrame(() => {
+                    bar.style.width = ((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100) + '%';
+                    tick = false;
+                });
+                tick = true;
+            }
+        }, { passive: true });
+    }
+
+    function initHeader() {
+        const h = document.getElementById('header');
+        if (!h) return;
+        window.addEventListener('scroll', () => h.classList.toggle('scrolled', window.scrollY > 50), { passive: true });
+    }
+
+    function initMobileNav() {
+        const burger = document.getElementById('nav-burger');
+        const nav = document.getElementById('nav-mobile');
+        if (!burger || !nav) return;
+        burger.addEventListener('click', () => {
+            const a = burger.classList.toggle('active');
+            nav.classList.toggle('active');
+            burger.setAttribute('aria-expanded', a);
+            document.body.style.overflow = a ? 'hidden' : '';
+        });
+        nav.querySelectorAll('.nav-mobile-link').forEach(l => l.addEventListener('click', () => {
+            burger.classList.remove('active');
+            nav.classList.remove('active');
+            document.body.style.overflow = '';
+        }));
+    }
+
+    function initTheme() {
+        const btn = document.getElementById('theme-toggle');
+        const icon = btn?.querySelector('.theme-icon');
+        if (!btn || !icon) return;
+        const saved = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        applyTheme(saved);
+        btn.addEventListener('click', () => {
+            const t = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            applyTheme(t);
+            localStorage.setItem('theme', t);
+        });
+        function applyTheme(t) {
+            document.documentElement.setAttribute('data-theme', t);
+            icon.textContent = t === 'dark' ? '☀️' : '🌙';
+        }
+    }
+
+    function initScrollAnim() {
+        const els = document.querySelectorAll('.animate-on-scroll,.animate-slide-left,.animate-slide-right');
+        if (!els.length) return;
+        const obs = new IntersectionObserver(entries => entries.forEach(e => {
+            if (e.isIntersecting) e.target.classList.add('animated');
+        }), { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+        els.forEach(e => obs.observe(e));
+    }
+
+    function initCounter() {
+        const els = document.querySelectorAll('[data-count]');
+        if (!els.length) return;
+        const obs = new IntersectionObserver(entries => entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            const target = +e.target.getAttribute('data-count');
+            let cur = 0;
+            const timer = setInterval(() => {
+                cur += target / 60;
+                if (cur >= target) { e.target.textContent = target + '+'; clearInterval(timer); }
+                else e.target.textContent = Math.floor(cur) + '+';
+            }, 2000 / 60);
+            obs.unobserve(e.target);
+        }), { threshold: 0.5 });
+        els.forEach(e => obs.observe(e));
+    }
+
+    function initCursor() {
+        const cur = document.getElementById('cursor');
+        const dot = document.getElementById('cursor-dot');
+        if (!cur || !dot) return;
+        if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+            cur.style.display = 'none'; dot.style.display = 'none'; return;
+        }
+        let mx = 0, my = 0, cx = 0, cy = 0, dx = 0, dy = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+        (function anim() {
+            cx += (mx - cx) * .15; cy += (my - cy) * .15;
+            dx += (mx - dx) * .3; dy += (my - dy) * .3;
+            cur.style.left = cx - 12 + 'px'; cur.style.top = cy - 12 + 'px';
+            dot.style.left = dx - 3 + 'px'; dot.style.top = dy - 3 + 'px';
+            requestAnimationFrame(anim);
+        })();
+        document.querySelectorAll('a,button,.feature-card,.download-card,.faq-item,.booklet-page,.chat-tab,.proxy-state,.wiki-benefit,.cascade-step').forEach(el => {
+            el.addEventListener('mouseenter', () => cur.classList.add('active'));
+            el.addEventListener('mouseleave', () => cur.classList.remove('active'));
+        });
+        document.addEventListener('mousedown', () => cur.classList.add('clicking'));
+        document.addEventListener('mouseup', () => cur.classList.remove('clicking'));
+    }
+
+    function initCookies() {
+        const c = document.getElementById('cookie-consent');
+        if (!c || localStorage.getItem('cookieConsent')) return;
+        setTimeout(() => c.classList.add('visible'), 2500);
+    }
+    function acceptCookies() { localStorage.setItem('cookieConsent', 'accepted'); document.getElementById('cookie-consent')?.classList.remove('visible'); }
+    function declineCookies() { localStorage.setItem('cookieConsent', 'declined'); document.getElementById('cookie-consent')?.classList.remove('visible'); }
+
+    function initScrollTop() {
+        const btn = document.getElementById('scroll-top');
+        if (!btn) return;
+        window.addEventListener('scroll', () => btn.classList.toggle('visible', window.scrollY > 600), { passive: true });
+        btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
+
+    function initActiveNav() {
+        const sections = document.querySelectorAll('section[id]');
+        const links = document.querySelectorAll('.nav-link');
+        if (!sections.length) return;
+        const obs = new IntersectionObserver(entries => entries.forEach(e => {
+            if (e.isIntersecting) {
+                const id = e.target.id;
+                links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+            }
+        }), { rootMargin: '-20% 0px -80% 0px' });
+        sections.forEach(s => obs.observe(s));
+    }
+
+    function initSmoothScroll() {
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+            });
+        });
+    }
+
+    function initKeyboard() {
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+                const nav = document.getElementById('nav-mobile');
+                if (nav?.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    document.getElementById('nav-burger')?.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+        });
+    }
+
+    // ==========================================
+    // CHAT
+    // ==========================================
+    function initChat() {
+        const input = document.getElementById('chat-input');
+        const send = document.getElementById('chat-send');
+        const msgs = document.getElementById('chat-messages');
+        const tabsContainer = document.getElementById('chat-tabs');
+        const newBtn = document.getElementById('chat-new');
+
+        if (!input || !send || !msgs) return;
+
+        const aiReplies = [
+            {
+                text: 'Хороший вопрос! Сейчас поищу в Wikipedia... 🔍 Нашёл подходящую статью. Вот что важно знать:',
+                wiki: '📖 Wikipedia · 🖼️ Wikimedia Commons'
+            },
+            {
+                text: 'Понял! По описанию — скорее всего, это решаемо. Смотрите, что советует Wikipedia по этой теме:',
+                wiki: '📖 Wikipedia — найдена статья + фото для сравнения'
+            },
+            {
+                text: 'Отличное наблюдение. Судя по симптомам, нужно проверить несколько вещей. Вот что я нашёл:',
+                wiki: '📖 Источник: Wikipedia · Wikimedia Commons фото'
+            }
+        ];
+        let replyIdx = 0;
+        let isSending = false;
+
+        function autoResize() {
+            input.style.height = 'auto';
+            input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+        }
+
+        input.addEventListener('input', autoResize);
+
+        function sendMsg() {
+            const text = input.value.trim();
+            if (!text || isSending) return;
+            isSending = true;
+            send.disabled = true;
+
+            const userMsg = document.createElement('div');
+            userMsg.className = 'chat-msg user';
+            userMsg.innerHTML = `<div class="chat-avatar user-av">👤</div><div class="chat-bubble">${escHtml(text)}</div>`;
+            msgs.appendChild(userMsg);
+            input.value = '';
+            input.style.height = 'auto';
+            msgs.scrollTop = msgs.scrollHeight;
+
+            // Typing indicator
+            const typingEl = document.createElement('div');
+            typingEl.className = 'chat-msg ai';
+            typingEl.innerHTML = `<div class="chat-avatar ai">🤖</div><div class="chat-typing"><div class="chat-typing-dot"></div><div class="chat-typing-dot"></div><div class="chat-typing-dot"></div></div>`;
+            msgs.appendChild(typingEl);
+            msgs.scrollTop = msgs.scrollHeight;
+
+            setTimeout(() => {
+                typingEl.remove();
+                const reply = aiReplies[replyIdx % aiReplies.length];
+                replyIdx++;
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'chat-msg ai';
+                aiMsg.innerHTML = `<div class="chat-avatar ai">🤖</div><div><div class="chat-bubble">${reply.text}</div><div class="chat-wiki-ref">${reply.wiki}</div></div>`;
+                msgs.appendChild(aiMsg);
+                msgs.scrollTop = msgs.scrollHeight;
+                isSending = false;
+                send.disabled = false;
+                input.focus();
+            }, 1100);
+        }
+
+        send.addEventListener('click', sendMsg);
+        input.addEventListener('keydown', e => {
+            if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
+        });
+
+        function escHtml(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+
+        // Tab management
+        function setupTab(tab) {
+            tab.addEventListener('click', function(e) {
+                if (e.target.classList.contains('chat-tab-close')) {
+                    if (document.querySelectorAll('.chat-tab').length <= 1) return;
+                    if (tab.classList.contains('active')) {
+                        const sib = tab.previousElementSibling || tab.nextElementSibling;
+                        sib?.classList.add('active');
+                    }
+                    tab.remove();
+                    return;
+                }
+                document.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        }
+
+        document.querySelectorAll('.chat-tab').forEach(setupTab);
+
+        const plantNames = ['🌺 Роза', '🪴 Монстера', '🌵 Алоэ', '🌿 Хлорофитум', '🌸 Фиалка', '🍀 Клевер', '🌻 Подсолнух'];
+        let nameIdx = 0;
+
+        newBtn?.addEventListener('click', () => {
+            const tab = document.createElement('div');
+            tab.className = 'chat-tab active';
+            const name = plantNames[nameIdx % plantNames.length];
+            nameIdx++;
+            tab.innerHTML = `${name} <span class="chat-tab-close">✕</span>`;
+            document.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
+            tabsContainer?.appendChild(tab);
+            setupTab(tab);
+
+            msgs.innerHTML = `
+                <div class="chat-msg ai">
+                    <div class="chat-avatar ai">🤖</div>
+                    <div>
+                        <div class="chat-bubble">Новый чат создан! Расскажите мне о ${name.split(' ')[1] || 'растении'} — чем могу помочь? 🌿</div>
+                        <div class="chat-wiki-ref">📖 Wikipedia готова к поиску</div>
+                    </div>
+                </div>
+            `;
+            input.placeholder = `Спросите о ${name.split(' ').slice(1).join(' ') || 'растении'}...`;
+            input.focus();
+        });
+    }
+
+    // ==========================================
+    // LIGHTBOX
+    // ==========================================
+    function openLightbox(src, caption) {
+        const lb = document.getElementById('lightbox');
+        const img = document.getElementById('lightbox-img');
+        const cap = document.getElementById('lightbox-caption');
+        if (!lb || !img || !cap) return;
+        img.src = src; img.alt = caption; cap.textContent = caption;
+        lb.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        const lb = document.getElementById('lightbox');
+        if (!lb) return;
+        lb.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function toggleFaq(el) {
+        const item = el.parentElement;
+        if (!item) return;
+        const was = item.classList.contains('active');
+        document.querySelectorAll('.faq-item.active').forEach(f => f.classList.remove('active'));
+        if (!was) item.classList.add('active');
+    }
+
+    // Konami Easter Egg 🎉
+    let ki = 0;
+    const kc = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    document.addEventListener('keydown', e => {
+        ki = e.key === kc[ki] ? ki + 1 : 0;
+        if (ki === kc.length) {
+            ki = 0;
+            const style = document.createElement('style');
+            style.textContent = '@keyframes cf{to{transform:translateY(105vh) rotate(720deg);opacity:0}}';
+            document.head.appendChild(style);
+            const colors = ['#10b981','#8b5cf6','#f59e0b','#ef4444','#3b82f6','#06b6d4'];
+            for (let i = 0; i < 80; i++) {
+                const c = document.createElement('div');
+                c.style.cssText = `position:fixed;width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;background:${colors[i%6]};left:${Math.random()*100}vw;top:-20px;z-index:9999;pointer-events:none;border-radius:${Math.random()>.5?'50%':'3px'};animation:cf ${2+Math.random()*2}s linear ${Math.random()*.5}s forwards`;
+                document.body.appendChild(c);
+                setTimeout(() => c.remove(), 4500);
+            }
+            setTimeout(() => style.remove(), 5000);
+        }
+    });
+</script>
 </body>
 </html>
