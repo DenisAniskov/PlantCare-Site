@@ -1,0 +1,58 @@
+[
+  {
+    "id": "android-apk-1.2",
+    "platform": "android",
+    "platformName": "Android",
+    "icon": "🤖",
+    "version": "1.2",
+    "format": "APK",
+    "fileName": "PlantCare-v1.2.apk",
+    "filePath": "Releases/PlantCare-v1.2.apk",
+    "size": 48957620,
+    "sizeFormatted": "46.69 МБ",
+    "releaseDate": "2026-04-17",
+    "experimental": false
+  },
+  {
+    "id": "docs-pdf-latest",
+    "platform": "docs",
+    "platformName": "Документация",
+    "icon": "📚",
+    "version": "latest",
+    "format": "PDF",
+    "fileName": "PlantCare-Documentation.pdf",
+    "filePath": "Releases/PlantCare-Documentation.pdf",
+    "size": 285688,
+    "sizeFormatted": "278.99 КБ",
+    "releaseDate": "2026-04-12",
+    "experimental": false
+  },
+  {
+    "id": "windows-exe-latest",
+    "platform": "windows",
+    "platformName": "Windows",
+    "icon": "🪟",
+    "version": "latest",
+    "format": "EXE",
+    "fileName": "PlantCare-latest.exe",
+    "filePath": "Releases/PlantCare-latest.exe",
+    "size": 101133824,
+    "sizeFormatted": "96.45 МБ",
+    "releaseDate": "2026-04-12",
+    "experimental": false
+  },
+  {
+    "id": "windows-msi-latest",
+    "platform": "windows",
+    "platformName": "Windows",
+    "icon": "🪟",
+    "version": "latest",
+    "format": "MSI",
+    "fileName": "PlantCare-latest.msi",
+    "filePath": "Releases/PlantCare-latest.msi",
+    "size": 99479416,
+    "sizeFormatted": "94.87 МБ",
+    "releaseDate": "2026-04-12",
+    "experimental": false
+  }
+]

@@ -1,122 +1,73 @@
 // ============================================
-// PlantCare - Генератор downloads.json
-// Используется для Node.js при деплое
+// PlantCare - Генератор downloads.json (ESM)
+// Запуск: node generate-downloads.js
 // ============================================
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const fs = require('fs');
-const path = require('path');
-
-const releasesDir = path.join(__dirname, '..', 'Releases');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const releasesDir = path.join(__dirname, 'Releases');
 const outputFile = path.join(__dirname, 'downloads.json');
 
-// Парсинг информации из имени файла
 function parseFileName(fileName) {
-    // PlantCare-android-v0.8.2.apk -> { platform: 'android', version: '0.8.2' }
-    const match = fileName.match(/PlantCare-(\w+)-v?([\d.]+)/i);
-    
-    if (match) {
-        return {
-            platform: match[1].toLowerCase(),
-            version: match[2]
-        };
-    }
-    
+    const ext = path.extname(fileName).toLowerCase();
+    const base = path.basename(fileName, ext);
+    let m = base.match(/PlantCare-v?([\d.]+)/i);
+    if (m) return { platform: ext === '.apk' ? 'android' : 'windows', version: m[1], kind: ext === '.apk' ? 'apk' : (ext === '.exe' ? 'exe' : 'msi') };
+    if (/PlantCare-latest/i.test(base)) return { platform: 'windows', version: 'latest', kind: ext === '.exe' ? 'exe' : 'msi' };
+    if (/documentation/i.test(base)) return { platform: 'docs', version: '', kind: 'pdf' };
     return null;
 }
 
-// Определение иконки и названия платформы
-function getPlatformInfo(platform, fileName) {
-    const ext = path.extname(fileName).toLowerCase();
-    
-    const platformMap = {
-        'android': { icon: '🤖', name: 'Android', format: 'APK' },
-        'windows': { icon: '🪟', name: 'Windows', format: ext === '.exe' ? 'EXE' : 'MSI' },
-        'linux': { icon: '🐧', name: 'Linux', format: 'AppImage' },
-        'macos': { icon: '🍎', name: 'macOS', format: 'DMG' }
-    };
-    
-    return platformMap[platform] || { icon: '📦', name: 'Unknown', format: ext.toUpperCase() };
-}
-
-// Получение размера файла
-function getFileSize(filePath) {
-    try {
-        const stats = fs.statSync(filePath);
-        return stats.size;
-    } catch (error) {
-        return 0;
+function getPlatformInfo(rec) {
+    switch (rec.platform) {
+        case 'android': return { icon: '🤖', name: 'Android', format: 'APK' };
+        case 'windows': return { icon: '🪟', name: 'Windows', format: rec.kind === 'exe' ? 'EXE' : 'MSI' };
+        case 'docs':    return { icon: '📚', name: 'Документация', format: 'PDF' };
+        default:        return { icon: '📦', name: 'Unknown', format: rec.kind ? rec.kind.toUpperCase() : '' };
     }
 }
 
-// Форматирование размера файла
 function formatFileSize(bytes) {
+    if (!bytes) return '0 Байт';
     const sizes = ['Байт', 'КБ', 'МБ', 'ГБ'];
-    
-    if (bytes === 0) return '0 Байт';
-    
     const i = Math.floor(Math.log(bytes) / Math.log(1024));
-    const size = (bytes / Math.pow(1024, i)).toFixed(2);
-    
-    return `${size} ${sizes[i]}`;
+    return `${(bytes / Math.pow(1024, i)).toFixed(2)} ${sizes[i]}`;
 }
 
-// Генерация JSON файла
-function generateDownloadsJSON() {
-    if (!fs.existsSync(releasesDir)) {
-        console.error('❌ Папка Releases не найдена:', releasesDir);
-        return;
-    }
-    
-    const files = fs.readdirSync(releasesDir);
-    const downloads = [];
-    
-    files.forEach(fileName => {
-        const filePath = path.join(releasesDir, fileName);
-        const stats = fs.statSync(filePath);
-        
-        if (!stats.isFile()) return;
-        
-        const parsed = parseFileName(fileName);
-        
-        if (parsed) {
-            const platformInfo = getPlatformInfo(parsed.platform, fileName);
-            const fileSize = getFileSize(filePath);
-            
-            downloads.push({
-                id: `${parsed.platform}-${parsed.version}`,
-                platform: parsed.platform,
-                platformName: platformInfo.name,
-                icon: platformInfo.icon,
-                version: parsed.version,
-                format: platformInfo.format,
-                fileName: fileName,
-                filePath: `Releases/${fileName}`,
-                size: fileSize,
-                sizeFormatted: formatFileSize(fileSize),
-                releaseDate: stats.mtime.toISOString().split('T')[0],
-                experimental: parsed.version.includes('beta') || parsed.version.includes('alpha')
-            });
-        }
-    });
-    
-    // Сортировка по дате (новые сверху)
-    downloads.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
-    
-    // Сохранение в JSON
-    fs.writeFileSync(outputFile, JSON.stringify(downloads, null, 2), 'utf8');
-    
-    console.log('✅ Файл downloads.json создан успешно!');
-    console.log(`📦 Найдено релизов: ${downloads.length}`);
-    
-    downloads.forEach(dl => {
-        console.log(`   ${dl.icon} ${dl.platformName} ${dl.version} (${dl.sizeFormatted})`);
-    });
-}
-
-// Запуск генератора
-try {
-    generateDownloadsJSON();
-} catch (error) {
-    console.error('❌ Ошибка при генерации downloads.json:', error);
+if (!fs.existsSync(releasesDir)) {
+    console.error('❌ Папка Releases не найдена:', releasesDir);
     process.exit(1);
 }
+
+const downloads = fs.readdirSync(releasesDir)
+    .map(fileName => {
+        const filePath = path.join(releasesDir, fileName);
+        const stats = fs.statSync(filePath);
+        if (!stats.isFile()) return null;
+        const parsed = parseFileName(fileName);
+        if (!parsed) return null;
+        const info = getPlatformInfo(parsed);
+        const size = stats.size;
+        return {
+            id: `${parsed.platform}-${parsed.kind}-${parsed.version || 'latest'}`,
+            platform: parsed.platform,
+            platformName: info.name,
+            icon: info.icon,
+            version: parsed.version || 'latest',
+            format: info.format,
+            fileName,
+            filePath: `Releases/${fileName}`,
+            size,
+            sizeFormatted: formatFileSize(size),
+            releaseDate: stats.mtime.toISOString().split('T')[0],
+            experimental: /beta|alpha/i.test(parsed.version)
+        };
+    })
+    .filter(Boolean)
+    .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
+
+fs.writeFileSync(outputFile, JSON.stringify(downloads, null, 2), 'utf8');
+console.log(`✅ downloads.json создан. Релизов: ${downloads.length}`);
+downloads.forEach(d => console.log(`   ${d.icon} ${d.platformName} ${d.version} (${d.sizeFormatted})`));

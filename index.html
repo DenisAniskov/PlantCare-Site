@@ -3,17 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PlantCare — умный помощник для ваших растений. ИИ определяет болезни, напоминает о поливе и даёт советы по уходу.">
+    <meta name="description" content="PlantCare — бесплатный ИИ-помощник для ухода за растениями. 5 уровней ИИ с автопереключением, диагностика болезней по фото, Wikipedia RAG, Smart Care с напоминаниями полива, удобрения, опрыскивания и пересадки. Android и Windows.">
     <meta name="author" content="Денис Аниськов">
+    <meta name="keywords" content="PlantCare, уход за растениями, ИИ для растений, диагностика болезней растений, полив, напоминания, OpenRouter, Wikipedia, Material Design 3, Android, Windows, бесплатно">
     <meta name="theme-color" content="#10b981">
-    <meta property="og:title" content="PlantCare — Умный уход за растениями">
-    <meta property="og:description" content="ИИ-помощник для растений: определение болезней, напоминания об уходе, советы и справочник — всё бесплатно">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="application-name" content="PlantCare">
+    <meta name="color-scheme" content="light dark">
+    <link rel="canonical" href="https://plantcare.app/">
+    <meta property="og:title" content="PlantCare — Умный уход за растениями с ИИ">
+    <meta property="og:description" content="Бесплатный ИИ-помощник для растений: 5 уровней ИИ, диагностика болезней по фото, Wikipedia RAG, Smart Care напоминания. Android и Windows.">
     <meta property="og:type" content="website">
-    <title>PlantCare — Умный уход за растениями</title>
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="PlantCare">
+    <meta property="og:url" content="https://plantcare.app/">
+    <meta property="og:image" content="https://plantcare.app/Releases/PlantCare-booklet-p1.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PlantCare — Умный уход за растениями с ИИ">
+    <meta name="twitter:description" content="Бесплатный ИИ-помощник: диагностика болезней, Wikipedia RAG, Smart Care напоминания. Android и Windows.">
+    <meta name="twitter:image" content="https://plantcare.app/Releases/PlantCare-booklet-p1.png">
+    <meta name="twitter:image:alt" content="PlantCare — обложка буклета приложения">
+    <title>PlantCare — Умный уход за растениями с ИИ | Бесплатно для Android и Windows</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "PlantCare",
+          "applicationCategory": "LifestyleApplication",
+          "operatingSystem": "Android 7.0+, Windows 10+",
+          "softwareVersion": "1.2",
+          "description": "Бесплатный ИИ-помощник для ухода за растениями с 5-уровневым каскадом ИИ, диагностикой болезней и Wikipedia RAG.",
+          "inLanguage": "ru",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "RUB" },
+          "author": { "@type": "Person", "name": "Денис Аниськов", "url": "https://github.com/DenisAniskov" },
+          "url": "https://plantcare.app/",
+          "downloadUrl": "https://plantcare.app/Releases/PlantCare-v1.2.apk",
+          "screenshot": "https://plantcare.app/Releases/PlantCare-booklet-p1.png",
+          "featureList": [
+            "5-уровневый ИИ-каскад с автопереключением",
+            "Диагностика болезней растений по фото",
+            "Открытый справочник с Wikipedia и Wikimedia Commons",
+            "Smart Care напоминания: полив, подкормка, опрыскивание, пересадка",
+            "Чаты с историей и переименованием",
+            "Офлайн-справочник из 100+ растений"
+          ],
+          "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "ratingCount": "1" }
+        },
+        {
+          "@type": "WebSite",
+          "name": "PlantCare",
+          "url": "https://plantcare.app/",
+          "inLanguage": "ru",
+          "author": { "@type": "Person", "name": "Денис Аниськов" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            { "@type": "Question", "name": "Какие ИИ-модели используются в приложении?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Цепочка из пяти уровней: Nemotron → MiniMax → GLM → OpenRouter Free → офлайн (локальная база или TF-Lite). Переключение автоматическое." } },
+            { "@type": "Question", "name": "Что означают цвета кружка на главном экране?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Голубой — проверка прокси, зелёный — соединение есть, жёлтый — повторные попытки (1–3), красный — офлайн-режим после 3+ попыток." } },
+            { "@type": "Question", "name": "Зачем ИИ обращается к Wikipedia?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Wikipedia делает ответы точнее и актуальнее, добавляет фотографии болезней из Wikimedia для визуального сравнения." } },
+            { "@type": "Question", "name": "Smart Care следит только за поливом?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Нет. Smart Care отслеживает полив, удобрение, опрыскивание и пересадку с предупреждениями в обе стороны — слишком рано или слишком поздно." } },
+            { "@type": "Question", "name": "Работает ли приложение без интернета?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Да. Справочник 100+ растений, Smart Care и диагностика работают офлайн. ИИ-чат переходит на локальную RAG-базу или TF-Lite модель." } },
+            { "@type": "Question", "name": "Это действительно бесплатно?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Да. Нет рекламы, подписок, покупок внутри приложения. Исходный код открыт на GitHub." } }
+          ]
+        },
+        {
+          "@type": "VideoObject",
+          "name": "Видео-обзор PlantCare",
+          "description": "Обзор того, как работают ИИ-чат, Wikipedia, Smart Care и индикатор прокси в PlantCare.",
+          "thumbnailUrl": "https://plantcare.app/Releases/PlantCare-booklet-p1.png",
+          "contentUrl": "https://plantcare.app/Releases/PlantCare.mp4",
+          "uploadDate": "2026-04-12",
+          "inLanguage": "ru"
+        }
+      ]
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌿%3C/text%3E%3C/svg%3E">
+    <script>(function(){try{var t=localStorage.getItem('theme');if(!t){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
     <style>
         :root {
             --primary: #10b981;
@@ -96,7 +176,9 @@
         }
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
         html{scroll-behavior:smooth;scroll-padding-top:100px}
-        body{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--text-primary);background:var(--bg-primary);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+        body{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--text-primary);background:var(--bg-primary);overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background-color .35s ease,color .35s ease}
+        .feature-card,.download-card,.cascade-step,.proxy-card,.smart-care-item,.anti-error-card,.wiki-card,.wiki-benefit,.faq-item,.creator-card,.about-feature,.stats-card,.stat-box,.tech-tag,.instruction-card,.booklet-page,.proxy-state,.chat-window,.nav-menu,.nav-burger,.theme-toggle,.nav-mobile,.social-link,.creator-link,.chat-tab,.chat-bubble.msg-ai,.info-item,.float-card,.section-badge,.hero-badge,.cta-badge,.btn,.btn-cta-outline,.btn-cta-white,.btn-download,.btn-secondary,.footer-section a,.care-type-badge,.roadmap-card,.changelog-card,.review-card,.integration-card,.comparison-col,.privacy-card,.support-card,.stat-card-sm{transition-property:background-color,border-color,color,box-shadow,transform,opacity;transition-duration:.35s;transition-timing-function:ease}
+        html[data-theme] *{scroll-behavior:smooth}
         ::-webkit-scrollbar{width:10px}
         ::-webkit-scrollbar-track{background:var(--bg-secondary)}
         ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--primary),var(--primary-dark));border-radius:var(--radius-full);border:2px solid var(--bg-secondary)}
@@ -132,7 +214,8 @@
             .cursor.active{transform:scale(2);background:rgba(16,185,129,.15)}
             .cursor.clicking{transform:scale(.8)}
         }
-        .cursor,.cursor-dot{display:none}
+        @media(hover:none),(pointer:coarse){.cursor,.cursor-dot{display:none!important}}
+        @media(hover:hover) and (pointer:fine){body,*{cursor:none}}
 
         /* HEADER */
         .header{position:fixed;top:0;left:0;right:0;z-index:var(--z-sticky);padding:var(--space-md) 0;transition:var(--transition-base)}
@@ -170,6 +253,7 @@
         .nav-mobile.active{transform:translateX(0);opacity:1;visibility:visible}
         .nav-mobile-link{padding:var(--space-lg);font-weight:600;font-size:1.2rem;color:var(--text-primary);background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius-xl);text-align:center;transition:var(--transition-fast);display:block}
         .nav-mobile-link:hover{background:var(--gradient-primary);color:white;transform:scale(1.02)}
+        .nav-mobile-link.active{background:var(--gradient-primary);color:white;box-shadow:var(--shadow-md),0 0 20px var(--primary-glow)}
         @media(max-width:1100px){.nav-menu,.nav-cta{display:none}.nav-burger{display:flex}}
 
         /* HERO */
@@ -399,7 +483,7 @@
         .chat-tab.active{background:var(--gradient-primary);color:white;border-color:transparent}
         .chat-tab-close{opacity:.5;font-size:.75rem;transition:var(--transition-fast);line-height:1}
         .chat-tab:hover .chat-tab-close{opacity:1}
-        .chat-new-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--primary-subtle);border-radius:var(--radius-md);color:var(--primary);font-size:1.25rem;flex-shrink:0;cursor:pointer;transition:var(--transition-fast)}
+        .chat-new-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--primary-subtle);border:initial;border-radius:var(--radius-md);color:var(--primary);font-size:1.25rem;flex-shrink:0;cursor:pointer;transition:var(--transition-fast);line-height:1}
         .chat-new-btn:hover{background:var(--gradient-primary);color:white}
         .chat-messages{padding:var(--space-lg);display:flex;flex-direction:column;gap:var(--space-md);min-height:240px;max-height:320px;overflow-y:auto;scroll-behavior:smooth}
         .chat-messages::-webkit-scrollbar{width:4px}
@@ -432,9 +516,9 @@
         /* SCREENSHOTS */
         .screenshots{padding:var(--space-5xl) 0;background:var(--bg-primary);overflow:hidden}
         .carousel-container{position:relative;margin-top:var(--space-2xl);padding:var(--space-lg) 0}
-        .carousel-track{display:flex;gap:var(--space-lg);animation:carouselScroll 40s linear infinite}
+        .carousel-track{display:flex;gap:var(--space-lg);animation:carouselScroll 45s linear infinite;width:max-content}
         .carousel-track:hover{animation-play-state:paused}
-        @keyframes carouselScroll{0%{transform:translateX(0)}100%{transform:translateX(calc(-300px * 6 - var(--space-lg) * 6))}}
+        @keyframes carouselScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
         .screenshot-card{flex-shrink:0;width:300px;height:540px;background:var(--bg-secondary);border-radius:var(--radius-2xl);overflow:hidden;box-shadow:var(--shadow-xl);border:1px solid var(--border-light);transition:var(--transition-base);cursor:pointer}
         .screenshot-card:hover{transform:scale(1.05) translateY(-10px);box-shadow:var(--shadow-2xl)}
         .screenshot-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#1a3a28,#0d1f15);color:white;gap:var(--space-md);padding:var(--space-xl);text-align:center}
@@ -489,6 +573,8 @@
         .lightbox.active{opacity:1;visibility:visible}
         .lightbox-close{position:absolute;top:var(--space-xl);right:var(--space-xl);width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.1);border-radius:50%;font-size:1.5rem;color:white;cursor:pointer;transition:var(--transition-fast)}
         .lightbox-close:hover{transform:rotate(90deg);background:#ef4444}
+        .lightbox-close{cursor:pointer;border:none}
+        .lightbox.active{padding:0;border:0}
         .lightbox img{max-width:90%;max-height:80vh;border-radius:var(--radius-xl);box-shadow:var(--shadow-2xl);animation:lightboxZoom .3s ease}
         @keyframes lightboxZoom{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
         .lightbox p{color:white;margin-top:var(--space-lg);font-size:1.1rem;font-weight:500}
@@ -575,9 +661,10 @@
         .footer-logo{display:inline-flex;align-items:center;gap:var(--space-sm);font-size:1.75rem;font-weight:800;margin-bottom:var(--space-md)}
         .footer-tagline{color:var(--text-secondary);line-height:1.7;margin-bottom:var(--space-xl)}
         .footer-social{display:flex;gap:var(--space-sm)}
-        .social-link{width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:var(--bg-tertiary);border-radius:var(--radius-xl);font-size:1.5rem;transition:var(--transition-fast);border:1px solid var(--border-light)}
+        .social-link{width:auto;min-width:auto;height:48px;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 var(--space-lg);background:var(--bg-tertiary);border-radius:var(--radius-xl);font-size:.9rem;font-weight:600;transition:var(--transition-fast);border:1px solid var(--border-light);color:var(--text-primary)}
+        .social-link-label{font-size:.85rem;font-weight:600}
         .social-link:hover{background:var(--gradient-primary);transform:translateY(-5px) rotate(5deg);box-shadow:var(--shadow-lg),0 0 20px var(--primary-glow)}
-        .footer-links{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-xl)}
+        .footer-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:var(--space-xl)}
         .footer-section h4{font-size:1rem;font-weight:700;margin-bottom:var(--space-lg);color:var(--text-primary)}
         .footer-section ul{display:flex;flex-direction:column;gap:var(--space-sm)}
         .footer-section a{color:var(--text-secondary);font-size:.9375rem;transition:var(--transition-fast);display:inline-block}
@@ -612,10 +699,111 @@
         .animate-delay-1{transition-delay:.1s}.animate-delay-2{transition-delay:.2s}
         .animate-delay-3{transition-delay:.3s}.animate-delay-4{transition-delay:.4s}
         .animate-delay-5{transition-delay:.5s}
+        .animate-on-scroll,.animate-slide-left,.animate-slide-right{opacity:0;transform:translateY(40px) translateX(0);transition:opacity .8s ease,transform .8s ease}
+        .animate-slide-left{transform:translateX(-50px)}
+        .animate-slide-right{transform:translateX(50px)}
+        .animate-on-scroll.animated,.animate-slide-left.animated,.animate-slide-right.animated{opacity:1;transform:translate(0,0)}
+
+        /* INTEGRATIONS STRIP */
+        .integrations{padding:var(--space-4xl) 0;background:var(--bg-primary);border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light)}
+        .integrations-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:var(--space-xl) var(--space-3xl);margin-top:var(--space-xl)}
+        .integration-item{display:flex;align-items:center;gap:var(--space-sm);font-weight:700;font-size:1.05rem;color:var(--text-secondary);transition:var(--transition-fast);opacity:.7}
+        .integration-item:hover{opacity:1;transform:translateY(-4px);color:var(--primary)}
+        .integration-icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--bg-secondary);border:1px solid var(--border-light);border-radius:var(--radius-lg);font-size:1.5rem;flex-shrink:0;transition:var(--transition-base)}
+        .integration-item:hover .integration-icon{background:var(--gradient-primary);color:white}
+
+        /* ROADMAP */
+        .roadmap{padding:var(--space-5xl) 0;background:var(--bg-primary);position:relative}
+        .roadmap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-xl);margin-top:var(--space-2xl)}
+        .roadmap-col{background:var(--gradient-card);border:1px solid var(--border-light);border-radius:var(--radius-2xl);padding:var(--space-xl);transition:var(--transition-base)}
+        .roadmap-col:hover{transform:translateY(-6px);box-shadow:var(--shadow-card-hover)}
+        .roadmap-col h3{display:flex;align-items:center;gap:var(--space-sm);font-size:1.15rem;font-weight:700;margin-bottom:var(--space-md);padding-bottom:var(--space-md);border-bottom:1px solid var(--border-light)}
+        .roadmap-col.done h3{color:var(--success)}
+        .roadmap-col.wip h3{color:var(--accent)}
+        .roadmap-col.plan h3{color:var(--text-tertiary)}
+        .roadmap-card{display:flex;align-items:flex-start;gap:var(--space-sm);padding:var(--space-sm) 0;font-size:.9rem;color:var(--text-secondary);line-height:1.55}
+        .roadmap-card .ic{flex-shrink:0;font-size:1.1rem;line-height:1.4}
+        .roadmap-col.done .ic{color:var(--success)}
+        .roadmap-col.wip .ic{color:var(--accent)}
+        .roadmap-col.plan .ic{color:var(--text-tertiary)}
+        @media(max-width:1024px){.roadmap-grid{grid-template-columns:1fr}}
+
+        /* CHANGELOG */
+        .changelog{padding:var(--space-5xl) 0;background:var(--bg-secondary);position:relative}
+        .changelog::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--primary),transparent)}
+        .changelog-list{max-width:880px;margin:var(--space-2xl) auto 0;position:relative;padding-left:32px}
+        .changelog-list::before{content:'';position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--primary),var(--secondary),var(--border-medium))}
+        .changelog-card{position:relative;padding:var(--space-lg) var(--space-xl);background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius-xl);margin-bottom:var(--space-md);transition:var(--transition-base)}
+        .changelog-card:hover{transform:translateX(6px);box-shadow:var(--shadow-md);border-color:var(--primary)}
+        .changelog-card::before{content:'';position:absolute;left:-26px;top:26px;width:16px;height:16px;border-radius:50%;background:var(--gradient-primary);border:3px solid var(--bg-secondary);box-shadow:0 0 0 3px var(--primary-subtle)}
+        .changelog-version{display:inline-flex;align-items:center;gap:var(--space-xs);background:var(--gradient-primary);color:white;font-weight:700;font-size:.85rem;padding:3px 12px;border-radius:var(--radius-full)}
+        .changelog-date{color:var(--text-tertiary);font-size:.8rem;font-weight:500;margin-left:var(--space-sm)}
+        .changelog-card h3{font-size:1.1rem;font-weight:700;margin:var(--space-sm) 0 var(--space-sm);color:var(--text-primary)}
+        .changelog-changes{display:flex;flex-direction:column;gap:6px}
+        .changelog-changes li{display:flex;gap:var(--space-sm);font-size:.9rem;color:var(--text-secondary);line-height:1.55}
+        .changelog-changes .tag-new{color:var(--primary);font-weight:700}
+        .changelog-changes .tag-fix{color:var(--info);font-weight:700}
+        .changelog-changes .tag-imp{color:var(--accent);font-weight:700}
+
+        /* REVIEWS */
+        .reviews{padding:var(--space-5xl) 0;background:var(--bg-primary);position:relative}
+        .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-xl);margin-top:var(--space-2xl)}
+        .review-card{background:var(--gradient-card);border:1px solid var(--border-light);border-radius:var(--radius-2xl);padding:var(--space-xl);position:relative;transition:var(--transition-base);display:flex;flex-direction:column;gap:var(--space-sm)}
+        .review-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-card-hover);border-color:var(--primary)}
+        .review-quote{position:absolute;top:-10px;left:24px;font-size:3rem;line-height:1;color:var(--primary);opacity:.35;font-family:Georgia,serif}
+        .review-stars{color:#f59e0b;font-size:1rem;letter-spacing:2px}
+        .review-text{color:var(--text-secondary);font-size:.95rem;line-height:1.7;flex:1}
+        .review-author{display:flex;align-items:center;gap:var(--space-sm);padding-top:var(--space-md);border-top:1px solid var(--border-light)}
+        .review-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--gradient-primary);color:white;font-weight:700;font-size:1rem;flex-shrink:0}
+        .review-author-info strong{display:block;font-size:.9rem;color:var(--text-primary)}
+        .review-author-info span{font-size:.78rem;color:var(--text-tertiary)}
+        @media(max-width:1024px){.reviews-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:640px){.reviews-grid{grid-template-columns:1fr}}
+
+        /* PRIVACY */
+        .privacy{padding:var(--space-4xl) 0;background:var(--bg-secondary);position:relative}
+        .privacy-card{max-width:960px;margin:var(--space-2xl) auto 0;background:var(--gradient-card);border:1px solid var(--border-light);border-radius:var(--radius-2xl);padding:var(--space-2xl);display:grid;grid-template-columns:auto 1fr;gap:var(--space-xl);align-items:center}
+        .privacy-icon{width:88px;height:88px;display:flex;align-items:center;justify-content:center;background:var(--primary-subtle);border-radius:var(--radius-2xl);font-size:3rem;flex-shrink:0}
+        .privacy-card p{color:var(--text-secondary);line-height:1.75;font-size:1rem}
+        .privacy-card strong{color:var(--text-primary)}
+        @media(max-width:640px){.privacy-card{grid-template-columns:1fr;text-align:center}}
+
+        /* SUPPORT */
+        .support{padding:var(--space-2xl) 0;background:var(--bg-primary)}
+        .support-row{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-md);margin-top:var(--space-xl)}
+        .support-card{display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-md) var(--space-lg);background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius-xl);font-weight:600;color:var(--text-primary);transition:var(--transition-fast)}
+        .support-card:hover{background:var(--gradient-primary);color:white;transform:translateY(-4px);box-shadow:var(--shadow-md)}
+        .support-card .ic{font-size:1.25rem}
+
+        /* COMPARISON */
+        .comparison{padding:var(--space-4xl) 0;background:var(--bg-secondary)}
+        .comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);margin-top:var(--space-2xl);max-width:920px;margin-left:auto;margin-right:auto}
+        .comparison-col{padding:var(--space-xl);border-radius:var(--radius-2xl);border:1px solid var(--border-light);transition:var(--transition-base)}
+        .comparison-col.other{background:var(--bg-card);opacity:.85}
+        .comparison-col.plantcare{background:linear-gradient(145deg,rgba(16,185,129,.08),var(--bg-card));border-color:var(--primary);box-shadow:var(--shadow-md)}
+        .comparison-col h3{display:flex;align-items:center;gap:var(--space-sm);font-size:1.15rem;font-weight:700;margin-bottom:var(--space-md);padding-bottom:var(--space-md);border-bottom:1px solid var(--border-light)}
+        .comparison-col.other h3{color:var(--text-tertiary)}
+        .comparison-col.plantcare h3{color:var(--primary)}
+        .comparison-col ul{display:flex;flex-direction:column;gap:var(--space-sm)}
+        .comparison-col li{display:flex;align-items:flex-start;gap:var(--space-sm);font-size:.9rem;color:var(--text-secondary);line-height:1.55}
+        .comparison-col li .ic{flex-shrink:0;line-height:1.4}
+        .comparison-col.other li .ic{color:#ef4444}
+        .comparison-col.plantcare li .ic{color:var(--success)}
+        @media(max-width:768px){.comparison-grid{grid-template-columns:1fr}}
+
+        /* SECTION divider reveal */
+        section{position:relative}
+        .section-divider{position:absolute;top:0;left:50%;transform:translateX(-50%) scaleX(0);width:60%;max-width:600px;height:1px;background:linear-gradient(90deg,transparent,var(--primary),transparent);transform-origin:center;transition:transform .9s cubic-bezier(0.4,0,0.2,1);opacity:0}
+        .section-divider.visible{transform:translateX(-50%) scaleX(1);opacity:1}
+
+        /* SKIP LINK */
+        .skip-link{position:fixed;top:-100px;left:var(--space-md);z-index:var(--z-max);background:var(--gradient-primary);color:white;padding:var(--space-sm) var(--space-md);border-radius:var(--radius-md);font-weight:600;transition:top .2s ease}
+        .skip-link:focus{top:var(--space-md);outline:3px solid var(--primary-light)}
         @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}html{scroll-behavior:auto}.animate-on-scroll,.animate-slide-left,.animate-slide-right{opacity:1;transform:none}}
     </style>
 </head>
 <body>
+<a href="#home" class="skip-link">Перейти к содержанию</a>
 
 <!-- LOADING SCREEN -->
 <div class="loading-screen" id="loading">
@@ -642,9 +830,10 @@
         </a>
         <ul class="nav-menu">
             <li><a href="#home" class="nav-link active"><span>Главная</span></a></li>
-            <li><a href="#ai-cascade" class="nav-link"><span>Как работает ИИ</span></a></li>
+            <li><a href="#ai-cascade" class="nav-link"><span>Как ИИ</span></a></li>
             <li><a href="#features" class="nav-link"><span>Возможности</span></a></li>
-            <li><a href="#screenshots" class="nav-link"><span>Разделы</span></a></li>
+            <li><a href="#smart-care" class="nav-link"><span>Smart Care</span></a></li>
+            <li><a href="#reviews" class="nav-link"><span>Отзывы</span></a></li>
             <li><a href="#download" class="nav-link"><span>Скачать</span></a></li>
             <li><a href="#faq" class="nav-link"><span>FAQ</span></a></li>
             <li><a href="#about" class="nav-link"><span>О проекте</span></a></li>
@@ -663,6 +852,9 @@
         <a href="#home" class="nav-mobile-link">🏠 Главная</a>
         <a href="#ai-cascade" class="nav-mobile-link">🤖 Как работает ИИ</a>
         <a href="#features" class="nav-mobile-link">✨ Возможности</a>
+        <a href="#smart-care" class="nav-mobile-link">🛡️ Smart Care</a>
+        <a href="#changelog" class="nav-mobile-link">📜 Что нового</a>
+        <a href="#reviews" class="nav-mobile-link">💬 Отзывы</a>
         <a href="#screenshots" class="nav-mobile-link">📱 Разделы</a>
         <a href="#download" class="nav-mobile-link">📥 Скачать</a>
         <a href="#faq" class="nav-mobile-link">❓ FAQ</a>
@@ -824,6 +1016,25 @@
     </div>
 </section>
 
+<!-- INTEGRATIONS STRIP -->
+<section id="integrations" class="integrations">
+    <div class="container">
+        <div class="section-header animate-on-scroll" style="margin-bottom:0">
+            <span class="section-badge"><span>🔌</span><span>На чём работает</span></span>
+            <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2rem);margin-bottom:var(--space-sm)">Бесплатные API и открытые источники</h2>
+        </div>
+        <div class="integrations-row animate-on-scroll">
+            <div class="integration-item"><span class="integration-icon">🤖</span><span>OpenRouter AI</span></div>
+            <div class="integration-item"><span class="integration-icon">📖</span><span>Wikipedia</span></div>
+            <div class="integration-item"><span class="integration-icon">🖼️</span><span>Wikimedia Commons</span></div>
+            <div class="integration-item"><span class="integration-icon">🌿</span><span>Perenual</span></div>
+            <div class="integration-item"><span class="integration-icon">☀️</span><span>Open-Meteo</span></div>
+            <div class="integration-item"><span class="integration-icon">⚡</span><span>TFLite on-device</span></div>
+            <div class="integration-item"><span class="integration-icon">🪄</span><span>Material Design 3</span></div>
+        </div>
+    </div>
+</section>
+
 <!-- FEATURES -->
 <section id="features" class="features">
     <div class="container">
@@ -950,7 +1161,7 @@
 </section>
 
 <!-- PROXY INDICATOR -->
-<section class="proxy-section">
+<section id="proxy" class="proxy-section">
     <div class="container">
         <div class="section-header animate-on-scroll">
             <span class="section-badge"><span>🟢</span><span>Индикатор прокси</span></span>
@@ -1088,7 +1299,7 @@
 </section>
 
 <!-- WIKIPEDIA -->
-<section class="wiki-section">
+<section id="wiki" class="wiki-section">
     <div class="container">
         <div class="section-header animate-on-scroll">
             <span class="section-badge"><span>📖</span><span>Wikipedia + RAG</span></span>
@@ -1170,7 +1381,7 @@
 </section>
 
 <!-- CHAT -->
-<section class="chat-section">
+<section id="chat" class="chat-section">
     <div class="container">
         <div class="section-header animate-on-scroll">
             <span class="section-badge"><span>💬</span><span>Чаты с памятью</span></span>
@@ -1185,7 +1396,7 @@
                         <div class="chat-tab" data-id="2">🌸 Орхидея <span class="chat-tab-close">✕</span></div>
                         <div class="chat-tab" data-id="3">🌵 Кактус <span class="chat-tab-close">✕</span></div>
                     </div>
-                    <div class="chat-new-btn" id="chat-new" title="Новый чат">+</div>
+                    <button type="button" class="chat-new-btn" id="chat-new" title="Новый чат" aria-label="Создать новый чат">+</button>
                 </div>
                 <div class="chat-messages" id="chat-messages">
                     <div class="chat-msg ai">
@@ -1266,7 +1477,7 @@
                 </div>
                 <div class="download-details">
                     <div class="detail-item"><span class="detail-label">Версия:</span><span class="detail-value">1.2</span></div>
-                    <div class="detail-item"><span class="detail-label">Размер:</span><span class="detail-value">~150 МБ</span></div>
+                    <div class="detail-item"><span class="detail-label">Размер:</span><span class="detail-value">~47 МБ</span></div>
                     <div class="detail-item"><span class="detail-label">Требования:</span><span class="detail-value">Android 7.0+</span></div>
                 </div>
                 <a href="Releases/PlantCare-v1.2.apk" class="btn-download" download>
@@ -1284,7 +1495,7 @@
                 </div>
                 <div class="download-details">
                     <div class="detail-item"><span class="detail-label">Версия:</span><span class="detail-value">1.2</span></div>
-                    <div class="detail-item"><span class="detail-label">Размер:</span><span class="detail-value">~200 МБ</span></div>
+                    <div class="detail-item"><span class="detail-label">Размер:</span><span class="detail-value">~96 МБ</span></div>
                     <div class="detail-item"><span class="detail-label">Требования:</span><span class="detail-value">Windows 10+</span></div>
                 </div>
                 <a href="Releases/PlantCare-latest.exe" class="btn-download" download>
@@ -1302,7 +1513,7 @@
                 </div>
                 <div class="download-details">
                     <div class="detail-item"><span class="detail-label">Версия:</span><span class="detail-value">1.2</span></div>
-                    <div class="detail-item"><span class="detail-label">Размер:</span><span class="detail-value">~200 МБ</span></div>
+                    <div class="detail-item"><span class="detail-label">Размер:</span><span class="detail-value">~96 МБ</span></div>
                     <div class="detail-item"><span class="detail-label">Требования:</span><span class="detail-value">Windows 10+</span></div>
                 </div>
                 <a href="Releases/PlantCare-latest.msi" class="btn-download" download>
@@ -1356,8 +1567,8 @@
             </div>
         </div>
 
-        <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-            <span class="lightbox-close">&times;</span>
+        <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр крупнее" aria-hidden="true" onclick="closeLightbox()">
+            <button class="lightbox-close" type="button" aria-label="Закрыть">&times;</button>
             <img id="lightbox-img" src="" alt="">
             <p id="lightbox-caption"></p>
         </div>
@@ -1395,81 +1606,281 @@
         </div>
         <div class="faq-list">
             <div class="faq-item animate-on-scroll animate-delay-1">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-pan-1" onclick="toggleFaq(this)">
                     <span>Какие ИИ-модели используются в приложении?</span>
                     <span class="faq-icon">+</span>
                 </button>
-                <div class="faq-answer">
+                <div class="faq-answer" id="faq-pan-1" role="region">
                     <div class="faq-answer-content">
                         В приложении выстроена цепочка из пяти уровней. Сначала пробуется Nemotron — мощная основная модель. Если она не отвечает — подключается MiniMax, потом GLM, затем бесплатные модели через OpenRouter. Последний уровень — полный офлайн: локальная база данных или TF-Lite модель прямо на устройстве. Всё происходит автоматически, вы ничего не настраиваете.
                     </div>
                 </div>
             </div>
             <div class="faq-item animate-on-scroll animate-delay-2">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-pan-2" onclick="toggleFaq(this)">
                     <span>Что означают цвета кружка на главном экране?</span>
                     <span class="faq-icon">+</span>
                 </button>
-                <div class="faq-answer">
+                <div class="faq-answer" id="faq-pan-2" role="region">
                     <div class="faq-answer-content">
                         Это индикатор состояния прокси-соединения. Голубой — приложение прямо сейчас проверяет, работает ли прокси. Зелёный — соединение установлено, всё в порядке. Жёлтый — соединение не прошло после 1–3 попыток, приложение ещё пытается подключиться. Красный — после более чем 3 попыток прокси не ответил, и приложение переходит в офлайн-режим с локальной базой.
                     </div>
                 </div>
             </div>
             <div class="faq-item animate-on-scroll animate-delay-3">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-pan-3" onclick="toggleFaq(this)">
                     <span>Зачем ИИ лезет в Wikipedia? Он сам не знает ответы?</span>
                     <span class="faq-icon">+</span>
                 </button>
-                <div class="faq-answer">
+                <div class="faq-answer" id="faq-pan-3" role="region">
                     <div class="faq-answer-content">
                         ИИ обучен на данных прошлых лет и иногда может ошибаться или знать устаревшую информацию. Когда приложение дополнительно запрашивает Wikipedia — ответ становится точнее и актуальнее. Представьте, что ИИ перед ответом быстро проверяет факты в энциклопедии — получается намного надёжнее. Плюс в ответе сразу появляются фотографии болезней из Wikimedia для сравнения.
                     </div>
                 </div>
             </div>
             <div class="faq-item animate-on-scroll animate-delay-4">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-pan-4" onclick="toggleFaq(this)">
                     <span>Smart Care следит только за поливом?</span>
                     <span class="faq-icon">+</span>
                 </button>
-                <div class="faq-answer">
+                <div class="faq-answer" id="faq-pan-4" role="region">
                     <div class="faq-answer-content">
                         Нет, Smart Care следит за четырьмя видами ухода: поливом, удобрением, опрыскиванием и пересадкой. Для каждого из них приложение запоминает время последнего события и сравнивает с нормальным интервалом для данного растения. Если вы сделали что-то слишком рано — предупредит. Если давно не делали — напомнит.
                     </div>
                 </div>
             </div>
             <div class="faq-item animate-on-scroll animate-delay-5">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-pan-5" onclick="toggleFaq(this)">
                     <span>Как работают чаты и зачем их несколько?</span>
                     <span class="faq-icon">+</span>
                 </button>
-                <div class="faq-answer">
+                <div class="faq-answer" id="faq-pan-5" role="region">
                     <div class="faq-answer-content">
                         Если у вас несколько растений — удобно завести отдельный чат для каждого. Назовите чат «Мой фикус» или «Орхидея на кухне». ИИ будет помнить историю разговора именно об этом растении. Можно в любой момент переименовать чат или удалить его. Все разговоры сохраняются даже после закрытия приложения.
                     </div>
                 </div>
             </div>
             <div class="faq-item animate-on-scroll">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-pan-6" onclick="toggleFaq(this)">
                     <span>Работает ли приложение без интернета?</span>
                     <span class="faq-icon">+</span>
                 </button>
-                <div class="faq-answer">
+                <div class="faq-answer" id="faq-pan-6" role="region">
                     <div class="faq-answer-content">
                         Да. Справочник с более чем 100 растениями, Smart Care и основная диагностика работают полностью офлайн. При отсутствии интернета ИИ-чат переходит на локальную базу знаний или лёгкую TF-Lite модель, установленную прямо на устройстве. Кружок на главном экране станет красным — так вы сразу поймёте, что прокси недоступен и работает офлайн-режим.
                     </div>
                 </div>
             </div>
             <div class="faq-item animate-on-scroll">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-pan-7" onclick="toggleFaq(this)">
                     <span>Это точно бесплатно? Не будет скрытых платежей потом?</span>
                     <span class="faq-icon">+</span>
                 </button>
-                <div class="faq-answer">
+                <div class="faq-answer" id="faq-pan-7" role="region">
                     <div class="faq-answer-content">
                         Абсолютно бесплатно. Нет рекламы, нет подписки, нет покупок внутри приложения, нет платных функций. PlantCare — это открытый проект, весь исходный код доступен на GitHub для проверки. Планов делать приложение платным нет.
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap" class="roadmap">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-badge"><span>🗺️</span><span>Roadmap</span></span>
+            <h2 class="section-title">Что уже есть и что будет дальше</h2>
+            <p class="section-description">Проект активно развивается. Вот реальные статусы планов</p>
+        </div>
+        <div class="roadmap-grid">
+            <div class="roadmap-col done animate-slide-left">
+                <h3><span>✅</span><span>Уже работает</span></h3>
+                <ul>
+                    <li class="roadmap-card"><span class="ic">✅</span><span>ИИ-каскад из 5 уровней с автопереключением</span></li>
+                    <li class="roadmap-card"><span class="ic">✅</span><span>Чаты с историей и переименованием</span></li>
+                    <li class="roadmap-card"><span class="ic">✅</span><span>Wikipedia + Wikimedia в ответах ИИ</span></li>
+                    <li class="roadmap-card"><span class="ic">✅</span><span>Smart Care: полив, удобрение, опрыскивание, пересадка</span></li>
+                    <li class="roadmap-card"><span class="ic">✅</span><span>Распознавание по фото + TFLite fallback</span></li>
+                    <li class="roadmap-card"><span class="ic">✅</span><span>Справочник 100+ растений офлайн</span></li>
+                    <li class="roadmap-card"><span class="ic">✅</span><span>Версия для Windows (MSI/EXE)</span></li>
+                    <li class="roadmap-card"><span class="ic">✅</span><span>Тёмная тема и Material Design 3</span></li>
+                </ul>
+            </div>
+            <div class="roadmap-col wip animate-on-scroll">
+                <h3><span>🚧</span><span>В разработке</span></h3>
+                <ul>
+                    <li class="roadmap-card"><span class="ic">🚧</span><span>Растение с фотографией: визуальный каталог «Мои растения»</span></li>
+                    <li class="roadmap-card"><span class="ic">🚧</span><span>Дашборд «Сегодня» и «Скоро» с задачами по уходу</span></li>
+                    <li class="roadmap-card"><span class="ic">🚧</span><span>Персистентные заметки с тегами и вложениями</span></li>
+                    <li class="roadmap-card"><span class="ic">🚧</span><span>Экран настроек: OpenRouter ключи, прокси, темы</span></li>
+                    <li class="roadmap-card"><span class="ic">🚧</span><span>Повторяющиеся напоминания по интервалу ухода</span></li>
+                    <li class="roadmap-card"><span class="ic">🚧</span><span>История диагнозов и результатов сканирования</span></li>
+                </ul>
+            </div>
+            <div class="roadmap-col plan animate-slide-right">
+                <h3><span>📋</span><span>В планах</span></h3>
+                <ul>
+                    <li class="roadmap-card"><span class="ic">📋</span><span>Виджеты на домашний экран Android</span></li>
+                    <li class="roadmap-card"><span class="ic">📋</span><span>Прогноз погоды и советы по уходу с учётом влажности</span></li>
+                    <li class="roadmap-card"><span class="ic">📋</span><span>Бэкап/восстановление данных (экспорт/импорт)</span></li>
+                    <li class="roadmap-card"><span class="ic">📋</span><span>Английская локализация интерфейса</span></li>
+                    <li class="roadmap-card"><span class="ic">📋</span><span>iOS-версия</span></li>
+                    <li class="roadmap-card"><span class="ic">📋</span><span>Облачная синхронизация между устройствами</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CHANGELOG -->
+<section id="changelog" class="changelog">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-badge"><span>📜</span><span>Что нового</span></span>
+            <h2 class="section-title">История версий</h2>
+            <p class="section-description">Как PlantCare развивался от первого релиза до текущей версии</p>
+        </div>
+        <div class="changelog-list">
+            <div class="changelog-card animate-on-scroll">
+                <div>
+                    <span class="changelog-version">v1.2</span>
+                    <span class="changelog-date">Текущая версия</span>
+                </div>
+                <h3>ИИ-каскад, Wikipedia, чаты и новый UI</h3>
+                <ul class="changelog-changes">
+                    <li><span class="tag-new">НОВОЕ</span><span>5-уровневый каскад ИИ: Nemotron → MiniMax → GLM → OpenRouter Free → офлайн RAG</span></li>
+                    <li><span class="tag-new">НОВОЕ</span><span>Автопоиск в Wikipedia и подгрузка фото из Wikimedia Commons в ответы ИИ</span></li>
+                    <li><span class="tag-new">НОВОЕ</span><span>История чатов с переименованием и переключением</span></li>
+                    <li><span class="tag-new">НОВОЕ</span><span>Индикатор состояния прокси на всех экранах</span></li>
+                    <li><span class="tag-imp">УЛУЧШЕНО</span><span>Material Design 3, тёмная тема, адаптивные цвета</span></li>
+                    <li><span class="tag-fix">ИСПРАВЛЕНО</span><span>TFLite-fallback для NeuralScreen при отказе API</span></li>
+                </ul>
+            </div>
+            <div class="changelog-card animate-on-scroll">
+                <div>
+                    <span class="changelog-version">v1.1</span>
+                    <span class="changelog-date">Промежуточное обновление</span>
+                </div>
+                <h3>ИИ на Groq → Gemini, эталонные фото Pixabay</h3>
+                <ul class="changelog-changes">
+                    <li><span class="tag-new">НОВОЕ</span><span>ИИ-ассистент на Groq с переходом на Gemini</span></li>
+                    <li><span class="tag-new">НОВОЕ</span><span>Поиск эталонных изображений растений через Pixabay</span></li>
+                    <li><span class="tag-imp">УЛУЧШЕНО</span><span>Скорость отклика и стабильность соединения</span></li>
+                </ul>
+            </div>
+            <div class="changelog-card animate-on-scroll">
+                <div>
+                    <span class="changelog-version">v1.0</span>
+                    <span class="changelog-date">Первый релиз</span>
+                </div>
+                <h3>База знаний растений, уход, офлайн-справочник</h3>
+                <ul class="changelog-changes">
+                    <li><span class="tag-new">НОВОЕ</span><span>Каталог растений и болезней с локальной базой</span></li>
+                    <li><span class="tag-new">НОВОЕ</span><span>События ухода с напоминаниями через WorkManager</span></li>
+                    <li><span class="tag-new">НОВОЕ</span><span>Android и Desktop версии на Kotlin Multiplatform</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="reviews">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-badge"><span>💬</span><span>Отзывы</span></span>
+            <h2 class="section-title">Что говорят пользователи</h2>
+            <p class="section-description">Реальные отклики тех, кто пользуется PlantCare</p>
+        </div>
+        <div class="reviews-grid">
+            <div class="review-card animate-on-scroll animate-delay-1">
+                <div class="review-quote">"</div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">Наконец-то приложение для растений, которое реально подсказывает, а не просто хранит список. ИИ действительно помогает — особенно когда не знаешь, что с листьями. Без интернета тоже работает, что плюс.</p>
+                <div class="review-author">
+                    <div class="review-avatar">М</div>
+                    <div class="review-author-info">
+                        <strong>Мария, цветовод</strong>
+                        <span>7 комнатных растений</span>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card animate-on-scroll animate-delay-2">
+                <div class="review-quote">"</div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">Скачала из-за диагностики по фото — быстро показало, что у орхидеи, и дало план лечения. Что понравилось: Smart Care реально не даёт забыть про полив, причём предупреждает, если лью слишком часто.</p>
+                <div class="review-author">
+                    <div class="review-avatar">А</div>
+                    <div class="review-author-info">
+                        <strong>Анастасия</strong>
+                        <span>Любитель орхидей</span>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card animate-on-scroll animate-delay-3">
+                <div class="review-quote">"</div>
+                <div class="review-stars">★★★★☆</div>
+                <p class="review-text">Отличная идея с каскадом — когда основная модель лежит, ответ всё равно приходит. Хочется виджетов на главный экран и английский интерфейс, но по функционалу уже уверенная пятёрка за open-source.</p>
+                <div class="review-author">
+                    <div class="review-avatar">И</div>
+                    <div class="review-author-info">
+                        <strong>Игорь, разработчик</strong>
+                        <span>13 растений дома и на балконе</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COMPARISON -->
+<section id="comparison" class="comparison">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-badge"><span>⚖️</span><span>Сравнение</span></span>
+            <h2 class="section-title">PlantCare vs обычные приложения</h2>
+            <p class="section-description">Почему одного справочника недостаточно</p>
+        </div>
+        <div class="comparison-grid">
+            <div class="comparison-col other animate-slide-left">
+                <h3><span>📌</span><span>Обычный справочник растений</span></h3>
+                <ul>
+                    <li><span class="ic">✖️</span><span>Только статичные описания без ИИ</span></li>
+                    <li><span class="ic">✖️</span><span>Нет распознавания по фото</span></li>
+                    <li><span class="ic">✖️</span><span>Напоминания общие, без проверки норм для вида</span></li>
+                    <li><span class="ic">✖️</span><span>Нет проверки фактов по Wikipedia</span></li>
+                    <li><span class="ic">✖️</span><span>Один источник — нет fallback при сбое</span></li>
+                    <li><span class="ic">✖️</span><span>Без индикатора состояния соединения</span></li>
+                </ul>
+            </div>
+            <div class="comparison-col plantcare animate-slide-right">
+                <h3><span>🌿</span><span>PlantCare</span></h3>
+                <ul>
+                    <li><span class="ic">✓</span><span>5-уровневый ИИ-каскад с автопереключением</span></li>
+                    <li><span class="ic">✓</span><span>Распознавание по фото + TFLite-резерв</span></li>
+                    <li><span class="ic">✓</span><span>Smart Care предупреждает в обе стороны — слишком рано или поздно</span></li>
+                    <li><span class="ic">✓</span><span>Автопоиск в Wikipedia и Wikimedia фото</span></li>
+                    <li><span class="ic">✓</span><span>Резерв на локальную RAG-базу при отсутствии сети</span></li>
+                    <li><span class="ic">✓</span><span>Индикатор статуса прокси в реальном времени</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRIVACY -->
+<section id="privacy" class="privacy">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-badge"><span>🔒</span><span>Приватность</span></span>
+            <h2 class="section-title">Ваши данные остаются вашими</h2>
+        </div>
+        <div class="privacy-card animate-on-scroll">
+            <div class="privacy-icon">🔐</div>
+            <div>
+                <p><strong>Все хранится только на вашем устройстве.</strong> Растения, события ухода, заметки и история чатов лежат в локальной Room-базе и никуда не отправляются. В облако уходят только ваш вопрос к ИИ и (если вы прикрепили) фотография — для получения ответа. Никаких аккаунтов, регистрации итрекинга. Cookie на сайте используется только для запоминания темы и согласия.</p>
             </div>
         </div>
     </div>
@@ -1562,6 +1973,23 @@
     </div>
 </section>
 
+<!-- SUPPORT -->
+<section id="support" class="support">
+    <div class="container">
+        <div class="section-header animate-on-scroll" style="margin-bottom:0">
+            <span class="section-badge"><span>🤝</span><span>Поддержка</span></span>
+            <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2rem)">Помогите проекту стать лучше</h2>
+        </div>
+        <div class="support-row animate-on-scroll">
+            <a href="https://github.com/DenisAniskov/PlantCare" target="_blank" class="support-card"><span class="ic">⭐</span><span>Поставить звезду на GitHub</span></a>
+            <a href="https://github.com/DenisAniskov/PlantCare/issues" target="_blank" class="support-card"><span class="ic">🐛</span><span>Сообщить о баге</span></a>
+            <a href="https://github.com/DenisAniskov/PlantCare/blob/master/README.md" target="_blank" class="support-card"><span class="ic">📚</span><span>Документация</span></a>
+            <a href="https://github.com/DenisAniskov/PlantCare/releases" target="_blank" class="support-card"><span class="ic">📦</span><span>Все релизы</span></a>
+            <a href="#download" class="support-card"><span class="ic">📥</span><span>Скачать</span></a>
+        </div>
+    </div>
+</section>
+
 <!-- CTA -->
 <section class="cta">
     <div class="container">
@@ -1591,8 +2019,14 @@
                 <div class="footer-logo"><span class="logo-icon">🌿</span><span class="logo-text">PlantCare</span></div>
                 <p class="footer-tagline">Умный помощник для ваших растений. ИИ-чат, диагностика болезней, напоминания об уходе — всё бесплатно.</p>
                 <div class="footer-social">
-                    <a href="https://github.com/DenisAniskov/PlantCare" target="_blank" class="social-link" aria-label="PlantCare на GitHub">🌿</a>
-                    <a href="https://github.com/DenisAniskov/PlantCare-Site" target="_blank" class="social-link" aria-label="Сайт на GitHub">🌐</a>
+                    <a href="https://github.com/DenisAniskov/PlantCare" target="_blank" class="social-link" aria-label="PlantCare: исходный код приложения на GitHub" title="Исходный код приложения">
+                        <svg width="22" height="22" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                        <span class="social-link-label">Приложение</span>
+                    </a>
+                    <a href="https://github.com/DenisAniskov/PlantCare-Site" target="_blank" class="social-link" aria-label="PlantCare: исходный код сайта на GitHub" title="Исходный код сайта">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" style="opacity:.85"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                        <span class="social-link-label">Сайт</span>
+                    </a>
                 </div>
             </div>
             <div class="footer-links">
@@ -1602,10 +2036,22 @@
                         <li><a href="#home">Главная</a></li>
                         <li><a href="#ai-cascade">Как работает ИИ</a></li>
                         <li><a href="#features">Возможности</a></li>
+                        <li><a href="#smart-care">Smart Care</a></li>
                         <li><a href="#screenshots">Разделы</a></li>
                         <li><a href="#download">Скачать</a></li>
                         <li><a href="#faq">Вопросы и ответы</a></li>
                         <li><a href="#about">О проекте</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Ещё о проекте</h4>
+                    <ul>
+                        <li><a href="#roadmap">Roadmap</a></li>
+                        <li><a href="#changelog">Что нового</a></li>
+                        <li><a href="#reviews">Отзывы</a></li>
+                        <li><a href="#comparison">Сравнение</a></li>
+                        <li><a href="#privacy">Приватность</a></li>
+                        <li><a href="#support">Поддержка</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -1647,22 +2093,29 @@
 
 <script>
     const CFG = {
-        loadingMs: 1800,
+        loadingMs: 700,
         typingSpeed: 65,
         typingText: 'умный помощник для ваших растений',
         emojiList: ['🌿','🌱','🍀','🌸','🌺','🌻','🌼','🍃','🌾','☘️','🪴','🌳'],
         particleCount: 18
     };
 
-    document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(() => {
-            const l = document.getElementById('loading');
-            l.classList.add('hidden');
-            setTimeout(() => l.remove(), 600);
-        }, CFG.loadingMs);
+    let _t0 = Date.now();
+    function hideLoading(){
+        const l = document.getElementById('loading');
+        if (!l) return;
+        l.classList.add('hidden');
+        setTimeout(() => l.remove(), 600);
+        setTimeout(() => initTyping(), 250);
+    }
+    window.addEventListener('load', () => {
+        const elapsed = Date.now() - _t0;
+        const wait = Math.max(0, Math.min(CFG.loadingMs, CFG.loadingMs - elapsed));
+        setTimeout(hideLoading, wait);
+    });
 
+    document.addEventListener('DOMContentLoaded', () => {
         initParticles();
-        initTyping();
         initScrollProgress();
         initHeader();
         initMobileNav();
@@ -1676,6 +2129,12 @@
         initSmoothScroll();
         initKeyboard();
         initChat();
+        initTilt();
+        initParallax();
+        initDividerReveal();
+        initLightboxKeys();
+        initFaqA11y();
+        initChatA11y();
     });
 
     function initParticles() {
@@ -1703,7 +2162,7 @@
                 setTimeout(() => el.style.borderRight = 'none', 1200);
             }
         }
-        setTimeout(type, CFG.loadingMs + 400);
+        type();
     }
 
     function initScrollProgress() {
@@ -1747,18 +2206,25 @@
     function initTheme() {
         const btn = document.getElementById('theme-toggle');
         const icon = btn?.querySelector('.theme-icon');
+        const meta = document.querySelector('meta[name="theme-color"]');
         if (!btn || !icon) return;
-        const saved = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        applyTheme(saved);
+        syncIcon(document.documentElement.getAttribute('data-theme') || 'light');
         btn.addEventListener('click', () => {
             const t = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            applyTheme(t);
-            localStorage.setItem('theme', t);
-        });
-        function applyTheme(t) {
             document.documentElement.setAttribute('data-theme', t);
-            icon.textContent = t === 'dark' ? '☀️' : '🌙';
-        }
+            localStorage.setItem('theme', t);
+            syncIcon(t);
+            if (meta) meta.setAttribute('content', t === 'dark' ? '#0a0f1a' : '#10b981');
+        });
+        function syncIcon(t){ icon.textContent = t === 'dark' ? '☀️' : '🌙'; }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', e => {
+            if (!localStorage.getItem('theme')) {
+                const t = e.matches ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', t);
+                syncIcon(t);
+                if (meta) meta.setAttribute('content', t === 'dark' ? '#0a0f1a' : '#10b981');
+            }
+        });
     }
 
     function initScrollAnim() {
@@ -1828,7 +2294,7 @@
 
     function initActiveNav() {
         const sections = document.querySelectorAll('section[id]');
-        const links = document.querySelectorAll('.nav-link');
+        const links = document.querySelectorAll('.nav-link,.nav-mobile-link');
         if (!sections.length) return;
         const obs = new IntersectionObserver(entries => entries.forEach(e => {
             if (e.isIntersecting) {
@@ -1850,6 +2316,13 @@
 
     function initKeyboard() {
         document.addEventListener('keydown', e => {
+            const lb = document.getElementById('lightbox');
+            const lbActive = lb?.classList.contains('active');
+            if (lbActive && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
+                e.preventDefault();
+                _lbUpdate((e.key === 'ArrowRight' ? (_lbIdx + 1) : (_lbIdx - 1)));
+                return;
+            }
             if (e.key === 'Escape') {
                 closeLightbox();
                 const nav = document.getElementById('nav-mobile');
@@ -1943,6 +2416,10 @@
 
         // Tab management
         function setupTab(tab) {
+            tab.setAttribute('role','tab'); tab.setAttribute('tabindex','0');
+            tab.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tab.click(); }
+            });
             tab.addEventListener('click', function(e) {
                 if (e.target.classList.contains('chat-tab-close')) {
                     if (document.querySelectorAll('.chat-tab').length <= 1) return;
@@ -1995,15 +2472,16 @@
         const img = document.getElementById('lightbox-img');
         const cap = document.getElementById('lightbox-caption');
         if (!lb || !img || !cap) return;
-        img.src = src; img.alt = caption; cap.textContent = caption;
-        lb.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        const idx = LIGHTBOX_IMAGES.findIndex(it => it.src === src);
+        if (idx >= 0) { _lbUpdate(idx); }
+        else { img.src = src; img.alt = caption || ''; cap.textContent = caption || ''; lb.classList.add('active'); lb.setAttribute('aria-hidden','false'); document.body.style.overflow = 'hidden'; _lbIdx = -1; }
     }
 
     function closeLightbox() {
         const lb = document.getElementById('lightbox');
         if (!lb) return;
         lb.classList.remove('active');
+        lb.setAttribute('aria-hidden','true');
         document.body.style.overflow = '';
     }
 
@@ -2011,8 +2489,126 @@
         const item = el.parentElement;
         if (!item) return;
         const was = item.classList.contains('active');
-        document.querySelectorAll('.faq-item.active').forEach(f => f.classList.remove('active'));
-        if (!was) item.classList.add('active');
+        document.querySelectorAll('.faq-item.active').forEach(f => {
+            f.classList.remove('active');
+            const b = f.querySelector('.faq-question');
+            if (b) b.setAttribute('aria-expanded','false');
+        });
+        if (!was) {
+            item.classList.add('active');
+            el.setAttribute('aria-expanded','true');
+        }
+    }
+
+    function initFaqA11y() {
+        document.querySelectorAll('.faq-question').forEach(b => {
+            b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); b.click(); } });
+        });
+    }
+
+    function initChatA11y() {
+        document.querySelectorAll('.chat-tab').forEach(t => {
+            t.setAttribute('role','tab');
+            t.setAttribute('tabindex','0');
+            t.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.click(); }
+            });
+        });
+        const nw = document.getElementById('chat-new');
+        if (nw) {
+            nw.setAttribute('role','button');
+            nw.setAttribute('tabindex','0');
+            nw.setAttribute('aria-label','Создать новый чат');
+            nw.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); nw.click(); }
+            });
+        }
+    }
+
+    // ==========================================
+    // 3D TILT on cards
+    // ==========================================
+    function initTilt() {
+        if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const cards = document.querySelectorAll('.feature-card,.download-card,.review-card,.changelog-card,.roadmap-col');
+        const MAX = 8;
+        cards.forEach(c => {
+            c.addEventListener('mousemove', e => {
+                const r = c.getBoundingClientRect();
+                const px = (e.clientX - r.left) / r.width;
+                const py = (e.clientY - r.top) / r.height;
+                const rx = (py - .5) * -2 * MAX;
+                const ry = (px - .5) * 2 * MAX;
+                c.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+            });
+            c.addEventListener('mouseleave', () => { c.style.transform = ''; });
+        });
+    }
+
+    // ==========================================
+    // PARALLAX on hero blobs
+    // ==========================================
+    function initParallax() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const shapes = document.querySelectorAll('.hero-shape');
+        if (!shapes.length) return;
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    const y = window.scrollY;
+                    shapes.forEach((s, i) => { s.style.translate = `0 ${y * (0.08 + i * 0.04)}px`; });
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+    }
+
+    // ==========================================
+    // SECTION DIVIDER reveal
+    // ==========================================
+    function initDividerReveal() {
+        const dividers = document.querySelectorAll('.section-divider');
+        if (!dividers.length) {
+            document.querySelectorAll('section').forEach(s => {
+                if (s.querySelector('.section-divider')) return;
+                const d = document.createElement('div');
+                d.className = 'section-divider';
+                s.appendChild(d);
+            });
+        }
+        const obs = new IntersectionObserver(entries => entries.forEach(e => {
+            if (e.isIntersecting) e.target.classList.add('visible');
+        }), { threshold: 0.1 });
+        document.querySelectorAll('.section-divider').forEach(d => obs.observe(d));
+    }
+
+    // ==========================================
+    // LIGHTBOX keyboard nav
+    // ==========================================
+    const LIGHTBOX_IMAGES = [
+        { src: 'Releases/PlantCare-booklet-p1.png', cap: 'Буклет PlantCare — Страница 1' },
+        { src: 'Releases/PlantCare-booklet-p2.png', cap: 'Буклет PlantCare — Страница 2' }
+    ];
+    let _lbIdx = -1;
+    function initLightboxKeys() {
+        const lb = document.getElementById('lightbox');
+        const close = lb?.querySelector('.lightbox-close');
+        if (close) close.addEventListener('click', e => { e.stopPropagation(); closeLightbox(); });
+    }
+    function _lbUpdate(i) {
+        const img = document.getElementById('lightbox-img');
+        const cap = document.getElementById('lightbox-caption');
+        const lb = document.getElementById('lightbox');
+        if (!img || !cap || !lb) return;
+        _lbIdx = (i + LIGHTBOX_IMAGES.length) % LIGHTBOX_IMAGES.length;
+        const item = LIGHTBOX_IMAGES[_lbIdx];
+        img.src = item.src; img.alt = item.cap; cap.textContent = `${item.cap} (${_lbIdx + 1}/${LIGHTBOX_IMAGES.length})`;
+        lb.classList.add('active');
+        lb.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
     }
 
     // Konami Easter Egg 🎉
